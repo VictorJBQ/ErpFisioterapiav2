@@ -1,0 +1,26 @@
+
+#cabeceraTabla{
+	background-image: linear-gradient(to top, #173e78, #00629c, #0088bb, #00aed5, #41d5eb);
+	font-family: "Times New Roman", Times, serif;
+	color: white;
+}
+#cuerpoTabla{
+	background-image: linear-gradient(to top, #769cd6, #77b2e2, #81c7eb, #94dcf2, #aceff9);
+}
+.dropdown:hover >.dropdown-menu {
+    display: block !important;
+}
+
+#table{
+  font-family: Calibri; 
+  color:black; 
+  font-size: 11pt; 
+  font-style: normal;
+  font-weight: bold;
+  background-color: white; 
+  border-collapse: collapse; 
+  border: 2px solid navy
+}
+#table.inner{
+  border: 0px
+}
