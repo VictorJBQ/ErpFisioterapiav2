@@ -5,6 +5,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 
 import proy.MoisVictorv1.ErpFisioterapiav1.Model.Empleados;
@@ -25,6 +26,8 @@ public class ErpFisioterapiav1Application {
 		SpringApplication.run(ErpFisioterapiav1Application.class, args);
 	}
 	
+	
+	@Profile({"dev","prod"})
 	@Bean //Cargamos independientemente
 
 	public CommandLineRunner demo(EmpleadosRepositorio empleados) {
