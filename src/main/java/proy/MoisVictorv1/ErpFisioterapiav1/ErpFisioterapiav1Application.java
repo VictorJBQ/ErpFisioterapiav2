@@ -57,11 +57,11 @@ public class ErpFisioterapiav1Application {
 	Empleados empleado= new Empleados("T01","Carlos",encoder.encode("123"),rol);
 		empleadosRepositorio.save(empleado);
 	
-	Citas cita= new Citas(LocalDate.now(), LocalTime.now(), "libre", "fija", empleado);
+	//Citas cita= new Citas(LocalDate.now(), LocalTime.now(), "libre", "fija", empleado);
 ////	
-citasRepositorio.save(cita);
-		Pacientes paciente= new Pacientes("Catalina",66565565);
-	pacientesRepositorio.save(paciente);
+//citasRepositorio.save(cita);
+		//Pacientes paciente= new Pacientes("Catalina",66565565);
+	//pacientesRepositorio.save(paciente);
 	
 	Tarifas tarifa= new Tarifas("amigos",20.0);
 	Tarifas tarifa2= new Tarifas("interna",40.0);
