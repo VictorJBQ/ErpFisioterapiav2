@@ -16,7 +16,7 @@ public class Ingresos {
 	private String tipo;
 	private Double importe;
 	 @OneToOne
-	    @JoinColumn(name = "factura_id", referencedColumnName = "id")
+	    @JoinColumn(name = "factura_id")
 	    private Facturas factura;
 	public int getId() {
 		return id;
@@ -52,6 +52,9 @@ public class Ingresos {
 		super();
 		this.tipo = tipo;
 		this.importe = importe;
+	}
+	public Ingresos() {
+		super();
 	}
 	
 	

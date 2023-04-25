@@ -13,13 +13,13 @@ public class ControllerIngresos {
 	@Autowired
 	IngresosRepositorio ingresosRepositorio;
 	
-	@RequestMapping(path ="intranet/ingresos/ingresos")
+	@RequestMapping(path="intranet/ingresos/ingresos")
 	public String verIngresos(Model model) {
 		
 		return "intranet/ingresos/ingresos";
 	}
 	
-	@RequestMapping(path ="intranet/ingresos/registrarIngresos")
+	@RequestMapping(path="intranet/ingresos/registrarIngresos")
 	public String addIngresos(Model model) {
 		
 		return "intranet/ingresos/registrarIngresos";

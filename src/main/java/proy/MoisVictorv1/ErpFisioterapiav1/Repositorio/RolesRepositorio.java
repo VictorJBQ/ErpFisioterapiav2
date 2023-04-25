@@ -6,5 +6,5 @@ import proy.MoisVictorv1.ErpFisioterapiav1.Model.Roles;
 
 
 public interface RolesRepositorio extends CrudRepository<Roles,String> {
-
+Roles findByTipo(String tipo);
 }

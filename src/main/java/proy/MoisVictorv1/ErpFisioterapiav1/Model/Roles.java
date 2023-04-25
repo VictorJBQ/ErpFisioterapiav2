@@ -2,13 +2,14 @@ package proy.MoisVictorv1.ErpFisioterapiav1.Model;
 
 import java.util.List;
 
-
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
 @Entity
+@JsonIgnoreProperties({"empleado"})
 public class Roles {
 	
 	@Id
@@ -42,10 +43,7 @@ public class Roles {
 		super();
 	}
 
-	@Override
-	public String toString() {
-		return "Roles [tipo=" + tipo + ", empleado=" + empleado + "]";
-	}
+
 	
 	
 

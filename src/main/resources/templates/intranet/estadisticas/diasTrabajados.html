@@ -12,6 +12,9 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" />
 <link rel="stylesheet" th:href="@{/css/style.css}" />
 <title>JimBus Solutions</title>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+		<script src="/js/graficos/diasTrabajados.js"></script> 
 </head>
 <body>
 	<!-- top navigation bar -->
@@ -163,13 +166,31 @@
 		</div>
 	</div>
 	<br>
-	
+	<br>
+	<br>
+	<br>
 	<main class="mt-5 pt-3">
-		<!-- AQIO VA TODO -->
+		<div class="row">
+				<div class="col-md-12 mb-3">
+					<div class="card ">
+						<div class="card-header d-flex flex-row">
+						<div>
+							<span><i class="icon solid fa-chart-simple"></i></span> Estádisticas días trabajados por mes</div>
+							 <div class="ms-auto  "> <input id="opcion1" placeholder="2021" onchange='javascript: comparar();' /><span class="icon solid fa-magnifying-glass"></span>
+							 <input id="opcion2" placeholder="2021" onchange='javascript: comparar();' /><span class="icon solid fa-magnifying-glass"></span>
+							 </div>
+						</div>
+						<div class="card-body ">
+							<div class="table-responsive">
+								<div id='p1' class='panel'><div id='chart_div'></div> </div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 	</main>
 
 	<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
+
 </body>
 </html>

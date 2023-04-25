@@ -8,23 +8,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class ControllerGeneral {
-	@GetMapping(path ="intranet/inicio")
+	@RequestMapping(path="intranet/inicio")
 	public String bienvenida(Model model) {
 		model.addAttribute("mensaje",model.getAttribute("mensaje"));
 		return "intranet/inicio";
 	}
-	@GetMapping(path ="intranet/Plantilla")
-	public String plantilla(Model model) {
-		return "intranet/Plantilla";
-	}
 	 
-	@GetMapping(path ="index")
+	@RequestMapping(path="index")
 	public String index(Model model) {
 		model.addAttribute("mensaje",model.getAttribute("mensaje"));
 		return "index";
 	}
 	 
-	    @GetMapping(path ="login")
+	    @GetMapping(path="login")
 	    public String add2() {
 	        return "login";
 	    }

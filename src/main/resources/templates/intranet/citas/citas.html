@@ -12,8 +12,12 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" />
 <link rel="stylesheet" th:href="@{/css/style.css}" />
 <title>JimBus Solutions</title>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+ <script src="/js/pruebaNONE.js"></script>
+ 
 </head>
 <body>
+
 	<!-- top navigation bar -->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
 		<div class="container-fluid">
@@ -160,37 +164,209 @@
 
 				</ul>
 			</nav>
+			
 		</div>
 	</div>
 	<br>
 	
 	<main class="mt-5 pt-3">
-		<!-- AQIO VA TODO -->
+	<br>
+		<div class="row">
+
+				<div class="col-md-12 mb-3">
+       <nav class="navbar navbar-light bg-light">
+  <div class="container-fluid">
+
+  
+<button onclick="ocultarDiv()">Pendientes de confirmar</button>
+<button onclick="mostrarDiv()">Confirmadas</button>
+
+
+   
+    
+  </div>
+  
+</nav>
+					<div class="card " id="ocultando">
+						<div class="card-header d-flex flex-row">
+						<div>
+							<span><i class="bi bi-table me-2"></i></span> Tabla Pacientes </div>
+							 <div class="ms-auto  "><form class="form d-flex align-items-center"> <input class="form-control mr-sm-2 border-0 shadow-none" type="text" placeholder="Buscar" id="buscador"  ><span class="icon solid fa-magnifying-glass"></span></form></div>
+						</div>
+						<div class="card-body " >
+							<div class="table-responsive">
+							  <div class="alert alert-primary" id="msg" style="display: none;" role="alert"></div>
+								<table id="citas" class="table table-striped table-bordered" style="width:100%">
+									<thead id="cabeceraTabla">
+										<tr>
+												<th>id</th>
+											<th>fecha</th>
+											<th>hora</th>
+											<th>tipo</th>
+											<th>estado</th>
+											<th>Paciente</th>
+										</tr>
+									</thead>
+									<tbody id="cuerpoTabla">
+										
+												
+									</tbody>
+									<tfoot id="cabeceraTabla">
+										<tr>
+											<th>id</th>
+											<th>fecha</th>
+											<th>hora</th>
+											<th>tipo</th>
+											<th>estado</th>
+											<th>Paciente</th>
+										</tr>
+									</tfoot>
+									
+								</table>
+			
+							</div>
+						</div>
+						
+					</div>
+					
+							<div class="card ">
+						<div class="card-header d-flex flex-row">
+						<div>
+							<span><i class="bi bi-table me-2"></i></span> Tabla Pacientes </div>
+							 <div class="ms-auto  "><form class="form d-flex align-items-center"> <input class="form-control mr-sm-2 border-0 shadow-none" type="text" placeholder="Buscar" id="buscador"  ><span class="icon solid fa-magnifying-glass"></span></form></div>
+						</div>
+						<div class="card-body ">
+							<div class="table-responsive">
+							  <div class="alert alert-primary" id="msg" style="display: none;" role="alert"></div>
+								<table id="citas" class="table table-striped table-bordered" style="width:100%">
+									<thead id="cabeceraTabla">
+										<tr>
+												<th>id</th>
+											<th>fefgcha</th>
+											<th>horfgha</th>
+											<th>tifghpo</th>
+											<th>estado</th>
+											<th>Pafghciente</th>
+										</tr>
+									</thead>
+									<tbody id="cuerpoTabla">
+										
+												
+									</tbody>
+									<tfoot id="cabeceraTabla">
+										<tr>
+											<th>id</th>
+											<th>fecha</th>
+											<th>hfhggfora</th>
+											<th>tibgfhpo</th>
+											<th>estado</th>
+											<th>Paciente</th>
+										</tr>
+									</tfoot>
+									
+								</table>
+			
+							</div>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+			
+			<div class="modal fade" id="personaModal" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="modalTitle">Persona</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                          <label for="nombre">Fecha</label>
+                          <input type="text" class="form-control" id="fecha" placeholder="Ingrese su nombre">
+                          <input type="hidden" class="form-control" id="id">
+                        </div>
+                        <div class="form-group">
+                          <label for="apellido">hora</label>
+                          <input type="text" class="form-control" id="hora" placeholder="Ingrese su apellido">
+                        </div>
+                        <div class="form-group">
+                            <label for="direccion">tipo</label>
+                            <input type="text" class="form-control" id="tipo" placeholder="Ingrese su direccion">
+                        </div>
+                        <div class="form-group">
+                            <label for="telefono">estado</label>
+                            <input type="text" class="form-control" id="estado" placeholder="Ingrese su teléfono">
+                        </div>
+                           <div class="form-group">
+                            <label for="telefono">paciente</label>
+                            <input type="text" class="form-control" id="paciente" placeholder="Ingrese su teléfono">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                  <button type="button" id="save" class="btn btn-primary">Guardar</button>
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="modal fade" id="personaModal" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitle">Persona</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="fecha">Fecha</label>
+                        <input type="text" class="form-control" id="fecha" name="fecha" placeholder="Ingrese la fecha">
+                        <input type="hidden" class="form-control" id="id" name="id">
+                    </div>
+                    <div class="form-group">
+                        <label for="hora">Hora</label>
+                        <input type="text" class="form-control" id="hora" name="hora" placeholder="Ingrese la hora">
+                    </div>
+                    <div class="form-group">
+                        <label for="tipo">Tipo</label>
+                        <input type="text" class="form-control" id="tipo" name="tipo" placeholder="Ingrese el tipo">
+                    </div>
+                    <div class="form-group">
+                        <label for="estado">Estado</label>
+                        <input type="text" class="form-control" id="estado" name="estado" placeholder="Ingrese el estado">
+                    </div>
+                    <div class="form-group">
+                        <label for="paciente">Paciente</label>
+                        <input type="text" class="form-control" id="paciente" name="paciente" placeholder="Ingrese el paciente">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                  <button type="button" id="save" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+			        
 	</main>
+		 
 
-	<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+
 	<script
 		src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
-
-	<script
-		src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
-
-	<script
-		src="https://cdn.datatables.net/buttons/1.6.4/js/dataTables.buttons.min.js"></script>
-
-	<script
-		src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
-
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-		crossorigin="anonymous"></script>
-
-	<script
-		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-		crossorigin="anonymous"></script>
+		<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.4/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    
 </body>
 </html>

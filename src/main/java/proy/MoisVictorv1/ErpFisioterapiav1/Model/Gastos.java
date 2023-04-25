@@ -2,6 +2,8 @@ package proy.MoisVictorv1.ErpFisioterapiav1.Model;
 
 import java.time.LocalDate;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -9,9 +11,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotNull;
+import proy.MoisVictorv1.ErpFisioterapiav1.Repositorio.EmpleadosRepositorio;
 
 @Entity
 public class Gastos {
+
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
 	private int id;
@@ -73,12 +77,23 @@ public class Gastos {
 		this.importe = importe;
 		this.empleados = empleados;
 	}
+	
+	
+	
 
-	@Override
-	public String toString() {
-		return "Gastos [id=" + id + ", fecha=" + fecha + ", tipo=" + tipo + ", importe=" + importe + ", empleados="
-				+ empleados + "]";
+	public Gastos(LocalDate fecha, String tipo, Double importe, @NotNull Empleados empleados) {
+		super();
+		this.fecha = fecha;
+		this.tipo = tipo;
+		this.importe = importe;
+		this.empleados = empleados;
 	}
+
+	public Gastos() {
+		super();
+	}
+
+
 	
 	
 	

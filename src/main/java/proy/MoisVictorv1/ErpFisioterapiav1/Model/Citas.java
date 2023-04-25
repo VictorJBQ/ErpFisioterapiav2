@@ -4,7 +4,13 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import jakarta.annotation.Nullable;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -15,8 +21,9 @@ import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
+@JsonIgnoreProperties({"factura"})
 public class Citas {
-
+	
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
 	private int id;
@@ -25,12 +32,12 @@ public class Citas {
 	private String estado;
 	private String tipo;
 	
-	@NotNull
+	@Nullable
 	@ManyToOne
 	@JoinColumn(name="id_Paciente")
 	private Pacientes pacientes;
 	
-	@NotNull
+	@Nullable
 	@ManyToOne
 	@JoinColumn(name="id_empleado")
 	private Empleados empleados;
@@ -102,8 +109,8 @@ public class Citas {
 		this.factura = factura;
 	}
 
-	public Citas(LocalDate fecha, LocalTime hora, String estado, String tipo, @NotNull Pacientes pacientes,
-			@NotNull Empleados empleados) {
+	public Citas(LocalDate fecha, LocalTime hora, String estado, String tipo,  Pacientes pacientes,
+			 Empleados empleados) {
 		super();
 		this.fecha = fecha;
 		this.hora = hora;
@@ -113,14 +120,33 @@ public class Citas {
 		this.empleados = empleados;
 	}
 
-	public Citas(LocalDate fecha, LocalTime hora, String estado, String tipo, @NotNull Empleados empleados) {
+	public Citas(LocalDate fecha, LocalTime hora, String estado, String tipo,  Empleados empleados) {
 		super();
 		this.fecha = fecha;
 		this.hora = hora;
 		this.estado = estado;
 		this.tipo = tipo;
+		this.pacientes = null;
 		this.empleados = empleados;
 	}
+
+	public Citas() {
+		super();
+	}
+	
+	
+	
+	
+	
+	
+	
+
+
+
+
+	
+
+
 	
 	
 	

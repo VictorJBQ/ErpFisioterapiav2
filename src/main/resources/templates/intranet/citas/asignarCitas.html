@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://wwww.thymeleaf.org">
 <head>
-<meta charset="UTF-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.0/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
-<link rel="stylesheet" th:href="@{/css/EstiloDash.css}" />
-<link rel="stylesheet" th:href="@{/assets2/css/EstilosBasico.css}" />
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" />
-<link rel="stylesheet" th:href="@{/css/style.css}" />
-<title>JimBus Solutions</title>
+    <link rel="stylesheet" th:href="@{/css/EstiloDash.css}" />
+    <link rel="stylesheet" th:href="@{/assets2/css/EstilosBasico.css}" />
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <title>JimBus Solutions</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 	<!-- top navigation bar -->
@@ -163,109 +166,67 @@
 		</div>
 	</div>
 	<br>
-	
+	<!-- offcanvas -->
 	<main class="mt-5 pt-3">
-<div class="row">
-			<div class="col-md-6">
-					<div class="card">
-              <div class="card-header">
-                <span><i class="bi bi-table me-2"></i></span> Lista Citas
-              </div>
-              <div class="card-body">
-                <div class="table-responsive">
-                  <table
-                    id="example"
-                    class="table table-striped data-table"
-                    style="width: 100%"
-                  >
-                    <thead>
-                      <tr>
-                       <th>id cita</th>
-											<th>fecha</th>
-											<th>tipo</th>
-											<th>id empleado</th>
-											<th>id paciente</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                    <tfoot>
-                      <tr>
-                         <th>id cita</th>
-											<th>fecha</th>
-											<th>tipo</th>
-											<th>id empleado</th>
-											<th>id paciente</th>
-                      </tr>
-                    </tfoot>
-                  </table>
-                </div>
-              </div>
-            </div>
-				</div>
+	
+	<br>
+	<div class="alert alert-primary" id="msg" style="display: none;"
+									role="alert"></div>
+									<br>
+	  
+		<div id="calendario"></div>
 
-<div class="col-md-6">
-					<div class="card">
-              <div class="card-header">
-                <span><i class="bi bi-table me-2"></i></span> Lista Citas
-              </div>
-              <div class="card-body">
-                <div class="table-responsive">
-                  <table
-                    id="example"
-                    class="table table-striped data-table"
-                    style="width: 100%"
-                  >
-                    <thead>
-                      <tr>
-                       <th>id cita</th>
-											<th>fecha</th>
-											<th>tipo</th>
-											<th>id empleado</th>
-											<th>id paciente</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                    <tfoot>
-                      <tr>
-                         <th>id cita</th>
-											<th>fecha</th>
-											<th>tipo</th>
-											<th>id empleado</th>
-											<th>id paciente</th>
-                      </tr>
-                    </tfoot>
-                  </table>
-                </div>
-              </div>
-            </div>
-				</div>
-			</div>	</main>
+	<!-- Modal -->
+	<div class="modal fade" id="modal1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Selecciona paciente para asignar cita</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <button id="btn-nuevo-paciente">Nuevo paciente</button>
+      <input type="hidden" class="form-control" id="idCita">
+        <!-- Select para el modal -->
+           <div id="campos-fijo" style="display: block;">
+      <select class="form-control select2" name="miSelect" id="idPaciente">
+      <option th:each="pacientes:${lista}" th:value=${pacientes.id}
+			th:text="${pacientes.nombre}+' '+${pacientes.apellidos}
+			+' '+${pacientes.sabeDemi} ?: 'default value'" ></option>
+   			</select>
+      </div>
+      </div>
+      <div id="campos-adicionales" style="display: none;">
+  <div class="form-group">
+<label for="apellido">Nombre</label> 
+<input type="text"class="form-control" id="nomPaciente" placeholder="nombre">
+</div>
+    <div class="form-group">
+<label for="apellido">Teléfono</label> 
+<input type="number"class="form-control" id="telPaciente" placeholder="telefono">
+</div>
+  </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" id="asignar">Asignar cita</button>
+      </div>
+    </div>
+  </div>
+</div>
+	</main>
+	
+	
+	
+	<!-- Incluir los archivos JS necesarios -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/locale/es.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.1/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.0/js/bootstrap.min.js"></script>
+<script src="/js/calendario/citas.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.0/dist/chart.min.js"></script>
 
-	<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
-
-	<script
-		src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
-
-	<script
-		src="https://cdn.datatables.net/buttons/1.6.4/js/dataTables.buttons.min.js"></script>
-
-	<script
-		src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
-
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-		crossorigin="anonymous"></script>
-
-	<script
-		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-		crossorigin="anonymous"></script>
 </body>
 </html>

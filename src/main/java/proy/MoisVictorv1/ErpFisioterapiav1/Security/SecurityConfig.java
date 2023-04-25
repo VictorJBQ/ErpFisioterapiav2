@@ -19,7 +19,7 @@ public class SecurityConfig {
 	
 	  @Bean
 	    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		  http
+		  http.csrf().disable()
 	        .httpBasic()
 	            .and()
 	        .authorizeHttpRequests()
@@ -28,7 +28,7 @@ public class SecurityConfig {
 	            .and()
 	        .formLogin()
 	            .loginPage("/login")
-	            .defaultSuccessUrl("/intranet/Plantilla") // Agrega esta línea
+	            .defaultSuccessUrl("/intranet/inicio") // Agrega esta línea
 	            .permitAll()
 	            .and()
 	        .logout()

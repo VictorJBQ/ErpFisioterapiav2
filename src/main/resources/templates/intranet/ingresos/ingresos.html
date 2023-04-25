@@ -6,12 +6,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
 
+
 <link rel="stylesheet" th:href="@{/css/EstiloDash.css}" />
 <link rel="stylesheet" th:href="@{/assets2/css/EstilosBasico.css}" />
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" />
 <link rel="stylesheet" th:href="@{/css/style.css}" />
-<title>JimBus Solutions</title>
+<title>JimBus Solutions</title> 
+<link rel='stylesheet' type='text/css'
+	href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css'>
+<link rel='stylesheet' type='text/css'
+	href='https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css'>
+<link rel='stylesheet' type='text/css'
+	href='https://cdn.datatables.net/buttons/1.6.4/css/buttons.dataTables.min.css'>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="/js/tablas/ingresosTabla.js"></script>
 </head>
 <body>
 	<!-- top navigation bar -->
@@ -25,7 +34,7 @@
 			<a class="navbar-brand me-auto ms-lg-0 ms-3 text-uppercase fw-bold"
 				href="#"><img th:src="@{/images/JBblanco.png}" width="100px"
 				height="50px" />JimBus Solutions</a>
-	
+
 
 			<div class="ms-auto d-inline-block">
 				<form th:action="@{/logout}" method="post">
@@ -79,10 +88,13 @@
 							<li><a href="/intranet/empleados/empleados"
 								class="dropdown-item icon solid fa-magnifying-glass">Empleados</a></li>
 						</ul></li>
-					<li class="nav-item dropdown"><a class="nav-link dropdown-toggle icon solid fa-coins btn-dark text-white" href="#"  id="dropdownMenuClickableInside"   data-bs-toggle="dropdown" aria-expanded="false">
-            Contabilidad
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenuClickableInside">
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle icon solid fa-coins btn-dark text-white"
+						href="#" id="dropdownMenuClickableInside"
+						data-bs-toggle="dropdown" aria-expanded="false"> Contabilidad
+					</a>
+						<ul class="dropdown-menu"
+							aria-labelledby="dropdownMenuClickableInside">
 
 							<li><a href="/intranet/facturas/facturas"
 								class="dropdown-item icon solid fa-file-invoice-dollar">
@@ -93,9 +105,11 @@
 								data-bs-auto-close="true" aria-expanded="false">Ingresos</a>
 								<ul class="dropdown-menu" aria-labelledby="defaultDropdown">
 									<li><a href="/intranet/ingresos/ingresos"
-										class="dropdown-item dropdown icon solid fa-eye">Ver ingresos</a></li>
+										class="dropdown-item dropdown icon solid fa-eye">Ver
+											ingresos</a></li>
 									<li><a href="/intranet/ingresos/registrarIngresos"
-										class="dropdown-item dropdown icon solid fa-plus">Registrar ingreso</a></li>
+										class="dropdown-item dropdown icon solid fa-plus">Registrar
+											ingreso</a></li>
 								</ul></li>
 							<li class="dropdown"><a
 								class="dropdown-item dropdown-toggle icon solid fa-chart-line-down "
@@ -163,117 +177,149 @@
 		</div>
 	</div>
 	<br>
+	<br>
 	<!-- offcanvas -->
 	<main class="mt-5 pt-3">
 		<div class="container-fluid">
-		
+
 			<div class="row">
-			<div class="col-md-3">
-			<div class="card-header d-flex flex-row">
-							<div>
-								<span><i class="bi bi-table me-2"></i></span> Añadir Ingreso
-							</div>
-							
+
+
+
+				<div class="col-md-12 mb-3">
+					<div class="card ">
+						<div class="card-header d-flex flex-row">
+							<span><i class="bi bi-table me-2"></i></span> Lista ingresos
 						</div>
-						<div class="card-body table-responsive">
-				<form action="">
-				<table id="table" align="center" cellpadding="10">
+						<div class="card-body">
+							<div class="table-responsive">
+								<div class="alert alert-primary" id="msg" style="display: none;"
+									role="alert"></div>
 
-					<!----- First Name ---------------------------------------------------------->
-					<tr>
-						<td>Importe</td>
-						<td><input type="number" id="importe" min="0" step="0.01"/>
-							</td>
-					</tr>
+								<table id="ingresos" class="table table-striped data-table"
+									style="width: 100%">
 
-					<!----- Last Name ---------------------------------------------------------->
-					<tr>
-						<td>tipo</td>
-						<td><input type="text" name="name" maxlength="30" placeholder="(max 30 caractéres)"/>
-						</td>
-					</tr>
+									<thead id="cabeceraTabla">
+									<thead>
+										<tr>
+											<th>Importe</th>
+											<th>Tipo</th>
+											<th>FacturaId</th>
+											<th>Acciones</th>
 
-					
-					<!----- Email Id ---------------------------------------------------------->
-					<tr>
-						<td>id Factura</td>
-						<td><select name="rol" id="rol">
-								<option value="0">asda</option>
-						</select></td>
-						</tr>
-					
-					<tr>
-						<td colspan="2" align="center"><input type="submit"
-							value="Enviar">
-						</td>
-					</tr>
-				</table>
+										</tr>
+									</thead>
+									<tbody>
+									</tbody>
+									<tfoot>
+										<tr>
 
-				</form>
+											<th>Importe</th>
+											<th>Tipo</th>
+											<th>FacturaId</th>
+											<th>Acciones</th>
+										</tr>
+									</tfoot>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal fade" id="editarIngreso" tabindex="-1" role="dialog"
+				aria-labelledby="modalTitle" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="modalTitle">Editar gasto</h5>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<form>
+								<div class="form-group">
+									  <input type="hidden" class="form-control" id="idE">		
+								</div>
+								<div class="form-group">
+									<label for="apellido">Importe</label> 
+									<input type="number" id="importeE">
+								</div>
+								<div class="form-group">
+									<label for="direccion">Tipo</label> <input type="text"
+										class="form-control" id="tipoE">
+								</div>
+								
+							
+								
+
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary"
+								data-dismiss="modal">Cerrar</button>
+							<button type="button" id="editar" class="btn btn-primary">Editar</button>
+						</div>
+					</div>
 				</div>
 			</div>
 
-<div class="col-md-9">
-					<div class="card">
-              <div class="card-header">
-                <span><i class="bi bi-table me-2"></i></span> Lista Ingresos
-              </div>
-              <div class="card-body">
-                <div class="table-responsive">
-                  <table
-                    id="example"
-                    class="table table-striped data-table"
-                    style="width: 100%"
-                  >
-                    <thead>
-                      <tr>
-                       <th>id Ingreso</th>
-											<th>importe</th>
-											<th>tipo</th>
-											<th>id factura</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                    <tfoot>
-                      <tr>
-                         <th>id Ingreso</th>
-											<th>importe</th>
-											<th>tipo</th>
-											<th>id factura</th>
-                      </tr>
-                    </tfoot>
-                  </table>
-                </div>
-              </div>
-            </div>
+
+			<div class="modal fade" id="crearIngreso" tabindex="-1" role="dialog"
+				aria-labelledby="modalTitle" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="modalTitle">Registrar Ingreso </h5>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<form id="forAlta">
+								
+								<div class="form-group">
+									<label for="apellido">Importe</label> 
+									<input type="number" id="importeA" min=0>
+								</div>
+								
+								<div class="form-group">
+									<label for="direccion">Tipo</label> <input type="text"
+										class="form-control" id="tipoA">
+								</div>
+
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary"
+								data-dismiss="modal">Cerrar</button>
+							<button type="button" id="guardar" class="btn btn-primary">Guardar</button>
+						</div>
+					</div>
 				</div>
 			</div>
+
 		</div>
 	</main>
-	<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
-
 	<script
 		src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
-
 	<script
 		src="https://cdn.datatables.net/buttons/1.6.4/js/dataTables.buttons.min.js"></script>
-
 	<script
 		src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
-
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
 		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
 		crossorigin="anonymous"></script>
-
 	<script
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
 		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 		crossorigin="anonymous"></script>
+
 </body>
 </html>

@@ -6,12 +6,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
 
+
 <link rel="stylesheet" th:href="@{/css/EstiloDash.css}" />
 <link rel="stylesheet" th:href="@{/assets2/css/EstilosBasico.css}" />
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" />
 <link rel="stylesheet" th:href="@{/css/style.css}" />
-<title>JimBus Solutions</title>
+<title>JimBus Solutions</title> 
+<link rel='stylesheet' type='text/css'
+	href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css'>
+<link rel='stylesheet' type='text/css'
+	href='https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css'>
+<link rel='stylesheet' type='text/css'
+	href='https://cdn.datatables.net/buttons/1.6.4/css/buttons.dataTables.min.css'>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+<!-- Incluye select2 -->
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+<script src="/js/tablas/pacientesTabla.js"></script>
 </head>
 <body>
 	<!-- top navigation bar -->
@@ -23,9 +37,9 @@
 				<span class="navbar-toggler-icon" data-bs-target="#sidebar"></span>
 			</button>
 			<a class="navbar-brand me-auto ms-lg-0 ms-3 text-uppercase fw-bold"
-				href="#"><img th:src="@{/images/JBblanco.png}"
-				width="100px" height="50px" />JimBus Solutions</a>
-			
+				href="#"><img th:src="@{/images/JBblanco.png}" width="100px"
+				height="50px" />JimBus Solutions</a>
+
 
 			<div class="ms-auto d-inline-block">
 				<form th:action="@{/logout}" method="post">
@@ -79,10 +93,13 @@
 							<li><a href="/intranet/empleados/empleados"
 								class="dropdown-item icon solid fa-magnifying-glass">Empleados</a></li>
 						</ul></li>
-					<li class="nav-item dropdown"><a class="nav-link dropdown-toggle icon solid fa-coins btn-dark text-white" href="#"  id="dropdownMenuClickableInside"   data-bs-toggle="dropdown" aria-expanded="false">
-            Contabilidad
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenuClickableInside">
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle icon solid fa-coins btn-dark text-white"
+						href="#" id="dropdownMenuClickableInside"
+						data-bs-toggle="dropdown" aria-expanded="false"> Contabilidad
+					</a>
+						<ul class="dropdown-menu"
+							aria-labelledby="dropdownMenuClickableInside">
 
 							<li><a href="/intranet/facturas/facturas"
 								class="dropdown-item icon solid fa-file-invoice-dollar">
@@ -93,9 +110,11 @@
 								data-bs-auto-close="true" aria-expanded="false">Ingresos</a>
 								<ul class="dropdown-menu" aria-labelledby="defaultDropdown">
 									<li><a href="/intranet/ingresos/ingresos"
-										class="dropdown-item dropdown icon solid fa-eye">Ver ingresos</a></li>
+										class="dropdown-item dropdown icon solid fa-eye">Ver
+											ingresos</a></li>
 									<li><a href="/intranet/ingresos/registrarIngresos"
-										class="dropdown-item dropdown icon solid fa-plus">Registrar ingreso</a></li>
+										class="dropdown-item dropdown icon solid fa-plus">Registrar
+											ingreso</a></li>
 								</ul></li>
 							<li class="dropdown"><a
 								class="dropdown-item dropdown-toggle icon solid fa-chart-line-down "
@@ -163,38 +182,280 @@
 		</div>
 	</div>
 	<br>
-	
+	<br>
+	<!-- offcanvas -->
 	<main class="mt-5 pt-3">
-		<div class="row">
+		<div class="container-fluid">
+
+			<div class="row">
+
+
+
 				<div class="col-md-12 mb-3">
-				<!-- Aqui mete cosas si quieres añadir otro bloque copia el div de arriva class="col-md-12" -->
+					<div class="card ">
+						<div class="card-header d-flex flex-row">
+							<span><i class="bi bi-table me-2"></i></span> Lista pacientes
+						</div>
+						<div class="card-body">
+							<div class="table-responsive">
+								<div class="alert alert-primary" id="msg" style="display: none;"
+									role="alert"></div>
+
+								<table id="pacientes" class="table table-striped data-table"
+									style="width: 100%">
+
+									<thead id="cabeceraTabla">
+									<thead>
+										<tr>
+											<th>Nombre</th>
+											<th>Apellidos</th>
+											<th>DNI</th>
+											<th>Fecha-Alta</th>
+											<th>Domicilio</th>
+											<th>CP</th>
+											<th>Población</th>
+											<th>Teléfono</th>
+											<th>Conoce</th>
+											<th>Tarifa</th>
+											<th>Citar</th>
+											<th>Acciones</th>
+
+										</tr>
+									</thead>
+									<tbody>
+									</tbody>
+									<tfoot>
+										<tr>
+											<th>Nombre</th>
+											<th>Apellidos</th>
+											<th>DNI</th>
+											<th>Fecha-Alta</th>
+											<th>Domicilio</th>
+											<th>CP</th>
+											<th>Población</th>
+											<th>Teléfono</th>
+											<th>Conoce</th>
+											<th>Tarifa</th>
+											<th>Citar</th>
+											<th>Acciones</th>
+										</tr>
+									</tfoot>
+								</table>
+							</div>
+						</div>
 					</div>
+				</div>
 			</div>
+			<div class="modal fade" id="pacienteEditar" tabindex="-1" role="dialog"
+				aria-labelledby="modalTitle" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="modalTitle">Editar paciente</h5>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<form>
+								<div class="form-group">
+									<label for="nombre">Nombre</label>
+									 <input type="text" class="form-control" id="nombreE">
+									   <input type="hidden" class="form-control" id="idE">
+									   <input type="hidden" class="form-control" id="dniViejoE">
+								</div>
+								<div class="form-group">
+									<label for="apellido">Apellidos</label> <input type="text"
+										class="form-control" id="apellidosE"
+										placeholder="">
+								</div>
+								<div class="form-group">
+									<label for="apellido">DNI</label> <input type="text"
+										class="form-control" id="dniE"
+										placeholder="">
+								</div>
+									<div class="form-group">
+									<label for="apellido">Docmicilio</label> <input type="text"
+										class="form-control" id="domicilioE"
+										placeholder="">
+								</div>
+								<div class="form-group">
+									<label for="apellido">Código postal</label> 
+									<input type="number" id="cpE">
+								</div>
+									<div class="form-group">
+									<label for="apellido">Población</label> <input type="text"
+										class="form-control" id="poblaE"
+										placeholder="">
+								</div>
+								<div class="form-group">
+									<label for="apellido">Teléfono</label> 
+									<input type="number" id="telE">
+								</div>
+								<div class="form-group">
+									<label for="apellido">Conoce</label> 
+									<select id="conoceE" class="form-control">
+										  <option value="interna">Interna</option>
+										  <option value="externa">Externa</option>
+										  <option value="situacion">Situación</option>
+								
+									</select>
+								</div>
+								<div class="form-group">
+									<label for="apellido">Tarifa</label> <select class="form-control"
+										id="tarifaE">
+										<option th:each="tarifas:${lista}" th:value=${tarifas.tipo}
+											th:text="${tarifas.tipo}"></option>
+									</select>
+								</div>
+								
+
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary"
+								data-dismiss="modal">Cerrar</button>
+							<button type="button" id="editar" class="btn btn-primary" >Editar</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			
+			<div class="modal fade" id="pacienteCitar" tabindex="-1" role="dialog"
+				aria-labelledby="modalTitle" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="modalTitle">Dar cita</h5>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<form>
+								<div class="form-group">
+									<label for="apellido">Citas disponibles</label> <select
+										class="form-control select2" name="miSelect" id="citaDar">
+										<option th:each="citas:${citasLista}" th:value=${citas.id}
+											th:text="${citas.fecha}+' '+${citas.hora}"></option>
+									</select>
+									<input type="hidden" class="form-control" id="idCitar">
+								</div>
+								
+
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary"
+								data-dismiss="modal">Cerrar</button>
+							<button type="button" id="asignar" class="btn btn-primary">Asignar</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			
+			
+
+
+			<div class="modal fade" id="crearPaci" tabindex="-1" role="dialog"
+				aria-labelledby="modalTitle" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="modalTitle">Alta pacientes</h5>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<form>
+								<div class="form-group">
+									<label for="nombre">Nombre</label>
+									 <input type="text" class="form-control" id="nombreA" >
+								</div>
+								<div class="form-group">
+									<label for="apellido">Apellidos</label> <input type="text"
+										class="form-control" id="apellidosA"
+										placeholder="">
+								</div>
+								<div class="form-group">
+									<label for="apellido">DNI</label> <input type="text"
+										class="form-control" id="dniA"
+										placeholder="">
+								</div>
+									<div class="form-group">
+									<label for="apellido">Docmicilio</label> <input type="text"
+										class="form-control" id="domicilioA"
+										placeholder="">
+								</div>
+								<div class="form-group">
+									<label for="apellido">Código postal</label> 
+									<input type="number" id="cpA">
+								</div>
+									<div class="form-group">
+									<label for="apellido">Población</label> <input type="text"
+										class="form-control" id="poblaA"
+										placeholder="">
+								</div>
+								<div class="form-group">
+									<label for="apellido">Teléfono</label> 
+									<input type="number" id="telA">
+								</div>
+								<div class="form-group">
+									<label for="apellido">Conoce</label> 
+									<select id="conoceA" class="form-control">
+										  <option value="interna">Interna</option>
+										  <option value="externa">Externa</option>
+										  <option value="situacion">Situación</option>
+								
+									</select>
+									
+								
+								</div>
+								<div class="form-group">
+									<label for="apellido">Tarifa</label> <select class="form-control"
+										 id="tarifaA">
+										<option th:each="tarifas:${lista}" th:value=${tarifas.tipo}
+											th:text="${tarifas.tipo}"></option>
+									</select>
+								</div>
+								
+
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary"
+								data-dismiss="modal" id=cerrarM>Cerrar</button>
+							<button type="button" id="guardar"  class="btn btn-primary">Guardar</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
 	</main>
-
-<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
-
 	<script
 		src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
-
 	<script
 		src="https://cdn.datatables.net/buttons/1.6.4/js/dataTables.buttons.min.js"></script>
-
 	<script
 		src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
-
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
 		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
 		crossorigin="anonymous"></script>
-
 	<script
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
 		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 		crossorigin="anonymous"></script>
+
 </body>
 </html>

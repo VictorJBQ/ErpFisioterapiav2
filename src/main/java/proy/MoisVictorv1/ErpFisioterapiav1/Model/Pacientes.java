@@ -3,6 +3,8 @@ package proy.MoisVictorv1.ErpFisioterapiav1.Model;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -13,7 +15,10 @@ import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
+@JsonIgnoreProperties({"citas"})
 public class Pacientes {
+
+
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
 	private int id;
@@ -25,8 +30,9 @@ public class Pacientes {
 	private int telefono;
 	private LocalDate fechaAlta;
 	private String sabeDeMi;
+	private String poblacion;
 	
-	@NotNull
+	
 	@ManyToOne
 	@JoinColumn(name="tarifa")
 	private Tarifas tarifas;
@@ -122,8 +128,26 @@ public class Pacientes {
 		this.citas = citas;
 	}
 
+
+
+	public String getSabeDeMi() {
+		return sabeDeMi;
+	}
+
+	public void setSabeDeMi(String sabeDeMi) {
+		this.sabeDeMi = sabeDeMi;
+	}
+
+	public String getPoblacion() {
+		return poblacion;
+	}
+
+	public void setPoblacion(String poblacion) {
+		this.poblacion = poblacion;
+	}
+
 	public Pacientes(String dni, String nombre, String apellidos, String domicilio, String codigoPostal, int telefono,
-			LocalDate fechaAlta, String sabeDemi, @NotNull Tarifas tarifas) {
+			 String sabeDeMi, String poblacion, Tarifas tarifas) {
 		super();
 		this.dni = dni;
 		this.nombre = nombre;
@@ -131,8 +155,9 @@ public class Pacientes {
 		this.domicilio = domicilio;
 		this.codigoPostal = codigoPostal;
 		this.telefono = telefono;
-		this.fechaAlta = fechaAlta;
-		this.sabeDeMi = sabeDemi;
+		this.fechaAlta = LocalDate.now();
+		this.sabeDeMi = sabeDeMi;
+		this.poblacion = poblacion;
 		this.tarifas = tarifas;
 	}
 
@@ -140,6 +165,11 @@ public class Pacientes {
 		super();
 		this.nombre = nombre;
 		this.telefono = telefono;
+		this.fechaAlta= LocalDate.now();
+	}
+
+	public Pacientes() {
+		super();
 	}
 	
 	
