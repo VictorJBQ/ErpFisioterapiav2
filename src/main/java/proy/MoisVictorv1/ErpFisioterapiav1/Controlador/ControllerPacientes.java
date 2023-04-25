@@ -12,16 +12,16 @@ public class ControllerPacientes {
 	@Autowired
 	PacientesRepositorio pacientesRepositorio;
 	
-	@RequestMapping("/intranet/pacientes/pacientes")
+	@RequestMapping(path ="intranet/pacientes/pacientes")
 	public String verPacientes(Model model) {
 		
-		return "/intranet/pacientes/pacientes";
+		return "intranet/pacientes/pacientes";
 	}
 	
-	@RequestMapping("/intranet/pacientes/altaPacientes")
+	@RequestMapping(path ="intranet/pacientes/altaPacientes")
 	public String addPacientes(Model model) {
 		
-		return "/intranet/pacientes/altaPacientes";
+		return "intranet/pacientes/altaPacientes";
 	}
 
 }

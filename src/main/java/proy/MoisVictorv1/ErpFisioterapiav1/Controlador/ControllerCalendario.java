@@ -15,10 +15,10 @@ public class ControllerCalendario {
 	@Autowired
 	PacientesRepositorio pacientesRepositorio;
 	
-	@RequestMapping("/intranet/calendario/calendario")
+	@RequestMapping(path ="intranet/calendario/calendario")
 	public String verCalendario(Model model) {
 		
-		return "/intranet/calendario/calendario";
+		return "intranet/calendario/calendario";
 	}
 
 }

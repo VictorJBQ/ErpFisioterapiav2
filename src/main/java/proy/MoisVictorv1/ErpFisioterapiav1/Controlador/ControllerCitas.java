@@ -12,21 +12,21 @@ public class ControllerCitas {
 	
 	@Autowired
 	CitasRepositorio citasRepositorio;
-	@RequestMapping("/intranet/citas/citas")
+	@RequestMapping(path ="intranet/citas/citas")
 	public String verCitas(Model model) {
 		
-		return "/intranet/citas/citas";
+		return "intranet/citas/citas";
 	}
 	
-	@RequestMapping("/intranet/citas/altaCitas")
+	@RequestMapping(path ="intranet/citas/altaCitas")
 	public String addCitas(Model model) {
 		
-		return "/intranet/citas/altaCitas";
+		return "intranet/citas/altaCitas";
 	}
 	
-	@RequestMapping("/intranet/citas/asignarCitas")
+	@RequestMapping(path ="intranet/citas/asignarCitas")
 	public String asignarCitas(Model model) {
 		
-		return "/intranet/citas/asignarCitas";
+		return "intranet/citas/asignarCitas";
 	}
 }

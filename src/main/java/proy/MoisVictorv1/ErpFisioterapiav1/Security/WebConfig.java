@@ -11,9 +11,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void configureViewResolvers(ViewResolverRegistry registry) {
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-        resolver.setPrefix("/templates/");
-        resolver.setPrefix("/templates/home/");
-        resolver.setPrefix("/templates/intranet/");
+        resolver.setPrefix("/");
         resolver.setSuffix(".html");
         registry.viewResolver(resolver);
     }

@@ -24,58 +24,58 @@ public class ControllerEstadisticas {
 	@Autowired
 	GastosRepositorio gastosRepositorio;
 	
-	@RequestMapping("/intranet/estadisticas/diasTrabajados")
+	@RequestMapping(path ="intranet/estadisticas/diasTrabajados")
 	public String diasTrabajados(Model model) {
 		
-		return "/intranet/estadisticas/diasTrabajados";
+		return "intranet/estadisticas/diasTrabajados";
 	}
 	
-	@RequestMapping("/intranet/estadisticas/distribucionSesiones")
+	@RequestMapping(path ="intranet/estadisticas/distribucionSesiones")
 	public String distribucionSesiones(Model model) {
 		
-		return "/intranet/estadisticas/distribucionSesiones";
+		return "intranet/estadisticas/distribucionSesiones";
 	}
 	
-	@RequestMapping("/intranet/estadisticas/divisionPacientes")
+	@RequestMapping(path ="intranet/estadisticas/divisionPacientes")
 	public String divisionPacientes(Model model) {
 		
-		return "/intranet/estadisticas/divisionPacientes";
+		return "intranet/estadisticas/divisionPacientes";
 	}
 	
-	@RequestMapping("/intranet/estadisticas/gastosTotales")
+	@RequestMapping(path ="intranet/estadisticas/gastosTotales")
 	public String gastosTotales(Model model) {
 		
-		return "/intranet/estadisticas/gastosTotales";
+		return "intranet/estadisticas/gastosTotales";
 	}
 	
-	@RequestMapping("/intranet/estadisticas/ingresosTotales")
+	@RequestMapping(path ="intranet/estadisticas/ingresosTotales")
 	public String ingresosTotales(Model model) {
 		
-		return "/intranet/estadisticas/ingresosTotales";
+		return "intranet/estadisticas/ingresosTotales";
 	}
 	
-	@RequestMapping("/intranet/estadisticas/metodologiaPago")
+	@RequestMapping(path ="intranet/estadisticas/metodologiaPago")
 	public String metodologiaPago(Model model) {
 		
-		return "/intranet/estadisticas/metodologiaPago";
+		return "intranet/estadisticas/metodologiaPago";
 	}
 	
-	@RequestMapping("/intranet/estadisticas/numeroPacientes")
+	@RequestMapping(path ="intranet/estadisticas/numeroPacientes")
 	public String numeroPacientes(Model model) {
 		
-		return "/intranet/estadisticas/numeroPacientes";
+		return "intranet/estadisticas/numeroPacientes";
 	}
 	
-	@RequestMapping("/intranet/estadisticas/preciosSesiones")
+	@RequestMapping(path ="intranet/estadisticas/preciosSesiones")
 	public String preciosSesiones(Model model) {
 		
-		return "/intranet/estadisticas/preciosSesiones";
+		return "intranet/estadisticas/preciosSesiones";
 	}
 	
-	@RequestMapping("/intranet/estadisticas/procedenciaPacientes")
+	@RequestMapping(path ="intranet/estadisticas/procedenciaPacientes")
 	public String procedenciaPacientes(Model model) {
 		
-		return "/intranet/estadisticas/procedenciaPacientes";
+		return "intranet/estadisticas/procedenciaPacientes";
 	}
 
 }

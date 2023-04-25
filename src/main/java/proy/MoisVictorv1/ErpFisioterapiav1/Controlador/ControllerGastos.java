@@ -12,16 +12,16 @@ public class ControllerGastos {
 	@Autowired
 	GastosRepositorio gastosRepositorio;
 	
-	@RequestMapping("/intranet/gastos/gastos")
+	@RequestMapping(path ="intranet/gastos/gastos")
 	public String verGastos(Model model) {
 		
-		return "/intranet/gastos/gastos";
+		return "intranet/gastos/gastos";
 	}
 	
-	@RequestMapping("/intranet/gastos/registrarGastos")
+	@RequestMapping("intranet/gastos/registrarGastos")
 	public String addGastos(Model model) {
 		
-		return "/intranet/gastos/registrarGastos";
+		return "intranet/gastos/registrarGastos";
 	}
 
 }
