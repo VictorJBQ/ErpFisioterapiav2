@@ -48,7 +48,7 @@ public class ControllerCitas {
 	    return "redirect:intranet/citas/pruebas";
 	}
 	
-	@PostMapping(path ="intranet/citas/citas",value="/intranet/citas/citas")
+	@PostMapping(value="intranet/citas/citas")
 	public String  save() {
 	    // Aquí puedes hacer lo que necesites con los valores recibidos
 	    System.out.println("Hola");
