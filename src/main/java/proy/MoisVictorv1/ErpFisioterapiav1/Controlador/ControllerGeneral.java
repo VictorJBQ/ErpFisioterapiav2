@@ -38,7 +38,7 @@ public class ControllerGeneral {
 	TarifasRepositorio tarifasRepositorio;
 	@Autowired
 	EmpleadosRepositorio empleadosRepositorio;
-	@RequestMapping("/intranet/inicio")
+	@RequestMapping(path="intranet/inicio")
 	public String bienvenida(Model model, Authentication authentication) {
 		HashMap<String, String> empleado= new HashMap<>();
 		
@@ -68,32 +68,32 @@ public class ControllerGeneral {
 		itUsu.forEach(listaUsuarios::add);
 		model.addAttribute("lista", listaUsuarios);
 		model.addAttribute("datos", empleado);
-		return "/intranet/inicio";
+		return "intranet/inicio";
 	}
 	 
-	@RequestMapping("/index")
+	@RequestMapping(path="index")
 	public String index(Model model) {
 		model.addAttribute("mensaje",model.getAttribute("mensaje"));
-		return "/index";
+		return "index";
 	}
 	 
-	    @GetMapping("/login")
+	    @GetMapping(path="login")
 	    public String add2() {
-	        return "/login";
+	        return "login";
 	    }
 	    
-	    @PostMapping(path="/login")
+	    @PostMapping(path="login")
 	    public String add1() {
-	        return "/login";
+	        return "login";
 	    }
 	    
 	    
-	    @PostMapping(path = "/intranet/cambioPS")
+	    @PostMapping(path = "intranet/cambioPS")
 	    public String checkPersonInfo(@Valid CambioPSForm e, BindingResult bindingResult) {
 			
 			if(bindingResult.hasErrors()) {
 				
-				return "/intranet/inicio";
+				return "intranet/inicio";
 			}
 			return null;
 			
