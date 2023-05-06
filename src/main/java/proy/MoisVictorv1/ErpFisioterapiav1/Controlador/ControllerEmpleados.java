@@ -15,16 +15,16 @@ public class ControllerEmpleados {
 	
 	@Autowired 
 	RolesRepositorio rolesRepositorio;
-	@RequestMapping("/intranet/empleados/empleados")
+	@RequestMapping(path="intranet/empleados/empleados")
 	public String verEmpleados(Model model) {
 	
-		return "/intranet/empleados/empleados";
+		return "intranet/empleados/empleados";
 	}
 	
-	@RequestMapping("/intranet/empleados/altaEmpleados")
+	@RequestMapping(path="intranet/empleados/altaEmpleados")
 	public String addEmpleados(Model model) {
 		List<Roles> roles=(List<Roles>) rolesRepositorio.findAll();
 		model.addAttribute("lista",roles);
-		return "/intranet/empleados/altaEmpleados";
+		return "intranet/empleados/altaEmpleados";
 	}
 }

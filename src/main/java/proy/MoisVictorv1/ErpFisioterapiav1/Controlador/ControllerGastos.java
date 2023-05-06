@@ -20,17 +20,17 @@ public class ControllerGastos {
 	@Autowired
 	EmpleadosRepositorio empleadosRepositorio;
 	
-	@RequestMapping("/intranet/gastos/gastos")
+	@RequestMapping(path="intranet/gastos/gastos")
 	public String verGastos(Model model) {
 		List<Empleados> empleados=(List<Empleados>) empleadosRepositorio.findAll();
 		model.addAttribute("lista",empleados);
-		return "/intranet/gastos/gastos";
+		return "intranet/gastos/gastos";
 	}
 	
-	@RequestMapping("/intranet/gastos/registrarGastos")
+	@RequestMapping(path="intranet/gastos/registrarGastos")
 	public String addGastos(Model model) {
 		
-		return "/intranet/gastos/registrarGastos";
+		return "intranet/gastos/registrarGastos";
 	}
 
 }
