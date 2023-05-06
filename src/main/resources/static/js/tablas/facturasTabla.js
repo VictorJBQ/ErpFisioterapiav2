@@ -89,11 +89,6 @@ var app = {
 			},
 			dom: 'Bfrtip',
 			columns: [
-				
-				{ data: "formaPago" },
-				{ data: "importe" },
-				{ data: "cita.pacientes.dni" },
-				{ data: "fecha" },
 				{
 					// Agregar una columna para el botón Editar
 					data: null,
@@ -103,7 +98,20 @@ var app = {
 					},
 					orderable: false,
 					searchable: false
-				}
+				},
+				{ data: "formaPago" },
+				{ data: "importe" },
+				{
+					data: "cita.pacientes",
+					render: function(data) {
+
+						var nombre = data && data.nombre ? data.nombre : "NA";
+						var telefono = data && data.telefono ? data.telefono : "NA";
+						return nombre + " - " + telefono;
+					}
+				},
+				{ data: "fecha" },
+				
 			],
 			buttons: [
 				{
@@ -112,7 +120,14 @@ var app = {
 						confirmarTodo();
 					}
 				}
-			]
+			],
+				responsive: {
+            details: {
+                display: $.fn.dataTable.Responsive.display.childRowImmediate,
+                type: 'none',
+                target: ''
+            }
+        }
 		});
 
 		// Agregar una acción para el botón Editar

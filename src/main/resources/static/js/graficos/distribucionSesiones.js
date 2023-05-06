@@ -60,11 +60,16 @@ function comparar() {
   },
   vAxis: {
     minValue: 0,
-    title: 'sesiones',
+    title: 'Sesiones',
+        gridlines: {
+      count: 5
+    },
     titleTextStyle: {
       color: '#333'
-    }
+    },
+    
   },
+  colors: ['#3366CC', '#990099', '#FF9900', '#109618', '#DC3912', '#0099C6'],
   tooltip: {
     isHtml: true,
     trigger: 'hover',

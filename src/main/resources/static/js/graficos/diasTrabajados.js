@@ -66,10 +66,14 @@ function comparar() {
   vAxis: {
     minValue: 0,
     title: 'Días trabajados',
+        gridlines: {
+      count: 5
+    },
     titleTextStyle: {
       color: '#333'
     }
-  }
+  },
+    colors: ['#3DCFCC', '#ED7D31']
 };
 
 

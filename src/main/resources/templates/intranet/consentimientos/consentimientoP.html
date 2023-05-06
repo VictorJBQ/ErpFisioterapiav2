@@ -5,6 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+<link rel="shortcut icon" th:href="@{/images/perfilLog.png}">
 
 <link rel="stylesheet" th:href="@{/css/EstiloDash.css}" />
 <link rel="stylesheet" th:href="@{/assets2/css/EstilosBasico.css}" />
@@ -40,7 +41,7 @@
 	</nav>
 	<!-- top navigation bar -->
 	<!-- offcanvas -->
-	<div class="offcanvas offcanvas-start sidebar-nav bg-dark"
+		<div class="offcanvas offcanvas-start sidebar-nav bg-dark"
 		tabindex="-1" id="sidebar">
 		<div class="offcanvas-body p-0">
 			<nav class="navbar-dark m-3">
@@ -53,7 +54,7 @@
 						data-bs-toggle="dropdown" aria-expanded="false"> Agenda </a>
 						<ul class="dropdown-menu" aria-labelledby="navbarDropdownAgenda">
 							<li><a href="/intranet/citas/citas"
-								class="dropdown-item icon solid fa-eye"> Ver citas</a></li>
+								class="dropdown-item icon solid fa-eye">Citas por revisar</a></li>
 							<li><a href="/intranet/citas/asignarCitas"
 								class="dropdown-item icon solid fa-pen">Asignar citas</a></li>
 							<li><a href="/intranet/citas/altaCitas"
@@ -64,9 +65,7 @@
 						href="#" id="navbarDropdownPaciente" role="button"
 						data-bs-toggle="dropdown" aria-expanded="false">Pacientes</a>
 						<ul class="dropdown-menu" aria-labelledby="navbarDropdownPaciente">
-							<li><a href="/intranet/pacientes/altaPacientes"
-								class="dropdown-item icon solid fa-user-plus"> Nuevo
-									paciente</a></li>
+							
 							<li><a href="/intranet/pacientes/pacientes"
 								class="dropdown-item icon solid fa-magnifying-glass">
 									listado/buscador Cliente</a></li>
@@ -79,8 +78,7 @@
 							aria-labelledby="navbarDropdownEmpleados">
 							<li><a href="/intranet/empleados/altaEmpleados"
 								class="dropdown-item icon solid fa-user-plus">Nuevo empleado</a></li>
-							<li><a href="/intranet/empleados/empleados"
-								class="dropdown-item icon solid fa-magnifying-glass">Empleados</a></li>
+							
 						</ul></li>
 					<li class="nav-item dropdown"><a class="nav-link dropdown-toggle icon solid fa-coins btn-dark text-white" href="#"  id="dropdownMenuClickableInside"   data-bs-toggle="dropdown" aria-expanded="false">
             Contabilidad
@@ -97,8 +95,7 @@
 								<ul class="dropdown-menu" aria-labelledby="defaultDropdown">
 									<li><a href="/intranet/ingresos/ingresos"
 										class="dropdown-item dropdown icon solid fa-eye">Ver ingresos</a></li>
-									<li><a href="/intranet/ingresos/registrarIngresos"
-										class="dropdown-item dropdown icon solid fa-plus">Registrar ingreso</a></li>
+									
 								</ul></li>
 							<li class="dropdown"><a
 								class="dropdown-item dropdown-toggle icon solid fa-chart-line-down "
@@ -107,8 +104,7 @@
 								<ul class="dropdown-menu" aria-labelledby="defaultDropdown">
 									<li><a href="/intranet/gastos/gastos"
 										class="dropdown-item icon solid fa-eye">Ver gastos</a></li>
-									<li><a href="/intranet/gastos/registrarGastos"
-										class="dropdown-item icon solid fa-plus">Registrar gasto</a></li>
+									
 								</ul>
 							<li class="dropdown"><a
 								class="dropdown-item dropdown-toggle icon solid fa-tags "
@@ -117,8 +113,7 @@
 								<ul class="dropdown-menu" aria-labelledby="defaultDropdown">
 									<li><a href="/intranet/tarifas/tarifas"
 										class="dropdown-item icon solid fa-eye">Ver tarifas</a></li>
-									<li><a href="/intranet/tarifas/altaTarifas"
-										class="dropdown-item  icon solid fa-plus">Añadir tarifa</a></li>
+									
 								</ul></li>
 						</ul></li>
 
@@ -154,7 +149,7 @@
 							<li><a href="/intranet/estadisticas/numeroPacientes"
 								class="dropdown-item">Número pacientes</a></li>
 							<li><a href="/intranet/estadisticas/preciosSesiones"
-								class="dropdown-item">Précio sesiones</a></li>
+								class="dropdown-item">Precio sesiones</a></li>
 							<li><a href="/intranet/estadisticas/procedenciaPacientes"
 								class="dropdown-item">Procedencia pacientes</a></li>
 						</ul></li>
@@ -225,7 +220,13 @@ El/la paciente declara que ha sido informado/a inequívocamente de los riesgos y
                             style="border: 1px dashed red; width: 100%; height: 200px;"></canvas>
                     </div>
 
-                    <button type="submit" class="btn btn-primary mb-4" >Generar PDF</button>
+                   <div class="btn-group" role="group"
+							aria-label="Botones de formulario">
+							<button type="submit" class="btn btn-primary mb-4 mr-2">Generar
+								PDF</button>
+							<button type="button" class="btn btn-secondary mb-4"
+								id="clear-signature">Limpiar firma</button>
+						</div>
                     </div>
                 </form>
          

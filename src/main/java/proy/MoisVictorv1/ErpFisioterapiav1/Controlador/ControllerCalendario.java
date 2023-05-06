@@ -36,27 +36,27 @@ public class ControllerCalendario {
 	@Autowired
 	PacientesRepositorio pacientesRepositorio;
 	
-	@RequestMapping(path ="intranet/calendario/calendario")
+	@RequestMapping("/intranet/calendario/calendario")
 	public String verCalendario(Model model) {
 		Iterable<Pacientes> itUsu = pacientesRepositorio.findAll();
 		List<Pacientes> listaUsuarios = new ArrayList<Pacientes>();
 		itUsu.forEach(listaUsuarios::add);
 		model.addAttribute("lista", listaUsuarios);
 		
-		return "intranet/calendario/calendario";
+		return "/intranet/calendario/calendario";
 	}
 	
-	@RequestMapping(path ="cal")
+	@RequestMapping("/cal")
 	public String verCalendardio(Model model) {
 		
 		return "intranet/calendario/pruebaC";
 	}
 	
-	@GetMapping(path ="citas")
+	@GetMapping("/citas")
 	@ResponseBody
 	public List<Citas> obtenerCitas() {
 	    // Aquí deberías llamar a tu servicio o repositorio para obtener las citas
-	    List<Citas> citas = (List<Citas>) citasRepositorio.findByEstadoIn(Arrays.asList("libre", "cancelado"));;
+	    List<Citas> citas = (List<Citas>) citasRepositorio.findByEstadoIn(Arrays.asList("libre", "cancelada"));;
 	    
 	    List<Citas> aux =  new ArrayList<Citas>();
 	    for(Citas c: citas) {
@@ -81,9 +81,13 @@ public class ControllerCalendario {
 	        }
 	        return ResponseEntity.badRequest().body(errores);
 	    } else {
+	    	String estado="pendiente-Confirmar";
 	        Citas cita= citasRepositorio.findById(e.getIdCita());
+	        if(cita.getEstado().equals("cancelada") || cita.getEstado().equals("salvada-pendiente")) {
+	        	estado="salvada-pendiente";
+	        }
 	        cita.setPacientes(pacientesRepositorio.findById(e.getIdPaciente()));
-	        cita.setEstado("pendinte-Confirmar");
+	        cita.setEstado(estado);
 	        
 	       citasRepositorio.save(cita);
 	       
@@ -105,13 +109,17 @@ public class ControllerCalendario {
 	        }
 	        return ResponseEntity.badRequest().body(errores);
 	    } else {
+	    	String estado="pendiente-Confirmar";
 	        Citas cita= citasRepositorio.findById(e.getIdCita());
+	        if(cita.getEstado().equals("cancelada") || cita.getEstado().equals("salvada-pendiente")) {
+	        	estado="salvada-pendiente";
+	        }
 	        Pacientes paciente= new Pacientes(e.getNomPaciente(), Integer.parseInt(e.getTelPaciente()));
 	        pacientesRepositorio.save(paciente);
 	        
 	        
 	        cita.setPacientes(paciente);
-	       cita.setEstado("pendinte-Confirmar");
+	       cita.setEstado("pendiente-Confirmar");
 	        
 	       citasRepositorio.save(cita);
 	       

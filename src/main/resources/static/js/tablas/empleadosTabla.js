@@ -101,10 +101,7 @@ var app = {
 			},
 			dom: 'Bfrtip',
 			columns: [
-				{ data: "identificador" },
-				{ data: "nombre" },
-				{ data: "roles.tipo" },
-				{
+					{
 					// Agregar una columna para el botón Editar
 					data: null,
 					render: function(data, type, row) {
@@ -114,7 +111,11 @@ var app = {
 					},
 					orderable: false,
 					searchable: false
-				}
+				},
+				{ data: "identificador" },
+				{ data: "nombre" },
+				{ data: "roles.tipo" },
+			
 			],
 			buttons: [
 				{
@@ -123,7 +124,14 @@ var app = {
 						confirmarTodo();
 					}
 				}
-			]
+			],
+				responsive: {
+            details: {
+                display: $.fn.dataTable.Responsive.display.childRowImmediate,
+                type: 'none',
+                target: ''
+            }
+        }
 		});
 
 		// Agregar una acción para el botón Editar

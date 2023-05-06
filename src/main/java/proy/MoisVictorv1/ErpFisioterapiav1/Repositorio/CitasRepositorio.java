@@ -1,5 +1,8 @@
 package proy.MoisVictorv1.ErpFisioterapiav1.Repositorio;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.Modifying;
@@ -56,5 +59,59 @@ public interface CitasRepositorio extends CrudRepository<Citas,Integer>{
 		 /*citas salvadas*/
 		 @Query("SELECT COUNT(c) FROM Citas c WHERE c.estado = 'salvada' AND MONTH(c.fecha) = :mes AND YEAR(c.fecha) = :anio")
 		  Double contarCitasSalvadasPorMesYAnio(@Param("mes") int mes, @Param("anio") int anio);
+		 
+		 @Query("SELECT c FROM Citas c WHERE c.fecha = :fecha AND FUNCTION('TIME_FORMAT', c.hora, '%H:%i') = :hora")
+		    Citas findCitasByFechaAndHora(@Param("fecha") LocalDate fecha, @Param("hora") LocalTime hora);
+		 
+		 
+		 List<Citas> findByFechaAndHora(LocalDate fecha, LocalTime hora);
+
+		 
+		 
+		 /*Citas con fecha actual o superior*/
+		 @Query("SELECT c FROM Citas c WHERE c.fecha >= current_date")
+		    List<Citas> findByFechaActualOrFutura();
+		 
+		 /*Traenos las citas que estan pendiente de confirmar y queda un día para la cita*/
+		 @Query("SELECT c FROM Citas c WHERE c.fecha = :fecha AND c.estado = 'pendiente-Confirmar'")
+		    List<Citas> findByFechaMenosUnoYEstadoPendienteConfirmar(@Param("fecha") LocalDate fecha);
+		 
+		 
+		 @Query("SELECT c FROM Citas c WHERE  c.estado = 'reservada'")
+		    List<Citas> findByEstadoReservada();
+		 
+		 @Query("SELECT c FROM Citas c WHERE  c.estado IN ('confirmada', 'salvada-pendiente')")
+		    List<Citas> findByEstadoConfirmada();
+		 
+		 @Query("SELECT COUNT(c) FROM Citas c WHERE  c.estado IN ('terminada', 'salvada')AND MONTH(c.fecha) = :mes AND YEAR(c.fecha) = :anio")
+		 Double contarTerminadaSalvadaMyA(@Param("mes") int mes, @Param("anio") int anio);
+		 
+		 /*Fechas de cita en intervalos, para que no se solapen*/
+		 @Query("SELECT c FROM Citas c WHERE c.fecha = :fecha AND ((c.hora >= :horaDesde1 AND c.hora <= :horaHasta1) OR (c.hora >= :horaDesde2 AND c.hora <= :horaHasta2))")
+		    List<Citas> findCitasByFechaAndHoraBetweenTwoRanges(LocalDate fecha, LocalTime horaDesde1, LocalTime horaHasta1, LocalTime horaDesde2, LocalTime horaHasta2);
+		 
+		 
+		 @Query("SELECT c FROM Citas c WHERE DATE(c.fecha) = CURRENT_DATE")
+		  List<Citas> getCitasDiaActual();
+		 
+		 @Query("SELECT COUNT(c) FROM Citas c WHERE  c.estado IN ('terminada', 'salvada')AND c.empleados.identificador= :emp ")
+		 Integer citasTotalEmpleado(@Param("emp") String emp);
+		 
+		 @Query("SELECT COUNT(c) FROM Citas c WHERE c.fecha >= CURRENT_DATE AND c.estado IN ('libre', 'cancelada') AND c.empleados.identificador= :id AND YEAR(c.fecha) = :year AND MONTH(c.fecha) = :month AND c.hora > CURRENT_TIME")
+		 Integer citasMesLibEmpleado(@Param("id")String id,@Param("year") Integer year, @Param("month") Integer month);
+		 
+		 
+		 /*citas canceladas*/
+		 @Query("SELECT COUNT(c) FROM Citas c WHERE c.estado ='cancelada' AND c.empleados.identificador= :id AND YEAR(c.fecha) = :year AND MONTH(c.fecha) = :month")
+		 Integer citasMesCanceladasEmpleado(@Param("id")String id,@Param("year") Integer year, @Param("month") Integer month);
+		 
+		 /*total citas del mes*/
+		 /*citas canceladas*/
+		 @Query("SELECT COUNT(c) FROM Citas c WHERE  c.empleados.identificador= :id AND YEAR(c.fecha) = :year AND MONTH(c.fecha) = :month")
+		 Integer citasMesTotalladasEmpleado(@Param("id")String id,@Param("year") Integer year, @Param("month") Integer month);
+		 
+		 /*Citas del mes terminadas*/
+		 @Query("SELECT COUNT(c) FROM Citas c WHERE c.estado IN ('terminada', 'salvada') AND c.empleados.identificador= :id AND YEAR(c.fecha) = :year AND MONTH(c.fecha) = :month")
+		 Integer citasMesTermidasEmpleado(@Param("id")String id,@Param("year") Integer year, @Param("month") Integer month);
 		
 }

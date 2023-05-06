@@ -50,9 +50,7 @@ $(document).ready(function() {
 		}
 	});
 
-	const camposAdicionales = document.querySelector('#campos-adicionales');
 
-	const camposAdicionales2 = document.querySelector('#campos-fijo');
 	
 	$('#nomPaciente').on('input', function () {
    			 $(this).removeClass('is-invalid');
@@ -73,77 +71,35 @@ $(document).ready(function() {
 	
 		
 
-	$("#asignar").click(function() {
-		$('#nomPaciente').on('input', function () {
-   			 $(this).removeClass('is-invalid');
-		});
+
+			$("#asignar").click(function() {
+			var opcion = document.querySelector('input[name="pacienteEDIT"]:checked').value;
+				
+				if(opcion== 'existenteasg'){
+						asignar({
+					idCita: $('#idCita').val(),
+					idPaciente: $('#idPaciente').val(),
+
+
+				});
+				}else if(opcion== 'nuevoasg'){
+								asignar2({
+					idCita: $('#idCita').val(),
+					nomPaciente: $('#nomPaciente').val(),
+					telPaciente: $('#telPaciente').val(),
+
+
+				});
+				}
+
+			
+
 		
-		$('#telPaciente').on('input', function () {
-   			 $(this).removeClass('is-invalid');
-		});
-		var idCita;
-		var idPaciente;
-		var tel;
-		var nom;
-		if (camposAdicionales.style.display === 'none') {
-			// si los campos adicionales están ocultos, obtenemos el valor del select
-			idCita = $('#idCita').val();
-			idPaciente = $('#idPaciente').val();
-			$("#asignar").click(function() {
-
-				asignar({
-					idCita: idCita,
-					idPaciente: idPaciente,
-
-
-				});
-			});
-		} else {
-			// si los campos adicionales están visibles, obtenemos los valores de los campos adicionales
-			idCita = $('#idCita').val();
-			tel = $('#telPaciente').val();
-			nom = $('#nomPaciente').val();
-			console.log(tel+" dsdfsdfsdfsdfsdfsfs")
-			$("#asignar").click(function() {
-				console.log(tel)
-
-				asignar2({
-					idCita: idCita,
-					nomPaciente: nom,
-					telPaciente: tel,
-
-
-				});
-			});
-		}
 
 
 		//console.log($('#idPaciente').val() + " eeeee")
 	});
 
-
-	$("#btn-nuevo-paciente").click(function() {
-
-
-
-		const btnNuevoPaciente = document.querySelector('#btn-nuevo-paciente');
-		btnNuevoPaciente.addEventListener('click', function() {
-
-			if (camposAdicionales.style.display === 'none') {
-				camposAdicionales.style.display = 'block';
-				camposAdicionales2.style.display = 'none';
-				btnNuevoPaciente.textContent = 'Paciente existente';
-			} else {
-
-				camposAdicionales.style.display = 'none';
-				camposAdicionales2.style.display = 'block';
-				btnNuevoPaciente.textContent = 'Nuevo paciente';
-				$('#nombre').val('');
-			}
-		});
-	});
-
-	// agregamos un evento al botón "Nuevo paciente" para mostrar/ocultar los campos adicionales
 
 
 
@@ -202,18 +158,35 @@ $(document).ready(function() {
 
 
 				},
-				 error: function(error) {
-					$("#msg").text('Error, campos vacios');
-					$("#msg").removeClass('alert-primary').addClass('alert-danger');
-					$('#modal1').modal('hide');
-					$("#msg").show();
-					 alert("Error, campos cliente nuevo vacío");
-					setTimeout(function() {
-						location.reload();
-					},);
+				error: function(xhr, status, error) {
+				var response = JSON.parse(xhr.responseText);
+				var errores = response;
+
+				for (var campo in errores) {
+					console.log(campo)
+					if (errores.hasOwnProperty(campo)) {
+						var input = $('#' + campo);
+						input.addClass('is-invalid');
+						input.after('<div class="invalid-feedback invalid-feedback-crear">' + errores[campo] + '</div>');
+						console.log(errores[campo])
+					}
 				}
+
+			}
 			})
 		}
 	
 
 });
+
+function mostrarCampos2() {
+	var nuevo2 = document.getElementById("campos-nuevos");
+	var existente2 = document.getElementById("campos-fijos");
+	if (document.querySelector('input[name="pacienteEDIT"]:checked').value == "nuevoasg") {
+		nuevo2.style.display = "block";
+		existente2.style.display = "none";
+	} else if (document.querySelector('input[name="pacienteEDIT"]:checked').value == "existenteasg") {
+		nuevo2.style.display = "none";
+		existente2.style.display = "block";
+	} 
+};

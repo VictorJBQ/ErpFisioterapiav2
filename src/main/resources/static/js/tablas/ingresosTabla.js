@@ -15,6 +15,7 @@ var app = {
 				idE: $('#idE').val(),
 				importeE: $('#importeE').val(),
 				tipoE: $('#tipoE').val(),
+				fechaE: $('#fechaE').val(),
 				
 			});
 		});
@@ -25,6 +26,7 @@ var app = {
 			app.guardar({
 				importeA: $('#importeA').val(),
 				tipoA: $('#tipoA').val(),
+				fechaA: $('#fechaA').val(),
 			});
 		});
 
@@ -34,6 +36,7 @@ var app = {
 			$('.invalid-feedback-crear').text(''); // Remueve el contenido del div
 			$('#importeA').val('');
 			$('#tipoA').val('');
+			$('#fechaA').val('');
 		});
 		
 		$('#editarIngreso').on('hidden.bs.modal', function() {
@@ -49,6 +52,14 @@ var app = {
 	
 		
 		$('#importeA').on('input', function () {
+   			 $(this).removeClass('is-invalid');
+		});
+		
+			$('#fechaA').on('input', function () {
+   			 $(this).removeClass('is-invalid');
+		});
+		
+			$('#fechaE').on('input', function () {
    			 $(this).removeClass('is-invalid');
 		});
 		
@@ -89,11 +100,7 @@ var app = {
 			},
 			dom: 'Bfrtip',
 			columns: [
-				
-				{ data: "importe" },
-				{ data: "tipo" },
-				{ data: "factura.id", render: function (data) {  return data || "N/A"; } },
-				{
+					{
 					// Agregar una columna para el botón Editar
 					data: null,
 					render: function(data, type, row) {
@@ -103,7 +110,21 @@ var app = {
 					},
 					orderable: false,
 					searchable: false
-				}
+				},
+				
+				{ data: "importe" },
+				{ data: "tipo" },
+				{
+					data: "factura",
+					render: function(data) {
+
+						var nombre = data && data.id ? data.id : "NA";
+						var telefono = data && data.fecha ? data.fecha : "NA";
+						return nombre + " - " + telefono;
+					}
+				},
+				{ data: "fecha" },
+			
 			],
 			buttons: [
 				{
@@ -112,7 +133,14 @@ var app = {
 						confirmarTodo();
 					}
 				}
-			]
+			],
+				responsive: {
+            details: {
+                display: $.fn.dataTable.Responsive.display.childRowImmediate,
+                type: 'none',
+                target: ''
+            }
+        }
 		});
 
 		// Agregar una acción para el botón Editar
@@ -169,6 +197,7 @@ console.log(data)
 		$('#idE').val(data.id);
 		$('#importeE').val(data.importe);
 		$('#tipoE').val(data.tipo);
+		$('#fechaE').val(data.fecha);
 
 
 

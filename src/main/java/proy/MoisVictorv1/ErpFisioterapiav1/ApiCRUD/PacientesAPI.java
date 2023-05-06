@@ -1,6 +1,7 @@
 package proy.MoisVictorv1.ErpFisioterapiav1.ApiCRUD;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,6 +51,18 @@ public class PacientesAPI {
 	@GetMapping("all")
 	public List<Pacientes> getAll(){
 		return (List<Pacientes>) pacientesRepositorio.findAll();
+		
+	}
+	
+	@GetMapping("allmescurso")
+	public List<Pacientes> getAllmescurso(){
+		return (List<Pacientes>) pacientesRepositorio.findPacientesWithCitasThisMonth();
+		
+	}
+	
+	@GetMapping("allpendi")
+	public List<Pacientes> getAllpendi(){
+		return (List<Pacientes>) pacientesRepositorio.buscarPacientesConCamposNulos();
 		
 	}
 	
@@ -116,9 +129,15 @@ public class PacientesAPI {
 	        }
 	        return ResponseEntity.badRequest().body(errores);
 	    } else {
+	    		String estado="pendiente-Confirmar";
+	    
+	    		
 	        Citas cita= citasRepositorio.findById(e.getIdCita());
+	        if(cita.getEstado().equals("cancelada")) {
+	        	estado="salvada-pendiente";
+	        }
 	        cita.setPacientes(pacientesRepositorio.findById(e.getIdPaciente()));
-	        cita.setEstado("pendinte-Confirmar");
+	        cita.setEstado(estado);
 	        
 	       citasRepositorio.save(cita);
 	       

@@ -5,6 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+<link rel="shortcut icon" th:href="@{/images/perfilLog.png}">
 
 
 <link rel="stylesheet" th:href="@{/css/EstiloDash.css}" />
@@ -19,6 +20,9 @@
 	href='https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css'>
 <link rel='stylesheet' type='text/css'
 	href='https://cdn.datatables.net/buttons/1.6.4/css/buttons.dataTables.min.css'>
+	
+<link rel='stylesheet' type='text/css' href=" https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+<link rel='stylesheet' type='text/css' href=" https://cdn.datatables.net/responsive/2.4.1/css/responsive.bootstrap4.min.css">
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="/js/tablas/gastosTabla.js"></script>
 </head>
@@ -46,7 +50,7 @@
 	</nav>
 	<!-- top navigation bar -->
 	<!-- offcanvas -->
-	<div class="offcanvas offcanvas-start sidebar-nav bg-dark"
+<div class="offcanvas offcanvas-start sidebar-nav bg-dark"
 		tabindex="-1" id="sidebar">
 		<div class="offcanvas-body p-0">
 			<nav class="navbar-dark m-3">
@@ -59,7 +63,7 @@
 						data-bs-toggle="dropdown" aria-expanded="false"> Agenda </a>
 						<ul class="dropdown-menu" aria-labelledby="navbarDropdownAgenda">
 							<li><a href="/intranet/citas/citas"
-								class="dropdown-item icon solid fa-eye"> Ver citas</a></li>
+								class="dropdown-item icon solid fa-eye">Citas por revisar</a></li>
 							<li><a href="/intranet/citas/asignarCitas"
 								class="dropdown-item icon solid fa-pen">Asignar citas</a></li>
 							<li><a href="/intranet/citas/altaCitas"
@@ -70,9 +74,7 @@
 						href="#" id="navbarDropdownPaciente" role="button"
 						data-bs-toggle="dropdown" aria-expanded="false">Pacientes</a>
 						<ul class="dropdown-menu" aria-labelledby="navbarDropdownPaciente">
-							<li><a href="/intranet/pacientes/altaPacientes"
-								class="dropdown-item icon solid fa-user-plus"> Nuevo
-									paciente</a></li>
+							
 							<li><a href="/intranet/pacientes/pacientes"
 								class="dropdown-item icon solid fa-magnifying-glass">
 									listado/buscador Cliente</a></li>
@@ -85,16 +87,12 @@
 							aria-labelledby="navbarDropdownEmpleados">
 							<li><a href="/intranet/empleados/altaEmpleados"
 								class="dropdown-item icon solid fa-user-plus">Nuevo empleado</a></li>
-							<li><a href="/intranet/empleados/empleados"
-								class="dropdown-item icon solid fa-magnifying-glass">Empleados</a></li>
+							
 						</ul></li>
-					<li class="nav-item dropdown"><a
-						class="nav-link dropdown-toggle icon solid fa-coins btn-dark text-white"
-						href="#" id="dropdownMenuClickableInside"
-						data-bs-toggle="dropdown" aria-expanded="false"> Contabilidad
-					</a>
-						<ul class="dropdown-menu"
-							aria-labelledby="dropdownMenuClickableInside">
+					<li class="nav-item dropdown"><a class="nav-link dropdown-toggle icon solid fa-coins btn-dark text-white" href="#"  id="dropdownMenuClickableInside"   data-bs-toggle="dropdown" aria-expanded="false">
+            Contabilidad
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuClickableInside">
 
 							<li><a href="/intranet/facturas/facturas"
 								class="dropdown-item icon solid fa-file-invoice-dollar">
@@ -105,11 +103,8 @@
 								data-bs-auto-close="true" aria-expanded="false">Ingresos</a>
 								<ul class="dropdown-menu" aria-labelledby="defaultDropdown">
 									<li><a href="/intranet/ingresos/ingresos"
-										class="dropdown-item dropdown icon solid fa-eye">Ver
-											ingresos</a></li>
-									<li><a href="/intranet/ingresos/registrarIngresos"
-										class="dropdown-item dropdown icon solid fa-plus">Registrar
-											ingreso</a></li>
+										class="dropdown-item dropdown icon solid fa-eye">Ver ingresos</a></li>
+									
 								</ul></li>
 							<li class="dropdown"><a
 								class="dropdown-item dropdown-toggle icon solid fa-chart-line-down "
@@ -118,8 +113,7 @@
 								<ul class="dropdown-menu" aria-labelledby="defaultDropdown">
 									<li><a href="/intranet/gastos/gastos"
 										class="dropdown-item icon solid fa-eye">Ver gastos</a></li>
-									<li><a href="/intranet/gastos/registrarGastos"
-										class="dropdown-item icon solid fa-plus">Registrar gasto</a></li>
+									
 								</ul>
 							<li class="dropdown"><a
 								class="dropdown-item dropdown-toggle icon solid fa-tags "
@@ -128,8 +122,7 @@
 								<ul class="dropdown-menu" aria-labelledby="defaultDropdown">
 									<li><a href="/intranet/tarifas/tarifas"
 										class="dropdown-item icon solid fa-eye">Ver tarifas</a></li>
-									<li><a href="/intranet/tarifas/altaTarifas"
-										class="dropdown-item  icon solid fa-plus">Añadir tarifa</a></li>
+									
 								</ul></li>
 						</ul></li>
 
@@ -165,7 +158,7 @@
 							<li><a href="/intranet/estadisticas/numeroPacientes"
 								class="dropdown-item">Número pacientes</a></li>
 							<li><a href="/intranet/estadisticas/preciosSesiones"
-								class="dropdown-item">Précio sesiones</a></li>
+								class="dropdown-item">Precio sesiones</a></li>
 							<li><a href="/intranet/estadisticas/procedenciaPacientes"
 								class="dropdown-item">Procedencia pacientes</a></li>
 						</ul></li>
@@ -177,7 +170,7 @@
 		</div>
 	</div>
 	<br>
-	<br>
+	<br><br>
 	<!-- offcanvas -->
 	<main class="mt-5 pt-3">
 		<div class="container-fluid">
@@ -186,7 +179,7 @@
 
 
 
-				<<div class="col-md-12 mb-3">
+				<div class="col-md-12 mb-3">
 					<div class="card ">
 						<div class="card-header d-flex flex-row">
 							<span><i class="bi bi-table me-2"></i></span> Lista gastos
@@ -196,16 +189,16 @@
 								<div class="alert alert-primary" id="msg" style="display: none;"
 									role="alert"></div>
 
-								<table id="gastos" class="table table-striped data-table"
+								<table id="gastos" class="table table-striped data-table dt-responsive nowrap"
 									style="width: 100%">
 
 									<thead id="cabeceraTabla">
-									<thead>
+									
 										<tr>
+											<th>Acciones</th>
 											<th>Fecha</th>
 											<th>Importe</th>
 											<th>Tipo</th>
-											<th>Acciones</th>
 
 										</tr>
 									</thead>
@@ -214,10 +207,10 @@
 									<tfoot>
 										<tr>
 
+											<th>Acciones</th>
 											<th>Fecha</th>
 											<th>Importe</th>
 											<th>Tipo</th>
-											<th>Acciones</th>
 										</tr>
 									</tfoot>
 								</table>
@@ -347,6 +340,13 @@
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
 		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 		crossorigin="anonymous"></script>
+		
+		<script
+		src="https://cdn.datatables.net/responsive/2.4.1/js/dataTables.responsive.min.js"></script>
+		
+		<script
+		src="https://cdn.datatables.net/responsive/2.4.1/js/responsive.bootstrap4.min.js"></script>
+		
 
 </body>
 </html>

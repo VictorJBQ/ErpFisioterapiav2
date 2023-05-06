@@ -1,4 +1,23 @@
-
+function mostrarCampos(valor) {
+	var pendientes = document.getElementById("tablaPendientes");
+	var tablaTodos = document.getElementById("tablaTodos");
+	var hoy = document.getElementById("tablaHoy+");
+	if (valor=='pendiente') {
+		pendientes.style.display = "block";
+		tablaTodos.style.display = "none";
+		hoy.style.display = "none";
+	} else if (valor=='todos') {
+		pendientes.style.display = "none";
+		tablaTodos.style.display = "block";
+		hoy.style.display = "none";
+	
+}else if (valor=='hoy') {
+		pendientes.style.display = "none";
+		tablaTodos.style.display = "none";
+		hoy.style.display = "block";
+	
+	} 
+}
 var modaladd;
 var modaledit;
 var modalasig;
@@ -10,8 +29,12 @@ var app = {
 	 */
 	backend: '/api-pct',
 	table: null,
+	table2:null,
+	table3:null,
 	init: function() {
 		app.initDatatable('#pacientes');
+		app.initDatatable2('#pendientes');
+		app.initDatatable3('#hoy');
 		$("#editar").click(function() {
 			
 			app.editar({
@@ -174,19 +197,7 @@ var app = {
 			},
 			dom: 'Bfrtip',
 			columns: [
-				
-				{ data: "nombre" },
-				{ data: "apellidos", render: function (data) {  return data || "N/A"; } },
-				{ data: "dni", render: function (data) {  return data || "N/A"; } },
-				{ data: "fechaAlta" },
-				{ data: "domicilio", render: function (data) {  return data || "N/A"; } },
-				{ data: "codigoPostal", render: function (data) {  return data || "N/A"; } },
-				{ data: "poblacion", render: function (data) {  return data || "N/A"; } },
-				{ data: "telefono" },
-				{ data: "sabeDeMi", render: function (data) {  return data || "N/A"; } },
-				{ data: "tarifas.tipo", render: function (data) {  return data || "N/A"; } },
-			
-				{
+					{
 					// Agregar una columna para el botón Editar
 					data: null,
 					render: function(data, type, row) {
@@ -207,6 +218,19 @@ var app = {
 					orderable: false,
 					searchable: false
 				},
+				
+				{ data: "nombre" },
+				{ data: "apellidos", render: function (data) {  return data || "N/A"; } },
+				{ data: "dni", render: function (data) {  return data || "N/A"; } },
+				{ data: "fechaAlta" },
+				{ data: "domicilio", render: function (data) {  return data || "N/A"; } },
+				{ data: "codigoPostal", render: function (data) {  return data || "N/A"; } },
+				{ data: "poblacion", render: function (data) {  return data || "N/A"; } },
+				{ data: "telefono" },
+				{ data: "sabeDeMi", render: function (data) {  return data || "N/A"; } },
+				{ data: "tarifas.tipo", render: function (data) {  return data || "N/A"; } },
+			
+			
 			],
 			buttons: [
 				{
@@ -215,7 +239,14 @@ var app = {
 						confirmarTodo();
 					}
 				}
-			]
+			],
+				responsive: {
+            details: {
+                display: $.fn.dataTable.Responsive.display.childRowImmediate,
+                type: 'none',
+                target: ''
+            }
+        }
 		});
 
 		// Agregar una acción para el botón Editar
@@ -287,21 +318,298 @@ var app = {
 
 
 	},
-	setDataToModal(data) {
+	
+		initDatatable2: function(id) {
+		/**Esto se encarfa de crear la tabla cargando el json que recibe de la bbdd 
+		 * que lo recibe en formato json, lo retornas a la llamada etc
+		 */
+			
+		
+		app.table2 = $(id).DataTable({
 
+			ajax: {
+				url: app.backend + '/allpendi',
+				dataSrc: function(json) {
+					console.log(json)
+					return json;
+				}
+			},
+			dom: 'Bfrtip',
+			columns: [
+						{
+					// Agregar una columna para el botón Editar
+					data: null,
+					render: function(data, type, row) {
+						return '<button type="button" class="btn btn-smDP btn-outline-primary editar"><i class="bi bi-plus-circle"></i></i>' +
+							'</button>';
+					},
+					orderable: false,
+					searchable: false
+				},
+					{
+					// Agregar una columna para el botón Editar
+					data: null,
+					render: function(data, type, row) {
+						return '<button type="button" class="btn btn-smP btn-outline-primary editar" ><i class="bi bi-pencil-fill"></i>' +
+							'</button>&nbsp;<button class="btn btn-danger btn-sm2P" data-id="' + row.id +
+							'"><i class="bi bi-trash-fill"></i></i></button>';
+					},
+					orderable: false,
+					searchable: false
+				},
+				
+				{ data: "nombre" },
+				{ data: "apellidos", render: function (data) {  return data || "N/A"; } },
+				{ data: "dni", render: function (data) {  return data || "N/A"; } },
+				{ data: "fechaAlta" },
+				{ data: "domicilio", render: function (data) {  return data || "N/A"; } },
+				{ data: "codigoPostal", render: function (data) {  return data || "N/A"; } },
+				{ data: "poblacion", render: function (data) {  return data || "N/A"; } },
+				{ data: "telefono" },
+				{ data: "sabeDeMi", render: function (data) {  return data || "N/A"; } },
+				{ data: "tarifas.tipo", render: function (data) {  return data || "N/A"; } },
+			
+		
+			],
+			buttons: [
+				
+			],
+				responsive: {
+            details: {
+                display: $.fn.dataTable.Responsive.display.childRowImmediate,
+                type: 'none',
+                target: ''
+            }
+        }
+		});
+
+		// Agregar una acción para el botón Editar
+		$('#Pendientes tbody').on('click', '.btn-smP', function() {
+			 $("#msg").text('').removeClass('alert')
+			var data = app.table2.row($(this).parents('tr')).data();
+			app.setDataToModal(data);
+			
+			var myModalEl = document.getElementById('pacienteEditar')
+			modaledit = new bootstrap.Modal(myModalEl)
+			modaledit.show();
+			
+			
+			//$('#pacienteEditar').modal();
+		});
+		
+			// Agregar una acción para el botón citar
+		$('#pendientes tbody').on('click', '.btn-smDP', function() {
+			 $("#msg").text('').removeClass('alert')
+			var data = app.table2.row($(this).parents('tr')).data();
+				if (data.tarifas && data.tarifas.tipo !== null) {
+ 					 $('#tarifaE').val(data.tarifas.tipo);
+						}
+			app.setDataToModal2(data);
+		//	$('#pacienteCitar').modal();
+			var myModalEl = document.getElementById('pacienteCitar')
+			modalasig = new bootstrap.Modal(myModalEl)
+			modalasig.show();
+			$('.select2').select2({
+        	dropdownParent: $('#pacienteCitar .modal-body')
+            });
+		});
+		
+		// Agregar una acción para el botón eliminar
+		$('#pendientes tbody').on('click', '.btn-sm2P', function() {
+			 $("#msg").text('').removeClass('alert')
+			var data = app.table2.row($(this).parents('tr')).data();
+			app.eliminar(data.id)
+			
+		});
+
+		
+		/**Para crear registros nuevos */
+		function confirmarTodo() {
+			 $("#msg").text('').removeClass('alert')
+			 	var myModalEl = document.getElementById('crearPaci')
+			 modaladd = new bootstrap.Modal(myModalEl)
+			modaladd.show();
+			
+
+
+
+		}
+
+
+		
+			/** Esta función de aqui es para hacer la celda seleccionada o no  */
+		$('#pendientes tbody').on('click', 'tr', function() {
+			if ($(this).hasClass('table-active')) {
+				$(this).removeClass('table-active');
+				$(this).css('background-color', null);
+			} else {
+				app.table2.$('tr.table-active').removeClass('table-active');
+				$(this).addClass('table-active');
+
+			}
+		});
+
+
+	},
+	
+	initDatatable3: function(id) {
+		/**Esto se encarfa de crear la tabla cargando el json que recibe de la bbdd 
+		 * que lo recibe en formato json, lo retornas a la llamada etc
+		 */
+			
+		
+		app.table3 = $(id).DataTable({
+
+			ajax: {
+				url: app.backend + '/allmescurso',
+				dataSrc: function(json) {
+					console.log(json)
+					return json;
+				}
+			},
+			dom: 'Bfrtip',
+			columns: [
+				{
+					// Agregar una columna para el botón Editar
+					data: null,
+					render: function(data, type, row) {
+						return '<button type="button" class="btn btn-smDH btn-outline-primary editar"><i class="bi bi-plus-circle"></i></i>' +
+							'</button>';
+					},
+					orderable: false,
+					searchable: false
+				},
+					{
+					// Agregar una columna para el botón Editar
+					data: null,
+					render: function(data, type, row) {
+						return '<button type="button" class="btn btn-smH btn-outline-primary editar" ><i class="bi bi-pencil-fill"></i>' +
+							'</button>&nbsp;<button class="btn btn-danger btn-sm2H" data-id="' + row.id +
+							'"><i class="bi bi-trash-fill"></i></i></button>';
+					},
+					orderable: false,
+					searchable: false
+				},
+				{ data: "nombre" },
+				{ data: "apellidos", render: function (data) {  return data || "N/A"; } },
+				{ data: "dni", render: function (data) {  return data || "N/A"; } },
+				{ data: "fechaAlta" },
+				{ data: "domicilio", render: function (data) {  return data || "N/A"; } },
+				{ data: "codigoPostal", render: function (data) {  return data || "N/A"; } },
+				{ data: "poblacion", render: function (data) {  return data || "N/A"; } },
+				{ data: "telefono" },
+				{ data: "sabeDeMi", render: function (data) {  return data || "N/A"; } },
+				{ data: "tarifas.tipo", render: function (data) {  return data || "N/A"; } },
+			
+				
+			],
+			buttons: [
+				
+			],
+				responsive: {
+            details: {
+                display: $.fn.dataTable.Responsive.display.childRowImmediate,
+                type: 'none',
+                target: ''
+            }
+        }
+		});
+
+		// Agregar una acción para el botón Editar
+		$('#hoy tbody').on('click', '.btn-smH', function() {
+			 $("#msg").text('').removeClass('alert')
+			var data = app.table3.row($(this).parents('tr')).data();
+			app.setDataToModal(data);
+			
+			var myModalEl = document.getElementById('pacienteEditar')
+			modaledit = new bootstrap.Modal(myModalEl)
+			modaledit.show();
+			
+			
+			//$('#pacienteEditar').modal();
+		});
+		
+			// Agregar una acción para el botón citar
+		$('#hoy tbody').on('click', '.btn-smDH', function() {
+			 $("#msg").text('').removeClass('alert')
+			var data = app.table3.row($(this).parents('tr')).data();
+				if (data.tarifas && data.tarifas.tipo !== null) {
+ 					 $('#tarifaE').val(data.tarifas.tipo);
+						}
+			app.setDataToModal2(data);
+		//	$('#pacienteCitar').modal();
+			var myModalEl = document.getElementById('pacienteCitar')
+			modalasig = new bootstrap.Modal(myModalEl)
+			modalasig.show();
+			$('.select2').select2({
+        	dropdownParent: $('#pacienteCitar .modal-body')
+            });
+		});
+		
+		// Agregar una acción para el botón eliminar
+		$('#hoy tbody').on('click', '.btn-sm2H', function() {
+			 $("#msg").text('').removeClass('alert')
+			var data = app.table3.row($(this).parents('tr')).data();
+			app.eliminar(data.id)
+			
+		});
+
+		
+		/**Para crear registros nuevos */
+		function confirmarTodo() {
+			 $("#msg").text('').removeClass('alert')
+			 	var myModalEl = document.getElementById('crearPaci')
+			 modaladd = new bootstrap.Modal(myModalEl)
+			modaladd.show();
+			
+
+
+
+		}
+
+
+		
+			/** Esta función de aqui es para hacer la celda seleccionada o no  */
+		$('#hoy tbody').on('click', 'tr', function() {
+			if ($(this).hasClass('table-active')) {
+				$(this).removeClass('table-active');
+				$(this).css('background-color', null);
+			} else {
+				app.table3.$('tr.table-active').removeClass('table-active');
+				$(this).addClass('table-active');
+
+			}
+		});
+
+
+	},
+	
+	
+	
+	
+	
+	setDataToModal(data) {
+		
 	
 		
-				 $('#idE').val(data.id),
-				 $('#nombreE').val(data.nombre),
-				 $('#apellidosE').val(data.apellidos),
-				 $('#dniE').val(data.dni),
-				 $('#dniViejoE').val(data.dni),
-				 $('#domicilioE').val(data.domicilio),
-				 $('#cpE').val(data.codigoPostal),
-				 $('#poblaE').val(data.poblacion),
-				 $('#telE').val(data.telefono),
-				// $('#tarifaE').val(data.tarifas.tipo),
-				 $('#conoceE').val(data.sabeDeMi)
+				 $('#idE').val(data.id);
+				 $('#nombreE').val(data.nombre);
+				 $('#apellidosE').val(data.apellidos);
+				 $('#dniE').val(data.dni);
+				 $('#dniViejoE').val(data.dni);
+				 $('#domicilioE').val(data.domicilio);
+				 $('#cpE').val(data.codigoPostal);
+				 $('#poblaE').val(data.poblacion);
+				 $('#telE').val(data.telefono);
+				
+				 $('#conoceE').val(data.sabeDeMi);
+				 
+				 
+			if (data.tarifas === null || data.tarifas === '') {
+   				$('#tarifaE').val('');
+  			}else{
+				  $('#tarifaE').val(data.tarifas.tipo);
+			  }
 
 
 

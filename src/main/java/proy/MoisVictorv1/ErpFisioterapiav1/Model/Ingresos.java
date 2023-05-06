@@ -1,5 +1,7 @@
 package proy.MoisVictorv1.ErpFisioterapiav1.Model;
 
+import java.time.LocalDate;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,7 +17,16 @@ public class Ingresos {
 	private int id;
 	private String tipo;
 	private Double importe;
-	 @OneToOne
+	private LocalDate fecha;
+	
+	
+	 public LocalDate getFecha() {
+		return fecha;
+	}
+	public void setFecha(LocalDate fecha) {
+		this.fecha = fecha;
+	}
+	@OneToOne
 	    @JoinColumn(name = "factura_id")
 	    private Facturas factura;
 	public int getId() {
@@ -44,14 +55,29 @@ public class Ingresos {
 	}
 	public Ingresos(Double importe, Facturas factura) {
 		super();
-		this.tipo="sesion cobrada";
+		this.tipo="sesión cobrada";
 		this.importe = importe;
 		this.factura = factura;
+	}
+	
+	public Ingresos(Double importe, Facturas factura, LocalDate fecha) {
+		super();
+		this.tipo="sesión cobrada";
+		this.importe = importe;
+		this.factura = factura;
+		this.fecha = fecha;
 	}
 	public Ingresos(String tipo, Double importe) {
 		super();
 		this.tipo = tipo;
 		this.importe = importe;
+	}
+	
+	public Ingresos(String tipo, Double importe,LocalDate fecha) {
+		super();
+		this.tipo = tipo;
+		this.importe = importe;
+		this.fecha = fecha;
 	}
 	public Ingresos() {
 		super();

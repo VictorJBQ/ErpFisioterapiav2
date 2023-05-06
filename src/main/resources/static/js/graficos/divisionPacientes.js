@@ -45,7 +45,8 @@ function comparar() {
   height: 400,
   chartArea: {
     width: '80%',
-    height: '70%'
+    height: '70%',
+     overflow: 'hidden'
   },
   legend: { position: 'top', maxLines: 3, textStyle: { alignment: 'end' } },
   bar: {
@@ -59,11 +60,15 @@ function comparar() {
   },
   vAxis: {
     minValue: 0,
-    title: 'pacientes',
+    title: 'Pacientes',
+        gridlines: {
+      count: 5
+    },
     titleTextStyle: {
       color: '#333'
     }
-  }
+  },
+    colors: ['#AA4CA6', '#3DCFCC', '#FFC000', '#61CB7A']
   
   
 };

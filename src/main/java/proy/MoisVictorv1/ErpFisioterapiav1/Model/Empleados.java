@@ -1,9 +1,11 @@
 package proy.MoisVictorv1.ErpFisioterapiav1.Model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -30,6 +32,8 @@ public class Empleados {
 	
 	@OneToMany(mappedBy="id")
 	private List<Citas> citas;
+	
+
 
 	public List<Citas> getCitas() {
 		return citas;

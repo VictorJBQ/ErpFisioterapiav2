@@ -1,56 +1,70 @@
+let signaturePad = null;
+let canvas = null;
+
 function loadImage(url) {
-    return new Promise(resolve => {
-        const xhr = new XMLHttpRequest();
-        xhr.open('GET', url, true);
-        xhr.responseType = "blob";
-        xhr.onload = function (e) {
-            const reader = new FileReader();
-            reader.onload = function(event) {
-                const res = event.target.result;
-                resolve(res);
-            }
-            const file = this.response;
-            reader.readAsDataURL(file);
-        }
-        xhr.send();
-    });
+  return new Promise(resolve => {
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', url, true);
+    xhr.responseType = "blob";
+    xhr.onload = function (e) {
+      const reader = new FileReader();
+      reader.onload = function(event) {
+        const res = event.target.result;
+        resolve(res);
+      }
+      const file = this.response;
+      reader.readAsDataURL(file);
+    }
+    xhr.send();
+  });
 }
 
-let signaturePad = null;
-
 window.addEventListener('load', async () => {
+  canvas = document.querySelector("#signature-canvas");
+  canvas.width = canvas.offsetWidth;
+  canvas.height = canvas.offsetHeight;
 
-    const canvas = document.querySelector("canvas");
-    canvas.height = canvas.offsetHeight;
-    canvas.width = canvas.offsetWidth;
+  signaturePad = new SignaturePad(canvas, {});
 
-    signaturePad = new SignaturePad(canvas, {});
-
-    const form = document.querySelector('#form');
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-
-        let dni = document.getElementById('dni').value;
-        let nombres = document.getElementById('nombre').value;
-        let apellidos = document.getElementById('apellido').value;
-        generatePDF(nombres,dni,apellidos);
-    })
-
+  const clearBtn = document.getElementById('clear-signature');
+  clearBtn.addEventListener('click', (e) => {
+    signaturePad.clear();
+  });
 });
 
-async function generatePDF(nombres,dni,apellidos) {
-    const image = await loadImage("/images/datos.jpg");
-    const signatureImage = signaturePad.toDataURL();
+window.addEventListener('resize', () => {
+  canvas.width = canvas.offsetWidth;
+  canvas.height = canvas.offsetHeight;
+  signaturePad.clear();
+});
 
-    const pdf = new jsPDF('p', 'pt', 'letter');
+window.addEventListener('load', async () => {
+  const form = document.querySelector('#form');
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const dni = document.getElementById('dni').value;
+    const nombres = document.getElementById('nombre').value;
+    const apellidos = document.getElementById('apellido').value;
+    await generatePDF(nombres, dni, apellidos, canvas);
+  });
+});
 
-    pdf.addImage(image, 'PNG', 0, 0, 565, 792);
-     pdf.setFontSize(12);
-    pdf.text(nombres+" "+apellidos, 130,525);
-    pdf.text(dni, 370,525);
-    pdf.addImage(signatureImage, 'PNG', 200, 580, 300, 60);
+async function generatePDF(nombres, dni, apellidos, canvas) {
+  const image = await loadImage("/images/datos.jpg");
+  const signatureImage = signaturePad.toDataURL();
 
+  const pdf = new jsPDF('p', 'pt', 'letter');
 
-    pdf.save("consentimiento"+dni+".pdf");
+  pdf.addImage(image, 'JPG', 0, 0, 565, 792);
+  pdf.setFontSize(12);
+  pdf.text(`${nombres} ${apellidos}`, 130, 525);
+  pdf.text(dni, 370, 525);
 
+  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  const signatureWidth = isMobile ? canvas.width / 2 : 300;
+  const signatureHeight = isMobile ? canvas.height / 4 :60;
+
+  pdf.addImage(signatureImage, 'JPG', 200, 580, signatureWidth, signatureHeight);
+
+  pdf.save(`consentimiento${dni}.pdf`);
 }

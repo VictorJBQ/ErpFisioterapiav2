@@ -85,9 +85,6 @@ var app = {
 			},
 			dom: 'Bfrtip',
 			columns: [
-				
-				{ data: "tipo" },
-				{ data: "precio" },
 				{
 					// Agregar una columna para el botón Editar
 					data: null,
@@ -98,7 +95,10 @@ var app = {
 					},
 					orderable: false,
 					searchable: false
-				}
+				},
+				{ data: "tipo" },
+				{ data: "precio" },
+				
 			],
 			buttons: [
 				{
@@ -107,7 +107,14 @@ var app = {
 						confirmarTodo();
 					}
 				}
-			]
+			],
+				responsive: {
+            details: {
+                display: $.fn.dataTable.Responsive.display.childRowImmediate,
+                type: 'none',
+                target: ''
+            }
+        }
 		});
 
 		// Agregar una acción para el botón Editar

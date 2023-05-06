@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import proy.MoisVictorv1.ErpFisioterapiav1.Model.Citas;
 import proy.MoisVictorv1.ErpFisioterapiav1.Repositorio.CitasRepositorio;
+import proy.MoisVictorv1.ErpFisioterapiav1.Repositorio.FacturasRepositorio;
 import proy.MoisVictorv1.ErpFisioterapiav1.Repositorio.GastosRepositorio;
 import proy.MoisVictorv1.ErpFisioterapiav1.Repositorio.IngresosRepositorio;
 import proy.MoisVictorv1.ErpFisioterapiav1.Repositorio.PacientesRepositorio;
@@ -33,10 +34,15 @@ public class ControllerEstadisticas {
 	@Autowired
 	GastosRepositorio gastosRepositorio;
 	
-	@RequestMapping(path="intranet/estadisticas/diasTrabajados")
+	@Autowired
+	FacturasRepositorio facturasRepositorio;
+	
+
+	
+	@RequestMapping("/intranet/estadisticas/diasTrabajados")
 	public String diasTrabajados(Model model) {
 		
-		return "intranet/estadisticas/diasTrabajados";
+		return "/intranet/estadisticas/diasTrabajados";
 	}
 	
 	
@@ -97,6 +103,235 @@ public class ControllerEstadisticas {
 	  media.put("anyo1", Double.valueOf(any1M/12).intValue());
 	  media.put("anyo2", Double.valueOf(any2M/12).intValue());
 	  datos.put("media", media);
+	  
+	  
+	  return datos; }
+	
+	
+	
+	/*gastos totales*/
+	@GetMapping("api/gastos-totales")
+	  
+	  @ResponseBody public Map<String, Map<String, Double>> gastosTotales(@RequestParam String opcion1, @RequestParam String opcion2) {
+	 
+		 int mes=1;
+		 Double any1M=0.0;
+		 Double any2M=0.0;
+	  Map<String, Map<String, Double>> datos = new HashMap<>();
+	  
+	  Map<String,Double> enero = new HashMap<>();
+	  Map<String,Double> febrero = new HashMap<>();
+	  Map<String,Double> marzo = new HashMap<>();
+	  Map<String,Double> abril = new HashMap<>();
+	  Map<String,Double> mayo = new HashMap<>();
+	  Map<String,Double> junio = new HashMap<>();
+	  Map<String,Double> julio = new HashMap<>();
+	  Map<String,Double> agosto = new HashMap<>();
+	  Map<String,Double> septiembre = new HashMap<>();
+	  Map<String,Double> octubre = new HashMap<>();
+	  Map<String,Double> noviembre = new HashMap<>();
+	  Map<String,Double> diciembre = new HashMap<>();
+	 
+	  
+	  
+	  List<Map<String,Double>> lista= new ArrayList<Map<String,Double>>();
+	  lista.add(enero);
+	  lista.add(febrero);
+	  lista.add(marzo);
+	  lista.add(abril);
+	  lista.add(mayo);
+	  lista.add(junio);
+	  lista.add(julio);
+	  lista.add(agosto);
+	  lista.add(septiembre);
+	  lista.add(octubre);
+	  lista.add(noviembre);
+	  lista.add(diciembre);
+	 
+	System.out.println(opcion1);
+	  for(Map<String,Double> enti: lista) {
+		 
+		  System.out.println(mes);
+		  Double any1= gastosRepositorio.sumImporteByYearAndMonth(mes, Integer.parseInt(opcion1));
+		  Double any2= gastosRepositorio.sumImporteByYearAndMonth(mes, Integer.parseInt(opcion2));
+		  
+		  if(any1==null) {
+			  any1=0.0;
+		  }
+		  if(any2==null) {
+			  any2=0.0;
+		  }
+		  
+		  System.out.println(any1);
+		  enti.put("anyo1", any1);
+		  enti.put("anyo2", any2);
+		  datos.put("mes"+mes, enti);
+		  mes++;
+		  any1M+=any1;
+		  any2M+=any2;
+		  
+	  }
+	  Map<String,Double> media= new HashMap<>();
+	  media.put("anyo1", Double.valueOf(any1M/12));
+	  media.put("anyo2", Double.valueOf(any2M/12));
+	  datos.put("media", media);
+	  
+	  Map<String,Double> total= new HashMap<>();
+	  total.put("anyo1", any1M);
+	  total.put("anyo2", any2M);
+	  datos.put("total", total);
+	  
+	  
+	  return datos; }
+	
+	
+	/*Sesiones realizadas*/
+	
+	@GetMapping("api/sesiones-totales")
+	  
+	  @ResponseBody public Map<String, Map<String, Double>> sesionesTotales(@RequestParam String opcion1, @RequestParam String opcion2) {
+	 
+		 int mes=1;
+		 Double any1M=0.0;
+		 Double any2M=0.0;
+	  Map<String, Map<String, Double>> datos = new HashMap<>();
+	  
+	  Map<String,Double> enero = new HashMap<>();
+	  Map<String,Double> febrero = new HashMap<>();
+	  Map<String,Double> marzo = new HashMap<>();
+	  Map<String,Double> abril = new HashMap<>();
+	  Map<String,Double> mayo = new HashMap<>();
+	  Map<String,Double> junio = new HashMap<>();
+	  Map<String,Double> julio = new HashMap<>();
+	  Map<String,Double> agosto = new HashMap<>();
+	  Map<String,Double> septiembre = new HashMap<>();
+	  Map<String,Double> octubre = new HashMap<>();
+	  Map<String,Double> noviembre = new HashMap<>();
+	  Map<String,Double> diciembre = new HashMap<>();
+	 
+	  
+	  
+	  List<Map<String,Double>> lista= new ArrayList<Map<String,Double>>();
+	  lista.add(enero);
+	  lista.add(febrero);
+	  lista.add(marzo);
+	  lista.add(abril);
+	  lista.add(mayo);
+	  lista.add(junio);
+	  lista.add(julio);
+	  lista.add(agosto);
+	  lista.add(septiembre);
+	  lista.add(octubre);
+	  lista.add(noviembre);
+	  lista.add(diciembre);
+	 
+	System.out.println(opcion1);
+	  for(Map<String,Double> enti: lista) {
+		 
+		  System.out.println(mes);
+		  Double any1= citasRepositorio.contarTerminadaSalvadaMyA(mes, Integer.parseInt(opcion1));
+		  Double any2= citasRepositorio.contarTerminadaSalvadaMyA(mes, Integer.parseInt(opcion2));
+		  
+		  if(any1==null) {
+			  any1=0.0;
+		  }
+		  if(any2==null) {
+			  any2=0.0;
+		  }
+		  
+		  System.out.println(any1);
+		  enti.put("anyo1", any1);
+		  enti.put("anyo2", any2);
+		  datos.put("mes"+mes, enti);
+		  mes++;
+		  any1M+=any1;
+		  any2M+=any2;
+		  
+	  }
+	  Map<String,Double> media= new HashMap<>();
+	  media.put("anyo1", Double.valueOf(any1M/12));
+	  media.put("anyo2", Double.valueOf(any2M/12));
+	  datos.put("media", media);
+	  
+	  Map<String,Double> total= new HashMap<>();
+	  total.put("anyo1", any1M);
+	  total.put("anyo2", any2M);
+	  datos.put("total", total);
+	  
+	  
+	  return datos; }
+	
+	/*gastos totales*/
+	@GetMapping("api/ingresos-totales")
+	  
+	  @ResponseBody public Map<String, Map<String, Double>> ingresosTotales(@RequestParam String opcion1, @RequestParam String opcion2) {
+	 
+		 int mes=1;
+		 Double any1M=0.0;
+		 Double any2M=0.0;
+	  Map<String, Map<String, Double>> datos = new HashMap<>();
+	  
+	  Map<String,Double> enero = new HashMap<>();
+	  Map<String,Double> febrero = new HashMap<>();
+	  Map<String,Double> marzo = new HashMap<>();
+	  Map<String,Double> abril = new HashMap<>();
+	  Map<String,Double> mayo = new HashMap<>();
+	  Map<String,Double> junio = new HashMap<>();
+	  Map<String,Double> julio = new HashMap<>();
+	  Map<String,Double> agosto = new HashMap<>();
+	  Map<String,Double> septiembre = new HashMap<>();
+	  Map<String,Double> octubre = new HashMap<>();
+	  Map<String,Double> noviembre = new HashMap<>();
+	  Map<String,Double> diciembre = new HashMap<>();
+	 
+	  
+	  
+	  List<Map<String,Double>> lista= new ArrayList<Map<String,Double>>();
+	  lista.add(enero);
+	  lista.add(febrero);
+	  lista.add(marzo);
+	  lista.add(abril);
+	  lista.add(mayo);
+	  lista.add(junio);
+	  lista.add(julio);
+	  lista.add(agosto);
+	  lista.add(septiembre);
+	  lista.add(octubre);
+	  lista.add(noviembre);
+	  lista.add(diciembre);
+	 
+	System.out.println(opcion1);
+	  for(Map<String,Double> enti: lista) {
+		 
+		  System.out.println(mes);
+		  Double any1= ingresosRepositorio.sumImporteByYearAndMonth(mes, Integer.parseInt(opcion1));
+		  Double any2= ingresosRepositorio.sumImporteByYearAndMonth(mes, Integer.parseInt(opcion2));
+		  
+		  if(any1==null) {
+			  any1=0.0;
+		  }
+		  if(any2==null) {
+			  any2=0.0;
+		  }
+		  
+		  System.out.println(any1);
+		  enti.put("anyo1", any1);
+		  enti.put("anyo2", any2);
+		  datos.put("mes"+mes, enti);
+		  mes++;
+		  any1M+=any1;
+		  any2M+=any2;
+		  
+	  }
+	  Map<String,Double> media= new HashMap<>();
+	  media.put("anyo1", Double.valueOf(any1M/12));
+	  media.put("anyo2", Double.valueOf(any2M/12));
+	  datos.put("media", media);
+	  
+	  Map<String,Double> total= new HashMap<>();
+	  total.put("anyo1", any1M);
+	  total.put("anyo2", any2M);
+	  datos.put("total", total);
 	  
 	  
 	  return datos; }
@@ -220,10 +455,10 @@ public class ControllerEstadisticas {
 	  return datos; }
 	
 	
-	@RequestMapping(path="intranet/estadisticas/distribucionSesiones")
+	@RequestMapping("/intranet/estadisticas/distribucionSesiones")
 	public String distribucionSesiones(Model model) {
 		
-		return "intranet/estadisticas/distribucionSesiones";
+		return "/intranet/estadisticas/distribucionSesiones";
 		
 	}
 	
@@ -311,41 +546,41 @@ public class ControllerEstadisticas {
 		  
 		  return datos; }
 	
-	@RequestMapping(path="intranet/estadisticas/divisionPacientes")
+	@RequestMapping("/intranet/estadisticas/divisionPacientes")
 	public String divisionPacientes(Model model) {
 	
 		
-		return "intranet/estadisticas/divisionPacientes";
+		return "/intranet/estadisticas/divisionPacientes";
 	}
 	
-	@RequestMapping(path="intranet/estadisticas/gastosTotales")
+	@RequestMapping("/intranet/estadisticas/gastosTotales")
 	public String gastosTotales(Model model) {
 		
-		return "intranet/estadisticas/gastosTotales";
+		return "/intranet/estadisticas/gastosTotales";
 	}
 	
-	@RequestMapping(path="intranet/estadisticas/ingresosTotales")
+	@RequestMapping("/intranet/estadisticas/ingresosTotales")
 	public String ingresosTotales(Model model) {
 		
-		return "intranet/estadisticas/ingresosTotales";
+		return "/intranet/estadisticas/ingresosTotales";
 	}
 	
-	@RequestMapping(path="intranet/estadisticas/metodologiaPago")
+	@RequestMapping("/intranet/estadisticas/metodologiaPago")
 	public String metodologiaPago(Model model) {
 		
-		return "intranet/estadisticas/metodologiaPago";
+		return "/intranet/estadisticas/metodologiaPago";
 	}
 	
-	@RequestMapping(path="intranet/estadisticas/numeroPacientes")
+	@RequestMapping("/intranet/estadisticas/numeroPacientes")
 	public String numeroPacientes(Model model) {
 		
-		return "intranet/estadisticas/numeroPacientes";
+		return "/intranet/estadisticas/numeroPacientes";
 	}
 	
-	@RequestMapping(path="intranet/estadisticas/preciosSesiones")
+	@RequestMapping("/intranet/estadisticas/preciosSesiones")
 	public String preciosSesiones(Model model) {
 		
-		return "intranet/estadisticas/preciosSesiones";
+		return "/intranet/estadisticas/preciosSesiones";
 	}
 	
 	
@@ -423,10 +658,10 @@ public class ControllerEstadisticas {
 	
 	
 	
-	@RequestMapping(path="intranet/estadisticas/procedenciaPacientes")
+	@RequestMapping("/intranet/estadisticas/procedenciaPacientes")
 	public String procedenciaPacientes(Model model) {
 		
-		return "intranet/estadisticas/procedenciaPacientes";
+		return "/intranet/estadisticas/procedenciaPacientes";
 	}
 	
 	@GetMapping("api/procedencia-pacientes")
@@ -495,6 +730,74 @@ public class ControllerEstadisticas {
 		  media.put("externam", Double.valueOf(externaM/12));
 		  media.put("internam", Double.valueOf(internasM/12));
 		  media.put("situacionm", Double.valueOf(situacionM/12));
+
+		  datos.put("media", media);
+		  
+		  
+		  return datos; }
+	
+	
+	
+	@GetMapping("api/forma-pagos")
+	  
+	  @ResponseBody public Map<String, Map<String, Double>> formaPagos(@RequestParam String opcion1) {
+		 int mes=1;
+		 Double externaM=0.0;
+		 Double internasM=0.0;
+		  Map<String, Map<String, Double>> datos = new HashMap<>();
+		  
+		  Map<String,Double> enero = new HashMap<>();
+		  Map<String,Double> febrero = new HashMap<>();
+		  Map<String,Double> marzo = new HashMap<>();
+		  Map<String,Double> abril = new HashMap<>();
+		  Map<String,Double> mayo = new HashMap<>();
+		  Map<String,Double> junio = new HashMap<>();
+		  Map<String,Double> julio = new HashMap<>();
+		  Map<String,Double> agosto = new HashMap<>();
+		  Map<String,Double> septiembre = new HashMap<>();
+		  Map<String,Double> octubre = new HashMap<>();
+		  Map<String,Double> noviembre = new HashMap<>();
+		  Map<String,Double> diciembre = new HashMap<>();
+		 
+		  
+		  
+		  List<Map<String,Double>> lista= new ArrayList<Map<String,Double>>();
+		  lista.add(enero);
+		  lista.add(febrero);
+		  lista.add(marzo);
+		  lista.add(abril);
+		  lista.add(mayo);
+		  lista.add(junio);
+		  lista.add(julio);
+		  lista.add(agosto);
+		  lista.add(septiembre);
+		  lista.add(octubre);
+		  lista.add(noviembre);
+		  lista.add(diciembre);
+		 
+		System.out.println(opcion1);
+		  for(Map<String,Double> enti: lista) {
+			 
+			Double externa= facturasRepositorio.countFacturasEfectivo(mes, Integer.parseInt(opcion1));
+			Double interna= facturasRepositorio.countFacturasBizum(mes, Integer.parseInt(opcion1));
+			
+			  
+			  enti.put("externa", externa);
+			  enti.put("interna", interna);
+			  
+			
+			  
+			  datos.put("mes"+mes, enti);
+			  mes++;
+			  
+			  externaM+=externa;
+			  internasM+=interna;
+			
+			  
+		  }
+		  Map<String,Double> media= new HashMap<>();
+		  media.put("externam", Double.valueOf(externaM/12));
+		  media.put("internam", Double.valueOf(internasM/12));
 
 		  datos.put("media", media);
 		  

@@ -59,7 +59,7 @@ public class IngresosAPI {
 	        return ResponseEntity.badRequest().body(errores);
 	    } else {
 	        Ingresos ing = new Ingresos(e.getTipoA(),
-	        		Double.parseDouble(e.getImporteA().replace(",", ".")));
+	        		Double.parseDouble(e.getImporteA().replace(",", ".")),LocalDate.parse(e.getFechaA()));
 	        ingresosRepositorio.save(ing);
 	       
 	        return ResponseEntity.ok(e);
@@ -86,6 +86,7 @@ public class IngresosAPI {
 	        	Ingresos ing= ingresosRepositorio.findById(e.getIdE());
 	        	ing.setImporte(Double.parseDouble(e.getImporteE().replace(",", ".")));
 	        	ing.setTipo(e.getTipoE());
+	        	ing.setFecha(LocalDate.parse(e.getFechaE()));
 	        	ingresosRepositorio.save(ing);
 		            return ResponseEntity.ok(e);
 	        }else {

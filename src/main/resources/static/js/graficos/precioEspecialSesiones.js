@@ -59,10 +59,14 @@ function comparar() {
   vAxis: {
     minValue: 0,
     title: 'Precios',
+        gridlines: {
+      count: 5
+    },
     titleTextStyle: {
       color: '#333'
     }
-  }
+  },
+    colors: ['#5B9BD5', '#61CB7A']
 };
 
 

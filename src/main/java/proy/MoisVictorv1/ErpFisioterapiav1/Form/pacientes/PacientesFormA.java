@@ -1,26 +1,39 @@
 package proy.MoisVictorv1.ErpFisioterapiav1.Form.pacientes;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 public class PacientesFormA {
 
-	@NotEmpty(message = "No puede estar vacío")
+	@NotBlank(message = "No puede estar vacío")
+	@Pattern(regexp = "^(?=\\S)(?!.*\\s{2})(\\S\\s*\\S){0,9}\\S?$", message = "Debe tener un máximo de 20 caracteres, el primer y último carácter no pueden ser en blanco y no puede haber dos espacios en blanco seguidos en medio")
 	private String nombreA;
-	@NotEmpty(message = "No puede estar vacío")
+	@NotBlank(message = "No puede estar vacío")
+	@Pattern(regexp = "^(?!\\s)[\\p{L}\\s]{1,48}(?<!\\s)$", message = "Debe tener un máximo de 50 caracteres, no puede empezar ni terminar con un espacio en blanco")
 	private String apellidosA;
 	@NotEmpty(message = "No puede estar vacío")
+	@Size(min = 9, max = 9, message = "El DNI/NIE debe tener 9 caracteres")
 	private String dniA;
-	@NotEmpty(message = "No puede estar vacío")
+	@NotBlank(message = "No puede estar vacío")
+	@Pattern(regexp = "^(?!\\s)[\\p{L}0-9\\s]{1,48}(?<!\\s)$", message = "Debe tener un máximo de 50 caracteres, no puede empezar ni terminar con un espacio en blanco")
 	private String domicilioA;
-	@NotEmpty(message = "No puede estar vacío")
+	@NotBlank(message = "No puede estar vacío")
+	@Pattern(regexp = "^[0-9]+$", message = "Debe contener solo números y no puede tener espacios en blanco")
+	@Size(min = 5, max = 5, message = "Debe tener una longitud de 5 caracteres")
 	private String cpA;
-	@NotEmpty(message = "No puede estar vacío")
+	@NotBlank(message = "No puede estar vacío")
+	@Pattern(regexp = "^(?=\\S)(?!.*\\s{2})(\\S\\s*\\S){0,9}\\S?$", message = "Debe tener un máximo de 20 caracteres, el primer y último carácter no pueden ser en blanco y no puede haber dos espacios en blanco seguidos en medio")
 	private String poblaA;
-	@NotEmpty(message = "No puede estar vacío")
+	@NotBlank(message = "No puede estar vacío")
+	@Pattern(regexp = "^[0-9]+$", message = "Debe contener solo números y no puede tener espacios en blanco")
+	@Size(min = 9, max = 9, message = "Debe tener una longitud de 9 caracteres")
 	private String telA; 
 	@NotEmpty(message = "No puede estar vacío")
 	private String conoceA;
 
+	@NotEmpty(message = "No puede estar vacío")
 	private String tarifaA;
 	
 	public String getNombreA() {

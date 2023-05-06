@@ -63,11 +63,15 @@ function comparar() {
 
   vAxis: {
     minValue: 0,
-    title: 'Días trabajados',
+    title: 'Pacientes',
+        gridlines: {
+      count: 5
+    },
     titleTextStyle: {
       color: '#333'
     }
-  }
+  },
+  colors: ['#FFC000', '#61CB7A','#AA4CA6']
   
   
 };

@@ -84,11 +84,12 @@ var app = {
 
 	},
 	initDatatable: function(id) {
-		console.log("hola")
+	
 		/**Esto se encarfa de crear la tabla cargando el json que recibe de la bbdd 
 		 * que lo recibe en formato json, lo retornas a la llamada etc
 		 */
 		app.table = $(id).DataTable({
+	
 
 			ajax: {
 				url: app.backend + '/all',
@@ -99,10 +100,7 @@ var app = {
 			},
 			dom: 'Bfrtip',
 			columns: [
-				{ data: "fecha" },
-				{ data: "importe" },
-				{ data: "tipo" },
-				{
+					{
 					// Agregar una columna para el botón Editar
 					data: null,
 					render: function(data, type, row) {
@@ -110,9 +108,14 @@ var app = {
 							'</button>&nbsp;<button class="btn btn-danger btn-sm2" data-id="' + row.id +
 							'"><i class="bi bi-trash-fill"></i></i></button>';
 					},
-					orderable: false,
+					orderable: true,
 					searchable: false
-				}
+				},
+				{ data: "fecha" },
+				{ data: "importe" },
+				{ data: "tipo" },
+				
+			
 			],
 			buttons: [
 				{
@@ -121,8 +124,18 @@ var app = {
 						confirmarTodo();
 					}
 				}
-			]
+			],
+					responsive: {
+            details: {
+                display: $.fn.dataTable.Responsive.display.childRowImmediate,
+                type: 'none',
+                target: ''
+            },
+
+        },
+      
 		});
+
 
 		// Agregar una acción para el botón Editar
 		$('#gastos tbody').on('click', '.btn-sm', function() {

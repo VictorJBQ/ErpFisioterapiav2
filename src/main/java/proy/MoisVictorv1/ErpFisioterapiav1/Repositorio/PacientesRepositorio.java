@@ -40,6 +40,13 @@ public interface PacientesRepositorio extends CrudRepository<Pacientes,Integer> 
 	Pacientes findByDni(String dni);
 	
 	Pacientes findById(String dni);
+	
+	 @Query("SELECT p FROM Pacientes p WHERE p.codigoPostal IS NULL OR p.apellidos IS NULL OR p.dni IS NULL OR p.domicilio IS NULL OR p.poblacion IS NULL OR p.sabeDeMi IS NULL OR p.telefono IS NULL OR p.tarifas IS NULL")
+	    List<Pacientes> buscarPacientesConCamposNulos();
+	 
+	 @Query("SELECT DISTINCT p FROM Pacientes p JOIN FETCH p.citas c WHERE YEAR(c.fecha) = YEAR(CURRENT_DATE)")
+	    List<Pacientes> findPacientesWithCitasThisMonth();
+
 
 
 }

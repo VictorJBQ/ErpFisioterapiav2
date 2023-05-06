@@ -1,18 +1,24 @@
 package proy.MoisVictorv1.ErpFisioterapiav1.Form.empleados;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Pattern;
 
 public class EmpleadosFormE {
-	@NotEmpty(message = "No puede estar vacío")
+	@NotBlank(message = "No puede estar vacío")
+	@Pattern(regexp = "^[^\\s]{1,10}$", message = "No puede contener espacios en blanco y debe tener una longitud máxima de 10 caracteres")
 	private String identificadorE;
 	
-	@NotEmpty(message = "No puede estar vacío")
+	@NotBlank(message = "No puede estar vacío")
+	@Pattern(regexp = "^(?=\\S)(?!.*\\s{2})(\\S\\s*\\S){0,9}\\S?$", message = "Debe tener un máximo de 20 caracteres, el primer y último carácter no pueden ser en blanco y no puede haber dos espacios en blanco seguidos en medio")
 	private String nombreE;
 	
-	@NotEmpty(message = "No puede estar vacío")
+	@NotBlank(message = "No puede estar vacío")
+	@Pattern(regexp = "^[^\\s]*$", message = "No puede contener espacios en blanco")
 	private String passwordE;
 	
-	@NotEmpty(message = "No puede estar vacío")
+	@NotBlank(message = "No puede estar vacío")
+	@Pattern(regexp = "^[^\\s]*$", message = "No puede contener espacios en blanco")
 	private String rolesE;
 
 	public String getIdentificador() {
