@@ -12,10 +12,10 @@ public class ControllerFacturas {
  @Autowired
  FacturasRepositorio facturasRepositorio;
  
-	@RequestMapping("/intranet/facturas/facturas")
+	@RequestMapping(path="intranet/facturas/facturas")
 	public String verFacturas(Model model) {
 		
-		return "/intranet/facturas/facturas";
+		return "intranet/facturas/facturas";
 	}
 
 }

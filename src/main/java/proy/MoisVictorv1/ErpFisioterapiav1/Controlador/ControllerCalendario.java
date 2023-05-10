@@ -36,23 +36,23 @@ public class ControllerCalendario {
 	@Autowired
 	PacientesRepositorio pacientesRepositorio;
 	
-	@RequestMapping("/intranet/calendario/calendario")
+	@RequestMapping(path="intranet/calendario/calendario")
 	public String verCalendario(Model model) {
 		Iterable<Pacientes> itUsu = pacientesRepositorio.findAll();
 		List<Pacientes> listaUsuarios = new ArrayList<Pacientes>();
 		itUsu.forEach(listaUsuarios::add);
 		model.addAttribute("lista", listaUsuarios);
 		
-		return "/intranet/calendario/calendario";
+		return "intranet/calendario/calendario";
 	}
 	
-	@RequestMapping("/cal")
+	@RequestMapping(path="cal")
 	public String verCalendardio(Model model) {
 		
 		return "intranet/calendario/pruebaC";
 	}
 	
-	@GetMapping("/citas")
+	@GetMapping(path="citas")
 	@ResponseBody
 	public List<Citas> obtenerCitas() {
 	    // Aquí deberías llamar a tu servicio o repositorio para obtener las citas

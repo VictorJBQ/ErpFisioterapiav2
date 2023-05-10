@@ -48,7 +48,7 @@ public class ControllerGeneral {
 	@Autowired
 	private EmailSenderService emailSenderService;
 
-	@RequestMapping("/intranet/inicio")
+	@RequestMapping(path="intranet/inicio")
 	public String bienvenida(Model model, Authentication authentication) {
 		HashMap<String, String> empleado = new HashMap<>();
 
@@ -85,33 +85,33 @@ public class ControllerGeneral {
 		} else {
 			model.addAttribute("codigoEmpleado", "y");
 		}
-		return "/intranet/inicio";
+		return "intranet/inicio";
 	}
 
-	@RequestMapping("/index")
+	@RequestMapping(path="index")
 	public String index(Model model) {
 		model.addAttribute("mensaje", model.getAttribute("mensaje"));
-		return "/index";
+		return "index";
 	}
 
-	@GetMapping("/login")
+	@GetMapping(path="login")
 	public String add2() {
-		return "/login";
+		return "login";
 	}
 
-	@GetMapping("/rest")
+	@GetMapping(path="rest")
 	public String rest() {
-		return "/rest";
+		return "rest";
 	}
 
-	@PostMapping(path = "/login")
+	@PostMapping(path = "login")
 	public String add1() {
-		return "/login";
+		return "login";
 	}
 
 
 
-	@GetMapping("/reset-password")
+	@GetMapping(path="reset-password")
 	public String showResetPasswordForm(@RequestParam("token") String token,
 			@RequestParam("expiration") String expiration, String email, Model model) {
 		String decodedEmail = new String(Base64.getUrlDecoder().decode(email));
@@ -140,12 +140,12 @@ public class ControllerGeneral {
 
 
 
-	@PostMapping(path = "/intranet/cambioPS")
+	@PostMapping(path = "intranet/cambioPS")
 	public String checkPersonInfo(@Valid CambioPSForm e, BindingResult bindingResult) {
 
 		if (bindingResult.hasErrors()) {
 
-			return "/intranet/inicio";
+			return "intranet/inicio";
 		}
 		return null;
 

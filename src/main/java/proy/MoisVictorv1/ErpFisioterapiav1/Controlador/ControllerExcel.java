@@ -59,7 +59,7 @@ public class ControllerExcel {
 	@Autowired
 	GastosRepositorio gastosRespositorio;
     
-    @PostMapping(value="/descargarEmpleados-excel")
+    @PostMapping(value="descargarEmpleados-excel")
     public void descargarEmpleadosExcel(HttpServletResponse response,@Param("nombre") String nombre) throws Exception {
     	List<Empleados> aa =(List<Empleados>) empleadosRepositorio.findAll();
         List<ExcelEmpleadoForm> lista = new ArrayList<ExcelEmpleadoForm>();
@@ -70,12 +70,12 @@ public class ControllerExcel {
        DescargaExcel descargaExcel = new DescargaExcel();
 	descargaExcel.descargarExcel(response, lista,nombre);
 	}else {
-		response.sendRedirect("/empleados/altaEmpleados");
+		response.sendRedirect("empleados/altaEmpleados");
 	}
        
     }
     
-    @PostMapping(value="/descargarCitasHoy-excel")
+    @PostMapping(value="descargarCitasHoy-excel")
     public void descargarCitasHoyExcel(HttpServletResponse response, @Param("nombre") String nombre) throws Exception {
        DescargaExcel descargaExcel = new DescargaExcel();
        System.out.println("entraaaaaaaaaaaaa");
@@ -97,13 +97,13 @@ public class ControllerExcel {
 	}
 	 descargaExcel.descargarExcel(response, aa,nombre);
 	}else {
-		response.sendRedirect("/intranet/inicio");
+		response.sendRedirect("intranet/inicio");
 	}
 	 
 
 
       }
-    @PostMapping(value="/descargarCitaConfirmar-excel")
+    @PostMapping(value="descargarCitaConfirmar-excel")
     public void descargarCitaConfirmarExcel(HttpServletResponse response,@Param("nombre") String nombre) throws Exception {
     	  LocalDate fecha = LocalDate.now().plusDays(1);
     	List<Citas> aa =(List<Citas>) citasRepositorio.findByFechaMenosUnoYEstadoPendienteConfirmar(fecha);
@@ -122,13 +122,13 @@ public class ControllerExcel {
        DescargaExcel descargaExcel = new DescargaExcel();
 	descargaExcel.descargarExcel(response, lista,nombre);
 	}else {
-		response.sendRedirect("/intranet/citas/citas");
+		response.sendRedirect("intranet/citas/citas");
 	}
 
        
     }
     
-    @PostMapping(value="/descargarCitaActualizar-excel")
+    @PostMapping(value="descargarCitaActualizar-excel")
     public void descargarCitaActualizarExcel(HttpServletResponse response,@Param("nombre") String nombre) throws Exception {
     	List<Citas> aa =(List<Citas>) citasRepositorio.findByEstadoReservada();
         List<ExcelCitaPenConfirmarForm> lista = new ArrayList<ExcelCitaPenConfirmarForm>();
@@ -146,13 +146,13 @@ public class ControllerExcel {
         DescargaExcel descargaExcel = new DescargaExcel();
  	descargaExcel.descargarExcel(response, lista,nombre);
  	}else {
- 		response.sendRedirect("/intranet/citas/citas");
+ 		response.sendRedirect("intranet/citas/citas");
  	}
 
        
     }
     
-    @PostMapping(value="/descargarCitaTerminar-excel")
+    @PostMapping(value="descargarCitaTerminar-excel")
     public void descargarCitaTerminarExcel(HttpServletResponse response,@Param("nombre") String nombre) throws Exception {
     	List<Citas> aa =(List<Citas>)citasRepositorio.findByEstadoConfirmada();
         List<ExcelCitaPenConfirmarForm> lista = new ArrayList<ExcelCitaPenConfirmarForm>();
@@ -170,13 +170,13 @@ public class ControllerExcel {
         DescargaExcel descargaExcel = new DescargaExcel();
  	descargaExcel.descargarExcel(response, lista,nombre);
  	}else {
- 		response.sendRedirect("/intranet/citas/citas");
+ 		response.sendRedirect("intranet/citas/citas");
  	}
 
        
     }
     
-    @PostMapping(value="/descargarCitaActualidad-excel")
+    @PostMapping(value="descargarCitaActualidad-excel")
     public void descargarCitaActualidadExcel(HttpServletResponse response,@Param("nombre") String nombre) throws Exception {
     	List<Citas> aa =(List<Citas>)citasRepositorio.findByFechaActualOrFutura();
         List<ExcelCitaPenConfirmarForm> lista = new ArrayList<ExcelCitaPenConfirmarForm>();
@@ -194,12 +194,12 @@ public class ControllerExcel {
         DescargaExcel descargaExcel = new DescargaExcel();
  	descargaExcel.descargarExcel(response, lista,nombre);
  	}else {
- 		response.sendRedirect("/intranet/citas/citas");
+ 		response.sendRedirect("intranet/citas/citas");
  	}
 
        
     }
-    @PostMapping(value="/descargarCitas-excel")
+    @PostMapping(value="descargarCitas-excel")
     public void descargarCitas(HttpServletResponse response,@Param("nombre") String nombre) throws Exception {
     	List<Citas> aa =(List<Citas>)citasRepositorio.findAll();
         List<ExcelCitaPenConfirmarForm> lista = new ArrayList<ExcelCitaPenConfirmarForm>();
@@ -217,12 +217,12 @@ public class ControllerExcel {
         DescargaExcel descargaExcel = new DescargaExcel();
  	descargaExcel.descargarExcel(response, lista,nombre);
  	}else {
- 		response.sendRedirect("/intranet/citas/altaCitas");
+ 		response.sendRedirect("intranet/citas/altaCitas");
  	}
 
        
     }
-    @PostMapping(value="/descargarFacturas-excel")
+    @PostMapping(value="descargarFacturas-excel")
     public void descargarFacturas(HttpServletResponse response,@Param("nombre") String nombre) throws Exception {
     	List<Facturas> aa =(List<Facturas>)facturasRepositorio.findAll();
         List<ExcelFacturaForm> lista = new ArrayList<ExcelFacturaForm>();
@@ -240,10 +240,10 @@ public class ControllerExcel {
         DescargaExcel descargaExcel = new DescargaExcel();
  	descargaExcel.descargarExcel(response, lista,nombre);
  	}else {
- 		response.sendRedirect("/intranet/facturas/facturas");
+ 		response.sendRedirect("intranet/facturas/facturas");
  	}
     }
-    @PostMapping(value="/descargarIngresos-excel")
+    @PostMapping(value="descargarIngresos-excel")
     public void descargarIngresos(HttpServletResponse response,@Param("nombre") String nombre) throws Exception {
     	List<Ingresos> aa =(List<Ingresos>)ingresosRepositorio.findAll();
         List<ExcelIngresosForm> lista = new ArrayList<ExcelIngresosForm>();
@@ -263,11 +263,11 @@ public class ControllerExcel {
         DescargaExcel descargaExcel = new DescargaExcel();
  	descargaExcel.descargarExcel(response, lista,nombre);
  	}else {
- 		response.sendRedirect("/intranet/ingresos/ingresos");
+ 		response.sendRedirect("intranet/ingresos/ingresos");
  	}
     }
     
-    @PostMapping(value="/descargarGastos-excel")
+    @PostMapping(value="descargarGastos-excel")
     public void descargarGastos(HttpServletResponse response,@Param("nombre") String nombre) throws Exception {
     	List<Gastos> aa =(List<Gastos>)gastosRespositorio.findAll();
         List<ExcelGastosForm> lista = new ArrayList<ExcelGastosForm>();
@@ -279,10 +279,10 @@ public class ControllerExcel {
         DescargaExcel descargaExcel = new DescargaExcel();
  	descargaExcel.descargarExcel(response, lista,nombre);
  	}else {
- 		response.sendRedirect("/intranet/gastos/gastos");
+ 		response.sendRedirect("intranet/gastos/gastos");
  	}
     }
-    @PostMapping(value="/descargarTarifas-excel")
+    @PostMapping(value="descargarTarifas-excel")
     public void descargarTarifas(HttpServletResponse response,@Param("nombre") String nombre) throws Exception {
     	List<Tarifas> aa =(List<Tarifas>)tarifasRepositorio.findAll();
         List<ExcelTarifasForm> lista = new ArrayList<ExcelTarifasForm>();
@@ -294,10 +294,10 @@ public class ControllerExcel {
         DescargaExcel descargaExcel = new DescargaExcel();
  	descargaExcel.descargarExcel(response, lista,nombre);
  	}else {
- 		response.sendRedirect("/intranet/tarifas/tarifas");
+ 		response.sendRedirect("intranet/tarifas/tarifas");
  	}
     }
-    @PostMapping(value="/descargarPacientesTodos-excel")
+    @PostMapping(value="descargarPacientesTodos-excel")
     public void descargarPacientesTodos(HttpServletResponse response,@Param("nombre") String nombre) throws Exception {
     	List<Pacientes> aa =(List<Pacientes>)pacientesRepositorio.findAll();
         List<ExcelPacientesForm> lista = new ArrayList<ExcelPacientesForm>();
@@ -310,11 +310,11 @@ public class ControllerExcel {
         DescargaExcel descargaExcel = new DescargaExcel();
  	descargaExcel.descargarExcel(response, lista,nombre);
  	}else {
- 		response.sendRedirect("/intranet/pacientes/pacientes");
+ 		response.sendRedirect("intranet/pacientes/pacientes");
  	}
         
     }
-    @PostMapping(value="/descargarPacientesPendientes-excel")
+    @PostMapping(value="descargarPacientesPendientes-excel")
     public void descargarPacientesPendientes(HttpServletResponse response,@Param("nombre") String nombre) throws Exception {
     	List<Pacientes> aa =(List<Pacientes>)pacientesRepositorio.buscarPacientesConCamposNulos();
         List<ExcelPacientesForm> lista = new ArrayList<ExcelPacientesForm>();
@@ -327,12 +327,12 @@ public class ControllerExcel {
         DescargaExcel descargaExcel = new DescargaExcel();
  	descargaExcel.descargarExcel(response, lista,nombre);
  	}else {
- 		response.sendRedirect("/intranet/pacientes/pacientes");
+ 		response.sendRedirect("intranet/pacientes/pacientes");
  	}
         
     }
     
-    @PostMapping(value="/descargarPacientesCurso-excel")
+    @PostMapping(value="descargarPacientesCurso-excel")
     public void descargarPacientesCurso(HttpServletResponse response,@Param("nombre") String nombre) throws Exception {
     	List<Pacientes> aa =(List<Pacientes>)pacientesRepositorio.findPacientesWithCitasThisMonth();
         List<ExcelPacientesForm> lista = new ArrayList<ExcelPacientesForm>();
@@ -345,7 +345,7 @@ public class ControllerExcel {
         DescargaExcel descargaExcel = new DescargaExcel();
  	descargaExcel.descargarExcel(response, lista,nombre);
  	}else {
- 		response.sendRedirect("/intranet/pacientes/pacientes");
+ 		response.sendRedirect("intranet/pacientes/pacientes");
  	}
         
     }
