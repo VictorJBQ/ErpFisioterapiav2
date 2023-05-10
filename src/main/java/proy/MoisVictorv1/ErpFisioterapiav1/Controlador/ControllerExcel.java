@@ -78,11 +78,9 @@ public class ControllerExcel {
     @PostMapping(value="descargarCitasHoy-excel")
     public void descargarCitasHoyExcel(HttpServletResponse response, @Param("nombre") String nombre) throws Exception {
        DescargaExcel descargaExcel = new DescargaExcel();
-       System.out.println("entraaaaaaaaaaaaa");
       List<Citas> a = (List<Citas>) citasRepositorio.getCitasDiaActual();
       List<ExcelCitaHoyForm> aa = new ArrayList<ExcelCitaHoyForm>();
      if(!a.isEmpty()) {
-         System.out.println("entraaaaaaasadasdsadsadasdaaaaaa");
 
 	for(Citas a1 : a) {
 		String nombrea = "";
@@ -90,7 +88,7 @@ public class ControllerExcel {
 			nombrea ="NA";
 		}
 		else {
-			nombrea = a1.getPacientes().getDni()+"-"+a1.getPacientes().getNombre();
+			nombrea = a1.getPacientes().getTelefono()+"-"+a1.getPacientes().getNombre();
 		}
 		aa.add(new ExcelCitaHoyForm(a1.getHora().toString(), a1.getEstado(), nombrea));
 		
@@ -115,7 +113,7 @@ public class ControllerExcel {
     				nombrea ="NA";
     			}
     			else {
-    				nombrea = a1.getPacientes().getDni()+"-"+a1.getPacientes().getNombre();
+    				nombrea = a1.getPacientes().getTelefono()+"-"+a1.getPacientes().getNombre();
     			}
     		   lista.add(new ExcelCitaPenConfirmarForm(a1.getFecha().toString(), a1.getHora().toString(), a1.getEstado(),nombrea ,a1.getTipo()));
     	   }
@@ -139,7 +137,7 @@ public class ControllerExcel {
      				nombrea ="NA";
      			}
      			else {
-     				nombrea = a1.getPacientes().getDni()+"-"+a1.getPacientes().getNombre();
+     				nombrea = a1.getPacientes().getTelefono()+"-"+a1.getPacientes().getNombre();
      			}
      		   lista.add(new ExcelCitaPenConfirmarForm(a1.getFecha().toString(), a1.getHora().toString(), a1.getEstado(),nombrea ,a1.getTipo()));
      	   }
@@ -163,7 +161,7 @@ public class ControllerExcel {
      				nombrea ="NA";
      			}
      			else {
-     				nombrea = a1.getPacientes().getDni()+"-"+a1.getPacientes().getNombre();
+     				nombrea = a1.getPacientes().getTelefono()+"-"+a1.getPacientes().getNombre();
      			}
      		   lista.add(new ExcelCitaPenConfirmarForm(a1.getFecha().toString(), a1.getHora().toString(), a1.getEstado(),nombrea ,a1.getTipo()));
      	   }
@@ -187,7 +185,7 @@ public class ControllerExcel {
      				nombrea ="NA";
      			}
      			else {
-     				nombrea = a1.getPacientes().getDni()+"-"+a1.getPacientes().getNombre();
+     				nombrea = a1.getPacientes().getTelefono()+"-"+a1.getPacientes().getNombre();
      			}
      		   lista.add(new ExcelCitaPenConfirmarForm(a1.getFecha().toString(), a1.getHora().toString(), a1.getEstado(),nombrea ,a1.getTipo()));
      	   }
@@ -210,7 +208,7 @@ public class ControllerExcel {
      				nombrea ="NA";
      			}
      			else {
-     				nombrea = a1.getPacientes().getDni()+"-"+a1.getPacientes().getNombre();
+     				nombrea = a1.getPacientes().getTelefono()+"-"+a1.getPacientes().getNombre();
      			}
      		   lista.add(new ExcelCitaPenConfirmarForm(a1.getFecha().toString(), a1.getHora().toString(), a1.getEstado(),nombrea ,a1.getTipo()));
      	   }
@@ -233,7 +231,7 @@ public class ControllerExcel {
      				nombrea ="NA";
      			}
      			else {
-     				nombrea = a1.getCita().getPacientes().getDni()+"-"+a1.getCita().getPacientes().getNombre();
+     				nombrea = a1.getCita().getPacientes().getTelefono()+"-"+a1.getCita().getPacientes().getNombre();
      			}
      		   lista.add(new ExcelFacturaForm(a1.getFormaPago(), a1.getImporte().toString(),nombrea ,a1.getFecha().toString()));
      	   }
