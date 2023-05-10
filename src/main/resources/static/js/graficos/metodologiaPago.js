@@ -20,7 +20,7 @@ function comparar() {
 	   
     console.log(datos)
    var data = google.visualization.arrayToDataTable([
-          ['meses',"Pagos en efectivo",{ role: 'annotation' },"Pagos en bizum",{ role: 'annotation' }],
+          ['meses',"Efectivo",{ role: 'annotation' },"Bizum",{ role: 'annotation' }],
         
             ['En', datos.mes1.externa,datos.mes1.externa,  datos.mes1.interna,datos.mes1.interna],
             ['Feb', datos.mes2.externa,datos.mes2.externa,  datos.mes2.interna,datos.mes2.interna ],

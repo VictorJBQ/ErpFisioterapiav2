@@ -12,15 +12,15 @@ public class ControllerTarifas {
 	@Autowired
 	TarifasRepositorio tarifasRepositorio;
 	
-	@RequestMapping(path="intranet/tarifas/tarifas")
+	@RequestMapping("/intranet/tarifas/tarifas")
 	public String verTarifas(Model model) {
 		
-		return "intranet/tarifas/tarifas";
+		return "/intranet/tarifas/tarifas";
 	}
 	
-	@RequestMapping(path="intranet/tarifas/altaTarifas")
+	@RequestMapping("/intranet/tarifas/altaTarifas")
 	public String addTarifas(Model model) {
 		
-		return "intranet/tarifas/altaTarifas";
+		return "/intranet/tarifas/altaTarifas";
 	}
 }

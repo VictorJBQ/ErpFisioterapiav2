@@ -28,13 +28,16 @@
 	rel="stylesheet" />
 <script
 	src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-	
-	<link rel='stylesheet' type='text/css' href=" https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
-<link rel='stylesheet' type='text/css' href=" https://cdn.datatables.net/responsive/2.4.1/css/responsive.bootstrap4.min.css">
+<script type="text/javascript"
+	src="https://www.gstatic.com/charts/loader.js"></script>
+
+<link rel='stylesheet' type='text/css'
+	href=" https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+<link rel='stylesheet' type='text/css'
+	href=" https://cdn.datatables.net/responsive/2.4.1/css/responsive.bootstrap4.min.css">
 
 <script src="/js/tablas/tablaInicio.js"></script>
-<script src="/js/graficos/numPacientes.js"></script> 
+<script src="/js/graficos/numPacientes.js"></script>
 </head>
 <body>
 	<!-- top navigation bar -->
@@ -184,7 +187,9 @@
 		</div>
 	</div>
 	<br>
-	<br><br>
+	<br>
+	<br>
+	<br>
 	<!-- offcanvas -->
 	<main class="mt-5 pt-3">
 		<div class="container-fluid">
@@ -215,55 +220,69 @@
 							</div>
 						</div>
 						<div class="card-body">
-						<div class="alert alert-primary" id="msg" style="display: none;"
-									role="alert"></div>
+							<div class="alert alert-primary" id="msg" style="display: none;"
+								role="alert"></div>
 							<div class="row">
 								<div class="col-lg-3">
-									<h6 class="mb-0" >Código Empleado</h6>
+									<h6 class="mb-0">Código Empleado</h6>
 								</div>
 								<div class="col-sm-9 text-secondary" th:text="${datos.codigo}">T01</div>
 							</div>
 							<hr>
 							<div class="row">
 								<div class="col-lg-3">
-									<h6 class="mb-0">Total citas del mes ofertadas </h6>
+									<h6 class="mb-0"
+										th:text="${codigoEmpleado == 'x' ? 'Total citas del mes ofertadas ' : 'Citas del mes de Carlos'}"></h6>
+
 								</div>
-								<div class="col-lg-9 text-success font-weight-bold" th:text="${datos.citasTotalmes}"></div>
+								<div class="col-lg-9 text-success font-weight-bold"
+									th:text="${datos.citasTotalmes}"></div>
 							</div>
 							<hr>
 							<div class="row">
 								<div class="col-lg-3">
-									<h6 class="mb-0">Citas del mes actual canceladas</h6>
+									<h6 class="mb-0"
+										th:text="${codigoEmpleado == 'x' ? 'Citas del mes actual canceladas ' : 'Citas del mes canceladas de Carlos'}"></h6>
+
 								</div>
-								<div class="col-lg-9 text-danger font-weight-bold" th:text="${datos.citasCanceladasmes}"></div>
+								<div class="col-lg-9 text-danger font-weight-bold"
+									th:text="${datos.citasCanceladasmes}"></div>
 							</div>
 							<hr>
 							<div class="row">
 								<div class="col-lg-3">
-									<h6 class="mb-0">Citas del mes libres con posibilidad de cubrir</h6>
+									<h6 class="mb-0"
+										th:text="${codigoEmpleado == 'x' ? 'Citas del mes libres con posibilidad de cubrir' : 'Citas posibilidad de cubrir mes actual carlos'}"></h6>
+
 								</div>
-								<div class="col-lg-9 text-info font-weight-bold" th:text="${datos.citasLibresmes}"></div>
+								<div class="col-lg-9 text-info font-weight-bold"
+									th:text="${datos.citasLibresmes}"></div>
 							</div>
 							<hr>
 							<div class="row">
 								<div class="col-lg-3">
-									<h6 class="mb-0">Citas del mes actual realizadas</h6>
+									<h6 class="mb-0"
+										th:text="${codigoEmpleado == 'x' ? 'Citas del mes actual realizadas' : 'Citas de Carlos realizadas mes actual'}"></h6>
+
 								</div>
-								<div class="col-lg-9 text-primary font-weight-bold" th:text="${datos.citasTerminadasmes}"></div>
+								<div class="col-lg-9 text-primary font-weight-bold"
+									th:text="${datos.citasTerminadasmes}"></div>
 							</div>
 							<hr>
 							<div class="row">
 								<div class="col-lg-3">
-									<h6 class="mb-0">Número total de sesiones realizadas</h6>
+									<h6 class="mb-0"
+										th:text="${codigoEmpleado == 'x' ? 'Número total de sesiones realizadas' : 'Sesiones totales realizadas Carlos'}"></h6>
+
 								</div>
-								<div class="col-lg-9 text-warning font-weight-bold" th:text="${datos.citas}"></div>
+								<div class="col-lg-9 text-warning font-weight-bold"
+									th:text="${datos.citas}"></div>
 							</div>
 							<hr>
 
 							<div class="row">
 								<div class="col-lg-12">
-									<button type="button" class="btn btn-info"
-										id="abrirmodalps">
+									<button type="button" class="btn btn-info" id="abrirmodalps">
 										Cambiar contraseña</button>
 								</div>
 
@@ -274,16 +293,25 @@
 					</div>
 					<div class="card mt-2 ">
 						<div class="card-header text-black">
-					
+
 							<div>
-							<span><i class="icon solid fa-chart-simple"></i></span>Número de pacientes tratados</div>
-							 <div class="ms-auto  "> <input id="opcion1" placeholder="2021" onchange='javascript: comparar();' /><span class="icon solid fa-magnifying-glass"></span>
-							 <input id="opcion2" placeholder="2021" onchange='javascript: comparar();' /><span class="icon solid fa-magnifying-glass"></span>
-							 </div>
+								<span><i class="icon solid fa-chart-simple"></i></span>Número de
+								pacientes tratados
+							</div>
+							<div class="ms-auto  ">
+								<input id="opcion1" placeholder="2021"
+									onchange='javascript: comparar();' /><span
+									class="icon solid fa-magnifying-glass"></span> <input
+									id="opcion2" placeholder="2021"
+									onchange='javascript: comparar();' /><span
+									class="icon solid fa-magnifying-glass"></span>
+							</div>
 						</div>
 						<div class="card-body">
 							<div class="table-responsive" style="overflow: hidden;">
-								<div id='p1' class='panel'><div id='chart_div'></div> </div>
+								<div id='p1' class='panel'>
+									<div id='chart_div'></div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -297,8 +325,18 @@
 					<div class="card ">
 						<div class="card-header d-flex flex-row">
 							<div class="text-black">
-								<span><i class="bi bi-table  me-2"></i></span> <i
-									class="material-icons text-black">Citas en el día de hoy</i>
+									<span><i class="bi bi-table  me-2"></i></span> <i
+										class="material-icons text-black">Citas en el día de hoy</i>
+								</div>
+								<form class="ms-auto" th:action="@{/descargarCitasHoy-excel}"
+									method="post">
+									<input type="hidden" name="nombre" value="CitasHoy">
+									<button type="submit" style="border: none;">
+
+										<img th:src="@{/images/excelLogo.png}" alt="Logo de Excel"
+											height="30">
+									</button>
+								</form>
 							</div>
 
 						</div>
@@ -314,7 +352,7 @@
 											<th>Hora</th>
 											<th>Estado</th>
 											<th>Paciente</th>
-											
+
 										</tr>
 									</thead>
 									<tbody id="cuerpoTabla">
@@ -340,40 +378,41 @@
 			</div>
 		</div>
 		<!-- Modal -->
-		<div class="modal fade" id="psw" role="dialog"
-			tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
+		<div class="modal fade" id="psw" role="dialog" tabindex="-1"
+			aria-labelledby="modalTitle" aria-hidden="true">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
-			
-						<div class="modal-header">
-							<h5 class="modal-title" id="staticBackdropLabel">Cambiar
-								Contraseña</h5>
-							<button type="button" class="close" data-dismiss="modal"
-								aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						
-						
-						<div class="modal-body">
-						<input type="hidden" class="form-control" th:value="${datos.codigo}" id="idEmpleado">
-							<label for="nombre">Contraseña actual</label> <input type="text"
-								class="form-control" id="vieja" required>
-						</div>
-						<div class="modal-body">
-							<label for="nombre">Nueva contraseña</label> <input type="text"
-								class="form-control" id="nueva" required>
-						</div>
-						<div class="modal-body">
-							<label for="nombre">Repite nueva contraseña</label> <input type="text"
-								class="form-control" id="nuevaConfirmada" required>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary"
-								data-dismiss="modal">Cancelar</button>
-							<button type="button" id="cmpsw" class="btn btn-primary">Guardar</button>
-						</div>
-			
+
+					<div class="modal-header">
+						<h5 class="modal-title" id="staticBackdropLabel">Cambiar
+							Contraseña</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+
+
+					<div class="modal-body">
+						<input type="hidden" class="form-control"
+							th:value="${datos.codigo}" id="idEmpleado"> <label
+							for="nombre">Contraseña actual</label> <input type="text"
+							class="form-control" id="vieja" required>
+					</div>
+					<div class="modal-body">
+						<label for="nombre">Nueva contraseña</label> <input type="text"
+							class="form-control" id="nueva" required>
+					</div>
+					<div class="modal-body">
+						<label for="nombre">Repite nueva contraseña</label> <input
+							type="text" class="form-control" id="nuevaConfirmada" required>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">Cancelar</button>
+						<button type="button" id="cmpsw" class="btn btn-primary">Guardar</button>
+					</div>
+
 				</div>
 			</div>
 		</div>
@@ -495,7 +534,7 @@
 
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary"
-								data-dismiss="modal" id="cerrarM">Cerrar</button>
+							data-dismiss="modal" id="cerrarM">Cerrar</button>
 						<button type="button" class="btn btn-primary" id="asignar">Asignar
 							cita</button>
 					</div>
@@ -523,11 +562,11 @@
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
 		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 		crossorigin="anonymous"></script>
-		
-		<script
+
+	<script
 		src="https://cdn.datatables.net/responsive/2.4.1/js/dataTables.responsive.min.js"></script>
-		
-		<script
+
+	<script
 		src="https://cdn.datatables.net/responsive/2.4.1/js/responsive.bootstrap4.min.js"></script>
 </body>
 </html>

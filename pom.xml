@@ -17,6 +17,7 @@
 		<java.version>17</java.version>
 	</properties>
 	<dependencies>
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -57,7 +58,7 @@
       <artifactId>jaxb-impl</artifactId>
       <version>2.3.1</version>
     </dependency>
-
+  
 
     <dependency>
       <groupId>javax.xml.bind</groupId>
@@ -103,8 +104,20 @@
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
 		</dependency>
+  <!-- EXCEL -->
+<dependency>
+	<groupId>org.apache.poi</groupId>
+	<artifactId>poi</artifactId>
+	<version>4.1.0</version>
+</dependency>
+<!--Correos-->
+<dependency>
 
+<groupId>org.springframework.boot</groupId>
 
+<artifactId>spring-boot-starter-mail</artifactId>
+
+</dependency>
 	</dependencies>
 	
 	

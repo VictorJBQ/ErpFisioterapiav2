@@ -184,7 +184,7 @@
 		</div>
 	</div>
 	<br>
-	<br>
+	<br><br><br>
 	<!-- offcanvas -->
 	<main class="mt-5 pt-3">
 		<div class="container-fluid">
@@ -196,8 +196,19 @@
 				<div class="col-md-12 mb-3">
 					<div class="card ">
 						<div class="card-header d-flex flex-row">
-							<span><i class="bi bi-table me-2"></i></span> Lista citas
+							<div class="text-black">
+								<span><i class="bi bi-table  me-2"></i></span> <i class="material-icons text-black"> Lista Citas </i>
+							</div>
+							<form th:action="@{/descargarCitas-excel}" class="ms-auto" method="post">
+
+								<input type="hidden" name="nombre" value="ListaCitas">
+								<button type="submit" style="border: none;">
+
+									<img th:src="@{/images/excelLogo.png}" alt="Logo de Excel" height="30">
+								</button>
+							</form>
 						</div>
+							
 						<div class="card-body">
 							<div class="table-responsive">
 								<div class="alert alert-primary" id="msg" style="display: none;"

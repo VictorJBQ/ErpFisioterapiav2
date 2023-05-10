@@ -21,8 +21,10 @@
 <link rel='stylesheet' type='text/css'
 	href='https://cdn.datatables.net/buttons/1.6.4/css/buttons.dataTables.min.css'>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<link rel='stylesheet' type='text/css' href=" https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
-<link rel='stylesheet' type='text/css' href=" https://cdn.datatables.net/responsive/2.4.1/css/responsive.bootstrap4.min.css">
+<link rel='stylesheet' type='text/css'
+	href=" https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+<link rel='stylesheet' type='text/css'
+	href=" https://cdn.datatables.net/responsive/2.4.1/css/responsive.bootstrap4.min.css">
 <script src="/js/tablas/tarifasTabla.js"></script>
 </head>
 <body>
@@ -49,7 +51,7 @@
 	</nav>
 	<!-- top navigation bar -->
 	<!-- offcanvas -->
-<div class="offcanvas offcanvas-start sidebar-nav bg-dark"
+	<div class="offcanvas offcanvas-start sidebar-nav bg-dark"
 		tabindex="-1" id="sidebar">
 		<div class="offcanvas-body p-0">
 			<nav class="navbar-dark m-3">
@@ -73,7 +75,7 @@
 						href="#" id="navbarDropdownPaciente" role="button"
 						data-bs-toggle="dropdown" aria-expanded="false">Pacientes</a>
 						<ul class="dropdown-menu" aria-labelledby="navbarDropdownPaciente">
-							
+
 							<li><a href="/intranet/pacientes/pacientes"
 								class="dropdown-item icon solid fa-magnifying-glass">
 									listado/buscador Cliente</a></li>
@@ -86,12 +88,15 @@
 							aria-labelledby="navbarDropdownEmpleados">
 							<li><a href="/intranet/empleados/altaEmpleados"
 								class="dropdown-item icon solid fa-user-plus">Nuevo empleado</a></li>
-							
+
 						</ul></li>
-					<li class="nav-item dropdown"><a class="nav-link dropdown-toggle icon solid fa-coins btn-dark text-white" href="#"  id="dropdownMenuClickableInside"   data-bs-toggle="dropdown" aria-expanded="false">
-            Contabilidad
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenuClickableInside">
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle icon solid fa-coins btn-dark text-white"
+						href="#" id="dropdownMenuClickableInside"
+						data-bs-toggle="dropdown" aria-expanded="false"> Contabilidad
+					</a>
+						<ul class="dropdown-menu"
+							aria-labelledby="dropdownMenuClickableInside">
 
 							<li><a href="/intranet/facturas/facturas"
 								class="dropdown-item icon solid fa-file-invoice-dollar">
@@ -102,8 +107,9 @@
 								data-bs-auto-close="true" aria-expanded="false">Ingresos</a>
 								<ul class="dropdown-menu" aria-labelledby="defaultDropdown">
 									<li><a href="/intranet/ingresos/ingresos"
-										class="dropdown-item dropdown icon solid fa-eye">Ver ingresos</a></li>
-									
+										class="dropdown-item dropdown icon solid fa-eye">Ver
+											ingresos</a></li>
+
 								</ul></li>
 							<li class="dropdown"><a
 								class="dropdown-item dropdown-toggle icon solid fa-chart-line-down "
@@ -112,7 +118,7 @@
 								<ul class="dropdown-menu" aria-labelledby="defaultDropdown">
 									<li><a href="/intranet/gastos/gastos"
 										class="dropdown-item icon solid fa-eye">Ver gastos</a></li>
-									
+
 								</ul>
 							<li class="dropdown"><a
 								class="dropdown-item dropdown-toggle icon solid fa-tags "
@@ -121,7 +127,7 @@
 								<ul class="dropdown-menu" aria-labelledby="defaultDropdown">
 									<li><a href="/intranet/tarifas/tarifas"
 										class="dropdown-item icon solid fa-eye">Ver tarifas</a></li>
-									
+
 								</ul></li>
 						</ul></li>
 
@@ -169,7 +175,9 @@
 		</div>
 	</div>
 	<br>
-	<br><br>
+	<br>
+	<br>
+	<br>
 	<!-- offcanvas -->
 	<main class="mt-5 pt-3">
 		<div class="container-fluid">
@@ -181,7 +189,20 @@
 				<div class="col-md-12 mb-3">
 					<div class="card ">
 						<div class="card-header d-flex flex-row">
-							<span><i class="bi bi-table me-2"></i></span> Lista tarifas
+							<div class="text-black">
+								<span><i class="bi bi-table  me-2"></i></span> <i
+									class="material-icons text-black"> Lista tarifas </i>
+							</div>
+							<form th:action="@{/descargarTarifas-excel}" class="ms-auto"
+								method="post">
+
+								<input type="hidden" name="nombre" value="Tarifas">
+								<button type="submit" style="border: none;">
+
+									<img th:src="@{/images/excelLogo.png}" alt="Logo de Excel"
+										height="30">
+								</button>
+							</form>
 						</div>
 						<div class="card-body">
 							<div class="table-responsive">
@@ -197,7 +218,7 @@
 											<th>Acciones</th>
 											<th>Tipo</th>
 											<th>Precio</th>
-											
+
 										</tr>
 									</thead>
 									<tbody>
@@ -312,11 +333,11 @@
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
 		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 		crossorigin="anonymous"></script>
-		
-		<script
+
+	<script
 		src="https://cdn.datatables.net/responsive/2.4.1/js/dataTables.responsive.min.js"></script>
-		
-		<script
+
+	<script
 		src="https://cdn.datatables.net/responsive/2.4.1/js/responsive.bootstrap4.min.js"></script>
 
 </body>

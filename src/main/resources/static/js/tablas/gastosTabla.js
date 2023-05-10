@@ -199,7 +199,7 @@ console.log(data)
 	},
 
 	editar: function(data) {
-		if (confirm('¿Estás seguro de que editar este empleado?')) {
+		if (confirm('¿Estás seguro de que editar este gasto?')) {
 
 			app.table.ajax.reload();
 			$.ajax({

@@ -23,7 +23,7 @@ public class SecurityConfig {
 	        .httpBasic()
 	            .and()
 	        .authorizeHttpRequests()
-	            .requestMatchers("/css/**","/assets/**","/assets2/**","/libreria/**","/download/**","/javascript/**", "/js/**", "/images/**","/index").permitAll()
+	            .requestMatchers("/css/**","/assets/**","/assets2/**","/libreria/**","/download/**","/javascript/**", "/js/**", "/images/**","/index","/rest","reset-password","/api-psw/**").permitAll()
 	            .anyRequest().authenticated()
 	            .and()
 	        .formLogin()

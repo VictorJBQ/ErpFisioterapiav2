@@ -20,6 +20,10 @@ public class EmpleadosFormE {
 	@NotBlank(message = "No puede estar vacío")
 	@Pattern(regexp = "^[^\\s]*$", message = "No puede contener espacios en blanco")
 	private String rolesE;
+	
+	@NotBlank(message = "No puede estar vacío")
+	@Pattern(regexp = "^[^\\s]*$", message = "No puede contener espacios en blanco")
+	private String emailE;
 
 	public String getIdentificador() {
 		return identificadorE;
@@ -53,16 +57,29 @@ public class EmpleadosFormE {
 		this.rolesE = roles;
 	}
 
-	public EmpleadosFormE(@NotEmpty(message = "El campo nombre no puede estar vacío") String identificador,
-			@NotEmpty(message = "El campo nombre no puede estar vacío") String nombre,
-			@NotEmpty(message = "El campo nombre no puede estar vacío") String password,
-			@NotEmpty(message = "El campo nombre no puede estar vacío") String roles) {
-		super();
-		this.identificadorE = identificador;
-		this.nombreE = nombre;
-		this.passwordE = password;
-		this.rolesE = roles;
+	public String getEmailE() {
+		return emailE;
 	}
+
+	public void setEmailE(String emailE) {
+		this.emailE = emailE;
+	}
+
+	public EmpleadosFormE(
+			@NotBlank(message = "No puede estar vacío") @Pattern(regexp = "^[^\\s]{1,10}$", message = "No puede contener espacios en blanco y debe tener una longitud máxima de 10 caracteres") String identificadorE,
+			@NotBlank(message = "No puede estar vacío") @Pattern(regexp = "^(?=\\S)(?!.*\\s{2})(\\S\\s*\\S){0,9}\\S?$", message = "Debe tener un máximo de 20 caracteres, el primer y último carácter no pueden ser en blanco y no puede haber dos espacios en blanco seguidos en medio") String nombreE,
+			@NotBlank(message = "No puede estar vacío") @Pattern(regexp = "^[^\\s]*$", message = "No puede contener espacios en blanco") String passwordE,
+			@NotBlank(message = "No puede estar vacío") @Pattern(regexp = "^[^\\s]*$", message = "No puede contener espacios en blanco") String rolesE,
+			@NotBlank(message = "No puede estar vacío") @Pattern(regexp = "^[^\\s]*$", message = "No puede contener espacios en blanco") String emailE) {
+		super();
+		this.identificadorE = identificadorE;
+		this.nombreE = nombreE;
+		this.passwordE = passwordE;
+		this.rolesE = rolesE;
+		this.emailE = emailE;
+	}
+
+	
 	
 	
 	

@@ -307,7 +307,7 @@ var app = {
 				},
 				
 				{
-					text: 'Carga automatica de citas',
+					text: 'Carga automática de citas',
 					action: function() {
 						cargaCitas();
 					}
@@ -345,7 +345,7 @@ var app = {
 				});
 			}
 
-
+ 
 		});
 
 		// Agregar una acción para el botón eliminar
@@ -353,7 +353,7 @@ var app = {
 			$("#msg").text('').removeClass('alert')
 			var data = app.table1.row($(this).parents('tr')).data();
 			var ce = data.estado;
-			if (ce == 'terminada') {
+			if (ce == 'terminada' || ce=='salvada') {
 				$("#msg").text('No puedes eliminar una cita terminada');
 				$("#msg").removeClass('alert-primary').addClass('alert-danger');
 				$("#msg").show();
@@ -567,7 +567,7 @@ var app = {
 
 	editarNUEVO: function(data) {
 		$('.invalid-feedback-crear').text(''); // Remueve el contenido del div
-		if (confirm('¿Estás seguro de que editar está cita?')) {
+		if (confirm('¿Estás seguro de que editar esta cita?')) {
 
 			app.table1.ajax.reload();
 			$.ajax({
@@ -607,7 +607,7 @@ var app = {
 
 	editarExistente: function(data) {
 		$('.invalid-feedback-crear').text(''); // Remueve el contenido del div
-		if (confirm('¿Estás seguro de que editar está cita?')) {
+		if (confirm('¿Estás seguro de que editar esta cita?')) {
 
 			app.table1.ajax.reload();
 			$.ajax({
@@ -787,7 +787,7 @@ var app = {
 	
 	
 		cargaDa: function(id) {
-		if (confirm('Solo se cargaran las citas presentes y futuras que no se encuentren registradas, o que su hora no esten en tramo de otras citas')) {
+		if (confirm('Solo se cargaran las citas presentes y futuras que no se encuentren registradas, o que su hora no estén en tramo de otras citas')) {
 			console.log(id)
 			app.table1.ajax.reload();
 			$.ajax({
@@ -820,7 +820,7 @@ var app = {
 				method: 'GET',
 				success: function(json) {
 
-					$("#msg").text('Se cancelar correctamente');
+					$("#msg").text('Se canceló correctamente');
 					$("#msg").show();
 			app.table1.ajax.reload();
 	

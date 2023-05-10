@@ -183,7 +183,7 @@
 	</div>
 	<br>
 	<br>
-	<br>
+	<br><br>
 	<!-- offcanvas -->
 	<main class="mt-5 pt-3">
 		<div class="container-fluid">
@@ -228,8 +228,19 @@
 
 					<div class="card " id="tablaPendientes" style="display: block;">
 						<div class="card-header d-flex flex-row bg-warning">
-							<span style="color: black;"><i class="bi bi-table me-2"></i></span> Citas pendientes de enviar recordatorio
-						</div>
+<div class="text-black">
+								<span><i class="bi bi-table  me-2"></i></span> <i class="material-icons text-black"> Citas pendientes de
+									enviar recordatorio</i>
+							</div>
+							<form th:action="@{/descargarCitaConfirmar-excel}" class="ms-auto" method="post">
+
+								<input type="hidden" name="nombre" value="CitasPendientesConfirmar">
+								<button class="bg-warning" type="submit" style="border: none;">
+
+									<img th:src="@{/images/excelLogo.png}" alt="Logo de Excel" height="30">
+								</button>
+							</form>						</div>
+							
 						<div class="card-body">
 							<div class="table-responsive">
 							
@@ -278,8 +289,19 @@
 				<div class="col-md-12 mb-3">
 					<div class="card " id="tablaReserva" style="display: none;">
 						<div class="card-header d-flex flex-row bg-dark text-white">
-							<span style="color:white;"><i class="bi bi-table me-2"></i></span> Citas reservadas pendientes de atualización
+							<div class="text-black">
+								<span><i class="bi bi-table  me-2"></i></span> <i class="material-icons text-black"> Citas reservadas pendientes de actualización</i>
+							</div>
+							<form th:action="@{/descargarCitaActualizar-excel}" class="ms-auto" method="post">
+
+								<input type="hidden" name="nombre" value="CitasPendientesActualizar">
+								<button class="bg-dark" type="submit" style="border: none;">
+
+									<img th:src="@{/images/excelLogo.png}" alt="Logo de Excel" height="30">
+								</button>
+							</form>
 						</div>
+						
 						<div class="card-body">
 							<div class="table-responsive">
 							
@@ -330,8 +352,19 @@
 				<div class="col-md-12 mb-3">
 					<div class="card " id="tablaTerminar" style="display: none;">
 						<div class="card-header d-flex flex-row bg-info  text-white">
-							<span style="color:white"><i class="bi bi-table me-2"></i></span> Citas pendientes de terminar
-						</div>
+	<div class="text-black">
+								<span><i class="bi bi-table  me-2"></i></span> <i class="material-icons text-black">Citas pendientes de terminar
+</i>
+							</div>
+							<form th:action="@{/descargarCitaTerminar-excel}" class="ms-auto" method="post">
+
+								<input type="hidden" name="nombre" value="CitasPendientesTerminar">
+								<button class="bg-info" type="submit" style="border: none;">
+
+									<img th:src="@{/images/excelLogo.png}" alt="Logo de Excel" height="30">
+								</button>
+							</form>						</div>
+					
 						<div class="card-body">
 							<div class="table-responsive">
 							
@@ -382,8 +415,19 @@
 				<div class="col-md-12 mb-3">
 					<div class="card " id="tablaHoy" style="display: none;">
 						<div class="card-header d-flex flex-row bg-light  text-black">
-							<span style="color:black"><i class="bi bi-table me-2"></i></span> Citas en la actualidad
-						</div>
+	<div class="text-black">
+								<span><i class="bi bi-table  me-2"></i></span> <i class="material-icons text-black">Citas en la actualidad
+</i>
+							</div>
+							<form th:action="@{/descargarCitaActualidad-excel}" class="ms-auto" method="post">
+
+								<input type="hidden" name="nombre" value="CitasActualidad">
+								<button class="bg-light"type="submit" style="border: none;">
+
+									<img th:src="@{/images/excelLogo.png}" alt="Logo de Excel" height="30">
+								</button>
+							</form>						</div>
+						
 						<div class="card-body">
 							<div class="table-responsive">
 						

@@ -29,7 +29,7 @@ public class ControllerPacientes {
 	@Autowired
 	CitasRepositorio citasRepositorio;
 	
-	@RequestMapping(path="intranet/pacientes/pacientes")
+	@RequestMapping("/intranet/pacientes/pacientes")
 	public String verPacientes(Model model) {
 		List<Tarifas> pacientes=(List<Tarifas>) tarifasRepositorio.findAll();
 		List<Citas> citas = (List<Citas>) citasRepositorio.findByEstadoIn(Arrays.asList("libre", "cancelado"));;
@@ -43,19 +43,19 @@ public class ControllerPacientes {
 		
 		model.addAttribute("citasLista",aux);
 		model.addAttribute("lista",pacientes);
-		return "intranet/pacientes/pacientes";
+		return "/intranet/pacientes/pacientes";
 	}
 	
-	@RequestMapping(path="intranet/pacientes/altaPacientes")
+	@RequestMapping("/intranet/pacientes/altaPacientes")
 	public String addPacientes(Model model) {
 		
-		return "intranet/pacientes/altaPacientes";
+		return "/intranet/pacientes/altaPacientes";
 	}
 	
-	@RequestMapping(path="p22")
+	@RequestMapping("/p22")
 	public String addPff(Model model) {
 		
-		return "pruebaTablaPacientes";
+		return "/pruebaTablaPacientes";
 	}
 
 }

@@ -22,7 +22,7 @@ function comparar() {
 		
 		
         var data = google.visualization.arrayToDataTable([
-			['Opción', "Precio público genera",{ role: 'annotation' }, "Precio recudido",{ role: 'annotation' }],
+			['Opción', "Precio general",{ role: 'annotation' }, "Precio recudido",{ role: 'annotation' }],
             ['En', datos.mes1.ge, datos.mes1.ge, datos.mes1.red, datos.mes1.red],
             ['Feb', datos.mes2.ge, datos.mes2.ge,datos.mes2.red, datos.mes2.red],
             ['Mar', datos.mes3.ge, datos.mes3.ge,datos.mes3.red, datos.mes3.red],

@@ -104,6 +104,9 @@ var app = {
 						}
 						var fechaActual = new Date();
 						var fechaCita = new Date(row.fecha + " " + row.hora);
+						let tiempoActual = fechaActual.getTime();
+						let tiempoSumado = tiempoActual - (49 * 60 * 1000);
+						let nuevaFecha = new Date(tiempoSumado);
 						var dato = row.estado; // obtener el valor de la columna de fecha
 						if (dato === 'salvada' || dato === 'terminada') { // agregar una condición para mostrar u ocultar los botones según el valor de la fecha
 							buttons = '';
@@ -120,7 +123,7 @@ var app = {
 						
 						} else if(dato === 'salvada-pendiente' || dato === 'confirmada') {
 							if(tarifa!=null){
-								if(fechaCita.getTime() < fechaActual.getTime()){
+								if(fechaCita.getTime() < nuevaFecha.getTime()){
 										buttons +='<button class=" btn btn-outline-warning btn-smcancelar " data-id="' + row.id +'"><i class="bi bi-x-square-fill "></i></i></button>&nbsp'
 										+ '<button class="btn btn-danger btn-sm2" data-id="' + row.id +
 								'"><i class="bi bi-trash-fill"></i></i></button>&nbsp;'+
@@ -129,7 +132,7 @@ var app = {
 										buttons +='<button class=" btn btn-outline-warning btn-smcancelar " data-id="' + row.id +'"><i class="bi bi-x-square-fill "></i></i></button>&nbsp'
 										+ '<button class="btn btn-danger btn-sm2" data-id="' + row.id +
 								'"><i class="bi bi-trash-fill"></i></i></button>&nbsp;'+
-								'<button type="button" class="btn btn-info ml-auto">Pendiente de realizar</button>';
+								'<span class="mr-2 text-info" style="text-align: center;">Cita pendiente</span>';
 									}
 							}else{
 								buttons +='<button class=" btn btn-outline-warning btn-smcancelar " data-id="' + row.id +'"><i class="bi bi-x-square-fill "></i></i></button>&nbsp'
@@ -415,7 +418,7 @@ var app = {
 				method: 'GET',
 				success: function(json) {
 
-					$("#msg").text('Se comfirmo correctamente');
+					$("#msg").text('Se comfirmó correctamente');
 					$("#msg").show();
 					app.table1.ajax.reload();
 			
@@ -469,7 +472,7 @@ var app = {
 				dataType: 'json',
 				contentType: "application/json; charset=utf-8",
 				success: function(json) {
-					$("#msg").text('Se asigno la cita correctamente');
+					$("#msg").text('Se asignó la cita correctamente');
 					$("#msg").show();
 					modalcita.hide();
 					app.table1.ajax.reload();

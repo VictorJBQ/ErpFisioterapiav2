@@ -6,13 +6,14 @@
 -->
 <html lang="es" xmlns:th="http://wwww.thymeleaf.org">
 	<head>
-		<title>ERP VICTORMOIS</title>
+		<title>JimBus Solutions</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" th:href="@{/assets/css/main.css}" />
 		<noscript><link rel="stylesheet" th:href="@{/assets/css/noscript.css}" /></noscript>
 		 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 		 <link rel="shortcut icon" th:href="@{/images/perfilLog.png}">
+		 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
 	</head>
 	<body class="is-preload">
 
@@ -25,7 +26,7 @@
 						<nav id="nav">
 							<ul>
 								<li class="special">
-									<a href="#menu" class="menuToggle"><span>Menu</span></a>
+									<a href="#menu" class="menuToggle"><span>Menú</span></a>
 									<div id="menu">
 										<ul>
 											<li><a href="index">Inicio</a></li>
@@ -68,8 +69,8 @@
               <button  href="perfil" class="btn btn-primary px-4" type="submit">Login</button>
             </div>
             <div class="col-6 text-right">
-               <button class="btn btn-link" type="button">¿Olvidaste contraseña?             
-                  </button>
+               <a href="rest">¿Olvidaste contraseña?             
+                  </a>
             </div>
           </div>
             </form>
@@ -80,7 +81,7 @@
   </div>
 </div>
 						</header>
-						
+	
 					</article>
 
 				<!-- Footer -->
@@ -94,6 +95,7 @@
 			</div>
 
 		<!-- Scripts -->
+			<
 				<script th:src="@{/assets/js/jquery.min.js}"></script>
 			<script th:src="@{/assets/js/jquery.scrollex.min.js}"></script>
 			<script th:src="@{/assets/js/jquery.scrolly.min.js}"></script>

@@ -7,6 +7,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -48,6 +50,13 @@ public class EmpleadosAPI {
 		
 	}
 	
+	@GetMapping("user")
+	public String getUser(Authentication authentication){
+		 UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+		return userDetails.getUsername();
+		
+	}
+	
 	
 	@PostMapping(value = "editarEmple")
 	@ResponseBody
@@ -68,6 +77,7 @@ public class EmpleadosAPI {
 	        	Empleados empleado= empleadosRepositorio.findByidentificador(e.getIdentificador());
 	    		empleado.setNombre(e.getNombre());
 	    		empleado.setRoles(rolesRepositorio.findByTipo(e.getRoles()));
+	    		empleado.setEmail(e.getEmailE());
 	    		empleadosRepositorio.save(empleado);
 		            return ResponseEntity.ok(e);
 	        }else {
@@ -108,7 +118,7 @@ public class EmpleadosAPI {
 	        }
 	        var encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 	        e.setPassword(encoder.encode(e.getPassword()));
-	        Empleados emple= new Empleados(e.getIdentificador(), e.getNombre(), e.getPassword(),rolesRepositorio.findByTipo(e.getRoles()));
+	        Empleados emple= new Empleados(e.getIdentificador(), e.getNombre(), e.getPassword(),e.getEmailA(), rolesRepositorio.findByTipo(e.getRoles()));
 	        empleadosRepositorio.save(emple);
 	        return ResponseEntity.ok(e);
 	    }

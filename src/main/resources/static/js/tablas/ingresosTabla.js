@@ -204,7 +204,7 @@ console.log(data)
 	},
 
 	editar: function(data) {
-		if (confirm('¿Estás seguro de que editar este Ingreso?')) {
+		if (confirm('¿Estás seguro de que editar este ingreso?')) {
 
 			app.table.ajax.reload();
 			$.ajax({
@@ -214,7 +214,7 @@ console.log(data)
 				dataType: 'json',
 				contentType: "application/json; charset=utf-8",
 				success: function(json) {
-					$("#msg").text('Se editó Ingreso correctamente');
+					$("#msg").text('Se editó ingreso correctamente');
 					$("#msg").show();
 					modaledit.hide();
 					app.table.ajax.reload();
@@ -275,7 +275,7 @@ console.log(data)
 	},
 	
 	eliminar: function(id) {
-		if (confirm('¿Estás seguro de que eliminar este Ingreso?')) {
+		if (confirm('¿Estás seguro de que eliminar este ingreso?')) {
 
 			app.table.ajax.reload();
 			$.ajax({

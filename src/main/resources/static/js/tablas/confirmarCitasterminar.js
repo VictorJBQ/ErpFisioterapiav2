@@ -141,7 +141,7 @@ var app = {
 			},
 			dom: 'Bfrtip',
 			columns: [
-					{
+				{
 					// Agregar una columna para el botón Editar
 					data: null,
 					render: function(data, type, row) {
@@ -155,7 +155,7 @@ var app = {
 					orderable: false,
 					searchable: false
 				},
-					{
+				{
 					// Agregar una columna para el botón Editar
 					data: null,
 					render: function(data, type, row) {
@@ -167,8 +167,8 @@ var app = {
 					orderable: false,
 					searchable: false
 				},
-				
-				
+
+
 				{ data: "fecha" },
 				{ data: "hora" },
 				{ data: "tipo" },
@@ -202,8 +202,8 @@ var app = {
 						return nombre + " - " + telefono;
 					}
 				}
-			
-			
+
+
 			],
 			buttons: [
 				{
@@ -219,15 +219,15 @@ var app = {
 					}
 				}
 			],
-					responsive: {
-            details: {
-                display: $.fn.dataTable.Responsive.display.childRowImmediate,
-                type: 'none',
-                target: ''
-            },
+			responsive: {
+				details: {
+					display: $.fn.dataTable.Responsive.display.childRowImmediate,
+					type: 'none',
+					target: ''
+				},
 
-        }
-		
+			}
+
 		});
 
 		// Agregar una acción para el botón confirmar
@@ -275,7 +275,7 @@ var app = {
 					for (var i = 0; i < ids.length; i++) {
 						app.confirmarSelc(ids[i]);
 					}
-					$("#msg").text('Se comfirmo correctamente');
+					$("#msg").text('Se comfirmó correctamente');
 					$("#msg").show();
 
 				}
@@ -285,14 +285,14 @@ var app = {
 
 
 		}
-		
+
 		function confirmar2() {
 			$("#msg").text('').removeClass('alert')
 			var ids = [];
 			app.table1.rows().every(function() {
 				var data = this.data();
 				ids.push(data.id);
-				
+
 			});
 			if (ids.length === 0) {
 				alert("No hay citas disponibles");
@@ -301,7 +301,7 @@ var app = {
 					for (var i = 0; i < ids.length; i++) {
 						app.confirmarSelc(ids[i]);
 					}
-					$("#msg").text('Se comfirmo correctamente');
+					$("#msg").text('Se comfirmó correctamente');
 					$("#msg").show();
 
 				}
@@ -346,7 +346,7 @@ var app = {
 			},
 			dom: 'Bfrtip',
 			columns: [
-					{
+				{
 					// Agregar una columna para el botón Editar
 					data: null,
 					render: function(data, type, row) {
@@ -374,8 +374,8 @@ var app = {
 					orderable: false,
 					searchable: false
 				},
-			
-				
+
+
 				{ data: "fecha" },
 				{ data: "hora" },
 				{ data: "tipo" },
@@ -409,8 +409,8 @@ var app = {
 						return nombre + " - " + telefono;
 					}
 				}
-				
-				
+
+
 			],
 			buttons: [
 				{
@@ -426,13 +426,13 @@ var app = {
 					}
 				}
 			],
-				responsive: {
-            details: {
-                display: $.fn.dataTable.Responsive.display.childRowImmediate,
-                type: 'none',
-                target: ''
-            }
-        }
+			responsive: {
+				details: {
+					display: $.fn.dataTable.Responsive.display.childRowImmediate,
+					type: 'none',
+					target: ''
+				}
+			}
 		});
 
 		// Agregar una acción para el botón confirmar
@@ -483,7 +483,7 @@ var app = {
 					for (var i = 0; i < ids.length; i++) {
 						app.confirmarSelc(ids[i]);
 					}
-					$("#msg").text('Se comfirmo correctamente');
+					$("#msg").text('Se comfirmó correctamente');
 					$("#msg").show();
 
 				}
@@ -500,7 +500,7 @@ var app = {
 			app.table2.rows().every(function() {
 				var data = this.data();
 				ids.push(data.id);
-			
+
 			});
 			if (ids.length === 0) {
 				alert("No hay citas disponibles");
@@ -509,7 +509,7 @@ var app = {
 					for (var i = 0; i < ids.length; i++) {
 						app.confirmarSelc(ids[i]);
 					}
-					$("#msg").text('Se comfirmo correctamente');
+					$("#msg").text('Se comfirmó correctamente');
 					$("#msg").show();
 
 				}
@@ -556,39 +556,46 @@ var app = {
 			},
 			dom: 'Bfrtip',
 			columns: [
-					{
-					// Agregar una columna para el botón Editar
-					data: null,
-    render: function(data, type, row) {
-        var buttons = '';
-        var fechaActual = new Date();
-        var fechaCita = new Date(row.fecha + " " + row.hora);
-        var dato = row.pacientes.tarifas; // obtener el valor de la columna de fecha
-        if (dato != null) { // agregar una condición para mostrar u ocultar los botones según el valor de la fecha
-            if (fechaCita.getTime() < fechaActual.getTime()) {
-                return '&nbsp;<input type="checkbox" class="form-check-input" value="' + row.id + '" style="max-width: 30px; margin: 0 auto; display: block;">';
-            } else {
-                return '<span class="mr-2 text-info" style="text-align: center;">Cita pendiente</span>';
-            }
-
-
-        } else {
-            return '<button type="button" class="btn btn-warning btn-smTarifa ml-auto" value="' + row.id + '">Elegir tarifa</button>';
-        }
-        ;
-    },
-    orderable: false,
-    searchable: false
-				},
-					{
+				{
 					// Agregar una columna para el botón Editar
 					data: null,
 					render: function(data, type, row) {
 
 						var fechaActual = new Date();
 						var fechaCita = new Date(row.fecha + " " + row.hora);
+						let tiempoActual = fechaActual.getTime();
+						let tiempoSumado = tiempoActual - (49 * 60 * 1000);
+						let nuevaFecha = new Date(tiempoSumado);
+						var dato = row.pacientes.tarifas; // obtener el valor de la columna de fecha
+						if (dato != null) { // agregar una condición para mostrar u ocultar los botones según el valor de la fecha
+							if (fechaCita.getTime() < nuevaFecha.getTime()) {
+								return '&nbsp;<input type="checkbox" class="form-check-input" value="' + row.id + '" style="max-width: 30px; margin: 0 auto; display: block;">';
+							} else {
+								return '<span class="mr-2 text-info" style="text-align: center;">Cita pendiente</span>';
+							}
+
+
+						} else {
+							return '<button type="button" class="btn btn-warning btn-smTarifa ml-auto" value="' + row.id + '">Elegir tarifa</button>';
+						}
+						;
+					},
+					orderable: false,
+					searchable: false
+				},
+				{
+					// Agregar una columna para el botón Editar
+					data: null,
+					render: function(data, type, row) {
+
+						var fechaActual = new Date();
+						var fechaCita = new Date(row.fecha + " " + row.hora);
+						let tiempoActual = fechaActual.getTime();
+						let tiempoSumado = tiempoActual - (49 * 60 * 1000);
+						let nuevaFecha = new Date(tiempoSumado);
+						console.log(nuevaFecha + " " + fechaCita)
 						var buttons = '';
-						if (fechaCita.getTime() < fechaActual.getTime() && row.pacientes.tarifas != null) { // agregar una condición para mostrar u ocultar los botones según el valor de la fecha
+						if (fechaCita.getTime() < nuevaFecha.getTime() && row.pacientes.tarifas != null) { // agregar una condición para mostrar u ocultar los botones según el valor de la fecha
 							return '<button type="button" class="btn btn-smETC btn-outline-success editar"><i class="bi bi-check-square-fill"></i>' +
 								'</button>&nbsp;<button class=" btn btn-outline-warning btn-smCANC " data-id="' + row.id +
 								'"><i class="bi bi-x-square-fill "></i></i></button>' + '&nbsp;<button class="btn btn-danger btn-smETB" data-id="' + row.id +
@@ -598,13 +605,13 @@ var app = {
 								'"><i class="bi bi-x-square-fill "></i></i></button>' + '&nbsp;<button class="btn btn-danger btn-smETB" data-id="' + row.id +
 								'"><i class="bi bi-trash-fill"></i></i></button>';
 						}
-						
+
 					},
 					orderable: false,
 					searchable: false
 				},
-			
-				
+
+
 				{ data: "fecha" },
 				{ data: "hora" },
 				{ data: "tipo" },
@@ -638,9 +645,9 @@ var app = {
 						return nombre + " - " + telefono;
 					}
 				}
-			
 
-				
+
+
 			],
 			buttons: [
 				{
@@ -668,13 +675,13 @@ var app = {
 					}
 				}
 			],
-				responsive: {
-            details: {
-                display: $.fn.dataTable.Responsive.display.childRowImmediate,
-                type: 'none',
-                target: ''
-            }
-        }
+			responsive: {
+				details: {
+					display: $.fn.dataTable.Responsive.display.childRowImmediate,
+					type: 'none',
+					target: ''
+				}
+			}
 		});
 
 		// Agregar una acción para el botón terminar
@@ -747,22 +754,22 @@ var app = {
 
 
 		}
-		
-			/**Para crear registros nuevos */
+
+		/**Para crear registros nuevos */
 		function confirmarTodoEFECTIVOtodas() {
 			$("#msg").text('').removeClass('alert')
 			var ids = [];
-			
+
 			app.table3.rows().every(function() {
 				var data = this.data();
 				var fechaActual = new Date();
 				var fechaCita = new Date(data.fecha + " " + data.hora);
-				
-				if(data.pacientes.tarifas!=null && fechaCita.getTime() < fechaActual.getTime()){
+
+				if (data.pacientes.tarifas != null && fechaCita.getTime() < fechaActual.getTime()) {
 					ids.push(data.id);
 				}
-				
-			
+
+
 			});
 			if (ids.length === 0) {
 				alert("No hay citas disponibles para terminar");
@@ -805,21 +812,21 @@ var app = {
 
 
 		}
-		
+
 		function confirmarTodoBIZUMtodas() {
 			$("#msg").text('').removeClass('alert')
 			var ids = [];
-			
+
 			app.table3.rows().every(function() {
 				var data = this.data();
 				var fechaActual = new Date();
 				var fechaCita = new Date(data.fecha + " " + data.hora);
-				
-				if(data.pacientes.tarifas!=null && fechaCita.getTime() < fechaActual.getTime()){
+
+				if (data.pacientes.tarifas != null && fechaCita.getTime() < fechaActual.getTime()) {
 					ids.push(data.id);
 				}
-				
-			
+
+
 			});
 			if (ids.length === 0) {
 				alert("No hay citas seleccionadas");
@@ -882,16 +889,17 @@ var app = {
 						if (dato === 'salvada' || dato === 'terminada') { // agregar una condición para mostrar u ocultar los botones según el valor de la fecha
 							buttons = '';
 						} else if (dato === 'libre' || dato === 'cancelada') {
-							return '<button type="button" class="btn btn-smEdit btn-outline-primary editar"><i class="bi bi-pencil-fill"></i>' +
+							buttons += '<button type="button" class="btn btn-smEdit btn-outline-primary editar"><i class="bi bi-pencil-fill"></i>' +
 								'</button>&nbsp;<button class="btn btn-danger btn-sm4" data-id="' + row.id +
 								'"><i class="bi bi-trash-fill"></i></i></button>';
 						} else {
-							return  '<button type="button" class="btn btn-smEdit btn-outline-primary editar"><i class="bi bi-pencil-fill"></i>' +
+							buttons += '<button type="button" class="btn btn-smEdit btn-outline-primary editar"><i class="bi bi-pencil-fill"></i>' +
 								'</button>&nbsp;<button class=" btn btn-outline-warning btn-smCANCEL " data-id="' + row.id +
 								'"><i class="bi bi-x-square-fill "></i></i></button>' + '&nbsp;<button class="btn btn-danger btn-sm4" data-id="' + row.id +
 								'"><i class="bi bi-trash-fill"></i></i></button>';
 						}
-						
+						return buttons;
+
 					},
 					orderable: false,
 					searchable: false
@@ -929,18 +937,18 @@ var app = {
 						return nombre + " - " + telefono;
 					}
 				}
-				
+
 			],
 			buttons: [
 
 			],
-				responsive: {
-            details: {
-                display: $.fn.dataTable.Responsive.display.childRowImmediate,
-                type: 'none',
-                target: ''
-            }
-        }
+			responsive: {
+				details: {
+					display: $.fn.dataTable.Responsive.display.childRowImmediate,
+					type: 'none',
+					target: ''
+				}
+			}
 		});
 
 		// Agregar una acción para el botón Editar
@@ -963,8 +971,9 @@ var app = {
 			$("#msg").text('').removeClass('alert')
 			var data = app.table4.row($(this).parents('tr')).data();
 			var ce = data.estado;
-			if ((ce != 'terminada' && ce != 'salvada') && pa != null) {
-				app.cancelar(data.id)
+
+			if (ce != 'terminada' && ce != 'salvada') {
+				app.eliminar(data.id)
 			} else {
 				alert("No puedes cancelar una cita terminada o sin paciente");
 			}
@@ -981,26 +990,13 @@ var app = {
 			if ((ce != 'terminada' && ce != 'salvada') && pa != null) {
 				app.cancelar(data.id)
 			} else {
-				alert("No puedes cancelar una cita terminada o sin paciente");
+				alert("No puedes borrar una cita terminada");
 			}
 
 		});
 
 
-		/**Para crear registros nuevos */
-		function confirmarTodo() {
-			$("#msg").text('').removeClass('alert')
-			var myModalEl = document.getElementById('crearCita')
-			modaladd = new bootstrap.Modal(myModalEl)
-			modaladd.show();
-			$('.select2').select2({
-				dropdownParent: $('#crearCita .modal-body')
-			});
 
-
-
-
-		}
 
 
 
@@ -1128,7 +1124,7 @@ var app = {
 
 	editarSIN: function(data) {
 		$('.invalid-feedback-crear').text(''); // Remueve el contenido del div
-		if (confirm('¿Estás seguro de que editar está cita?')) {
+		if (confirm('¿Estás seguro de que editar esta cita?')) {
 
 
 			app.table1.ajax.reload();
@@ -1404,7 +1400,7 @@ var app = {
 				method: 'GET',
 				success: function(json) {
 
-					$("#msg").text('Se comfirmo correctamente');
+					$("#msg").text('Se comfirmó correctamente');
 					$("#msg").show();
 					app.table1.ajax.reload();
 					app.table2.ajax.reload();
@@ -1466,7 +1462,7 @@ var app = {
 				method: 'GET',
 				success: function(json) {
 
-					$("#msg").text('Se cancelar correctamente');
+					$("#msg").text('Se canceló correctamente');
 					$("#msg").show();
 					app.table1.ajax.reload();
 					app.table2.ajax.reload();

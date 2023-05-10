@@ -276,12 +276,14 @@ public class CitasApi {
 				Ingresos ingreso= new Ingresos(factura.getImporte(), factura,factura.getFecha());
 				
 				ingresosRepositorio.save(ingreso);
+			}else {
+				
+				Citas citas = new Citas(LocalDate.parse(e.getFechaA()), LocalTime.parse(e.getHoraA()), e.getEstadoCONA(),
+						e.getTipoA(), paciente, empleadosRepositorio.findByidentificador("T01"));
+				citasRepositorio.save(citas);
 			}
 			
 			
-			Citas citas = new Citas(LocalDate.parse(e.getFechaA()), LocalTime.parse(e.getHoraA()), e.getEstadoCONA(),
-					e.getTipoA(), paciente, empleadosRepositorio.findByidentificador("T01"));
-			citasRepositorio.save(citas);
 			return ResponseEntity.ok(e);
 
 			
@@ -812,7 +814,7 @@ public class CitasApi {
 	@PostMapping("cargaAutomatica/{mes}")
 	public ResponseEntity<?> cargaAutomaticasCita(@PathVariable String mes, Authentication authentication) {
 		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-		 Empleados emp= empleadosRepositorio.findByidentificador(userDetails.getUsername());
+		 Empleados emp= empleadosRepositorio.findByidentificador("T01");
 		int mesActual= LocalDate.now().getMonthValue();
 		int year = LocalDate.now().getYear();
 		 int mesCi = Integer.parseInt(mes);

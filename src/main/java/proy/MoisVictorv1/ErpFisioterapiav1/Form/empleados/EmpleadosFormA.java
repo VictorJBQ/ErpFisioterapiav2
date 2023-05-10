@@ -22,6 +22,19 @@ public class EmpleadosFormA {
 	@NotBlank(message = "No puede estar vacío")
 	@Pattern(regexp = "^[^\\s]*$", message = "No puede contener espacios en blanco")
 	private String rolesA;
+	
+	@NotBlank(message = "No puede estar vacío")
+	@Pattern(regexp = "^[^\\s]*$", message = "No puede contener espacios en blanco")
+	private String emailA;
+	
+
+	public String getEmailA() {
+		return emailA;
+	}
+
+	public void setEmailA(String emailA) {
+		this.emailA = emailA;
+	}
 
 	public String getIdentificador() {
 		return identificadorA;
@@ -55,16 +68,21 @@ public class EmpleadosFormA {
 		this.rolesA = roles;
 	}
 
-	public EmpleadosFormA(@NotEmpty(message = "El campo nombre no puede estar vacío") String identificador,
-			@NotEmpty(message = "El campo nombre no puede estar vacío") String nombre,
-			@NotEmpty(message = "El campo nombre no puede estar vacío") String password,
-			@NotEmpty(message = "El campo nombre no puede estar vacío") String roles) {
+	public EmpleadosFormA(
+			@NotBlank(message = "No puede estar vacío") @Pattern(regexp = "^[^\\s]{1,10}$", message = "No puede contener espacios en blanco y debe tener una longitud máxima de 10 caracteres") String identificadorA,
+			@NotBlank(message = "No puede estar vacío") @Pattern(regexp = "^(?=\\S)(?!.*\\s{2})(\\S\\s*\\S){0,9}\\S?$", message = "Debe tener un máximo de 20 caracteres, el primer y último carácter no pueden ser en blanco y no puede haber dos espacios en blanco seguidos en medio") String nombreA,
+			@NotBlank(message = "No puede estar vacío") @Pattern(regexp = "^[^\\s]*$", message = "No puede contener espacios en blanco") String passwordA,
+			@NotBlank(message = "No puede estar vacío") @Pattern(regexp = "^[^\\s]*$", message = "No puede contener espacios en blanco") String rolesA,
+			@NotBlank(message = "No puede estar vacío") @Pattern(regexp = "^[^\\s]*$", message = "No puede contener espacios en blanco") String emailA) {
 		super();
-		this.identificadorA = identificador;
-		this.nombreA = nombre;
-		this.passwordA = password;
-		this.rolesA = roles;
+		this.identificadorA = identificadorA;
+		this.nombreA = nombreA;
+		this.passwordA = passwordA;
+		this.rolesA = rolesA;
+		this.emailA = emailA;
 	}
+
+	
 	
 	
 	

@@ -15,6 +15,8 @@ public class AsignarFormClale2 {
 	@Pattern(regexp = "^[0-9]+$", message = "Debe contener solo números y no puede tener espacios en blanco")
 	@Size(min = 9, max = 9, message = "Debe tener una longitud de 9 caracteres")
 	private String telPaciente;
+	@NotBlank(message = "No puede estar vacío")
+	private String estadoE;
 	public String getIdCita() {
 		return idCita;
 	}
@@ -33,13 +35,25 @@ public class AsignarFormClale2 {
 	public void setTelPaciente(String telPaciente) {
 		this.telPaciente = telPaciente;
 	}
-	public AsignarFormClale2(String idCita, @NotEmpty(message = "No puede estar vacío") String nomPaciente,
-			@NotEmpty(message = "No puede estar vacío") String telPaciente) {
+	public String getEstadoE() {
+		return estadoE;
+	}
+	public void setEstadoE(String estadoE) {
+		this.estadoE = estadoE;
+	}
+	public AsignarFormClale2(String idCita,
+			@NotBlank(message = "No puede estar vacío") @Pattern(regexp = "^(?=\\S)(?!.*\\s{2})(\\S\\s*\\S){0,9}\\S?$", message = "Debe tener un máximo de 20 caracteres, el primer y último carácter no pueden ser en blanco y no puede haber dos espacios en blanco seguidos en medio") String nomPaciente,
+			@NotBlank(message = "No puede estar vacío") @Pattern(regexp = "^[0-9]+$", message = "Debe contener solo números y no puede tener espacios en blanco") @Size(min = 9, max = 9, message = "Debe tener una longitud de 9 caracteres") String telPaciente,
+			@NotBlank(message = "No puede estar vacío") String estadoE) {
 		super();
 		this.idCita = idCita;
 		this.nomPaciente = nomPaciente;
 		this.telPaciente = telPaciente;
+		this.estadoE = estadoE;
 	}
+	
+	
+	
 	
 	
 

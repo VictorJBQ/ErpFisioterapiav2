@@ -176,7 +176,7 @@
 	</div>
 	<br>
 	<br>
-	<br>
+	<br><br>
 	<!-- offcanvas -->
 	<main class="mt-5 pt-3">
 		<div class="container-fluid">
@@ -212,7 +212,16 @@
 				<div class="col-md-12 mb-3">
 					<div class="card " id="tablaTodos" style="display: block;">
 						<div class="card-header d-flex flex-row">
-							<span><i class="bi bi-table me-2"></i></span> Todos los pacientes
+							<div class="text-black">
+								<span><i class="bi bi-table  me-2"></i></span> <i class="material-icons text-black">Todos los pacientes</i>
+							</div>
+							<form class="ms-auto" th:action="@{/descargarPacientesTodos-excel}" method="post">
+								<input type="hidden" name="nombre" value="TodosPacientes">
+								<button type="submit" style="border: none;">
+
+									<img th:src="@{/images/excelLogo.png}" alt="Logo de Excel" height="30">
+								</button>
+							</form>
 						</div>
 						<div class="card-body">
 							<div class="table-responsive">
@@ -266,8 +275,17 @@
 				</div>
 				<div class="col-md-12 mb-3">
 					<div class="card " id="tablaPendientes" style="display: none;">
-						<div class="card-header d-flex flex-row bg-warning">
-							<span><i class="bi bi-table me-2"></i></span> Pendiente de registrar datos
+					<div class="card-header d-flex flex-row bg-warning">
+							<div class="text-black">
+								<span><i class="bi bi-table  me-2"></i></span> <i class="material-icons text-black">Pendiente de registrar datos</i>
+							</div>
+							<form class="ms-auto" th:action="@{/descargarPacientesPendientes-excel}" method="post">
+								<input type="hidden" name="nombre" value="PacientesPendientes">
+								<button type="submit" class="bg-warning" style="border: none;">
+
+									<img th:src="@{/images/excelLogo.png}" alt="Logo de Excel" height="30">
+								</button>
+							</form>
 						</div>
 						<div class="card-body">
 							<div class="table-responsive">
@@ -323,8 +341,16 @@
 				<div class="col-md-12 mb-3">
 					<div class="card " id="tablaHoy+" style="display: none;">
 						<div class="card-header d-flex flex-row bg-info text-white">
-							<span><i class="bi bi-table me-2 text-white"></i></span> Pacientes con citas en la actualidad
-						</div>
+							<div class="text-black">
+								<span><i class="bi bi-table  me-2"></i></span> <i class="material-icons text-black">Pacientes con citas en la actualidad</i>
+							</div>
+							<form class="ms-auto" th:action="@{/descargarPacientesCurso-excel}" method="post">
+								<input type="hidden" name="nombre" value="PacientesCitasActual">
+								<button type="submit" class="bg-info " style="border: none;">
+
+									<img th:src="@{/images/excelLogo.png}" alt="Logo de Excel" height="30">
+								</button>
+							</form>	</div>
 						<div class="card-body">
 							<div class="table-responsive">
 								<div class="alert alert-primary" id="msg" style="display: none;"

@@ -384,7 +384,7 @@ var app = {
 		});
 
 		// Agregar una acción para el botón Editar
-		$('#Pendientes tbody').on('click', '.btn-smP', function() {
+		$('#pendientes tbody').on('click', '.btn-smP', function() {
 			 $("#msg").text('').removeClass('alert')
 			var data = app.table2.row($(this).parents('tr')).data();
 			app.setDataToModal(data);
@@ -623,7 +623,7 @@ var app = {
 	},
 
 	editar: function(data) {
-		if (confirm('¿Estás seguro de que editar este paciente')) {
+		if (confirm('¿Estás seguro de querer editar este paciente')) {
 
 			app.table.ajax.reload();
 			$.ajax({
@@ -660,7 +660,7 @@ var app = {
 	
 		asignar: function(data) {
 		
-		if (confirm('¿Estás seguro de que asignar esta cita?')) {
+		if (confirm('¿Estás seguro de querer asignar esta cita?')) {
 
 			app.table.ajax.reload();
 			$.ajax({
@@ -670,7 +670,7 @@ var app = {
 				dataType: 'json',
 				contentType: "application/json; charset=utf-8",
 				success: function(json) {
-					$("#msg").text('Se asigno la cita correctamente');
+					$("#msg").text('Se asignó la cita correctamente');
 					$("#msg").show();
 					$('#pacienteCitar').modal('hide');
 					app.table.ajax.reload();
@@ -706,7 +706,7 @@ var app = {
 			contentType: "application/json; charset=utf-8",
 			success: function(json) {
 				$('#crearPaci').modal('hide');
-				$("#msg").text('Ingreso añadido correctamente');
+				$("#msg").text('Paciente añadido correctamente');
 				$("#msg").show();
 			 	modaladd.hide();
 				app.table.ajax.reload();
@@ -732,7 +732,7 @@ var app = {
 	},
 	
 	eliminar: function(id) {
-		if (confirm('¿Estás seguro de que eliminar este paciente')) {
+		if (confirm('¿Estás seguro de que eliminar este paciente, si tiene citas asociadas no podrás')) {
 
 			app.table.ajax.reload();
 			$.ajax({
@@ -745,7 +745,7 @@ var app = {
 					app.table.ajax.reload();
 				},
 				error: function(error) {
-					$("#msg").text('Error al eliminar el ingreso');
+					$("#msg").text('Error al eliminar el paciente');
 					$("#msg").removeClass('alert-primary').addClass('alert-danger');
 					$("#msg").show();
 					app.table.ajax.reload();

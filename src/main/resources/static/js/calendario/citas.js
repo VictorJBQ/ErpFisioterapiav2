@@ -79,6 +79,7 @@ $(document).ready(function() {
 						asignar({
 					idCita: $('#idCita').val(),
 					idPaciente: $('#idPaciente').val(),
+					estadoE: $('#estadoE').val(),
 
 
 				});
@@ -87,6 +88,7 @@ $(document).ready(function() {
 					idCita: $('#idCita').val(),
 					nomPaciente: $('#nomPaciente').val(),
 					telPaciente: $('#telPaciente').val(),
+					estadoE: $('#estadoE').val(),
 
 
 				});

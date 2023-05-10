@@ -6,6 +6,7 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -21,6 +22,10 @@ public class Empleados {
 	private String identificador;
 	private String nombre;
 	private String password;
+	
+	 
+	@Column(unique=true)
+	private String email;
 	
 	@NotNull
 	@ManyToOne
@@ -83,11 +88,24 @@ public class Empleados {
 		this.gastos = gastos;
 	}
 
-	public Empleados(String identificador, String nombre, String password, @NotNull Roles roles) {
+
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
+	
+
+	public Empleados(String identificador, String nombre, String password, String email, @NotNull Roles roles) {
 		super();
 		this.identificador = identificador;
 		this.nombre = nombre;
 		this.password = password;
+		this.email = email;
 		this.roles = roles;
 	}
 
