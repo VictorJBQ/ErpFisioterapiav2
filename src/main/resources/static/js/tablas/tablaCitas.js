@@ -787,7 +787,7 @@ var app = {
 	
 	
 		cargaDa: function(id) {
-		if (confirm('Solo se cargaran las citas presentes y futuras que no se encuentren registradas, o que su hora no estén en tramo de otras citas')) {
+		if (confirm('Solo se cargarán las citas presentes y futuras que no se encuentren registradas, o que su hora no estén en tramo de otras citas')) {
 			console.log(id)
 			app.table1.ajax.reload();
 			$.ajax({

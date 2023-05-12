@@ -325,57 +325,57 @@
 					<div class="card ">
 						<div class="card-header d-flex flex-row">
 							<div class="text-black">
-									<span><i class="bi bi-table  me-2"></i></span> <i
-										class="material-icons text-black">Citas en el día de hoy</i>
-								</div>
-								<form class="ms-auto" th:action="@{/descargarCitasHoy-excel}"
-									method="post">
-									<input type="hidden" name="nombre" value="CitasHoy">
-									<button type="submit" style="border: none;">
-
-										<img th:src="@{/images/excelLogo.png}" alt="Logo de Excel"
-											height="30">
-									</button>
-								</form>
+								<span><i class="bi bi-table  me-2"></i></span> <i
+									class="material-icons text-black">Citas en el día de hoy</i>
 							</div>
+							<form class="ms-auto" th:action="@{/descargarCitasHoy-excel}"
+								method="post">
+								<input type="hidden" name="nombre" value="CitasHoy">
+								<button type="submit" style="border: none;">
 
-						</div>
-						<div class="card-body ">
-							<div class="table-responsive">
-								<div class="alert alert-primary" id="msg" style="display: none;"
-									role="alert"></div>
-								<table id="citas" class="table table-striped table-bordered"
-									style="width: 100%">
-									<thead id="cabeceraTabla">
-										<tr>
-											<th>Acciones</th>
-											<th>Hora</th>
-											<th>Estado</th>
-											<th>Paciente</th>
-
-										</tr>
-									</thead>
-									<tbody id="cuerpoTabla">
-
-
-									</tbody>
-									<tfoot id="cabeceraTabla">
-										<tr>
-											<th>Acciones</th>
-											<th>Hora</th>
-											<th>Estado</th>
-											<th>Paciente</th>
-										</tr>
-									</tfoot>
-
-								</table>
-
-							</div>
+									<img th:src="@{/images/excelLogo.png}" alt="Logo de Excel"
+										height="30">
+								</button>
+							</form>
 						</div>
 
 					</div>
+					<div class="card-body ">
+						<div class="table-responsive">
+							<div class="alert alert-primary" id="msg" style="display: none;"
+								role="alert"></div>
+							<table id="citas" class="table table-striped table-bordered"
+								style="width: 100%">
+								<thead id="cabeceraTabla">
+									<tr>
+										<th>Acciones</th>
+										<th>Hora</th>
+										<th>Estado</th>
+										<th>Paciente</th>
+
+									</tr>
+								</thead>
+								<tbody id="cuerpoTabla">
+
+
+								</tbody>
+								<tfoot id="cabeceraTabla">
+									<tr>
+										<th>Acciones</th>
+										<th>Hora</th>
+										<th>Estado</th>
+										<th>Paciente</th>
+									</tr>
+								</tfoot>
+
+							</table>
+
+						</div>
+					</div>
+
 				</div>
 			</div>
+		</div>
 		</div>
 		<!-- Modal -->
 		<div class="modal fade" id="psw" role="dialog" tabindex="-1"
@@ -492,54 +492,102 @@
 			</div>
 		</div>
 
+		<!-- Modal -->
+
 		<div class="modal fade" id="modal1"
 			aria-labelledby="exampleModalLabel" aria-hidden="true">
+
 			<div class="modal-dialog">
+
 				<div class="modal-content">
+
 					<div class="modal-header">
+
 						<h5 class="modal-title" id="exampleModalLabel">Selecciona
 							paciente para asignar cita</h5>
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
+
+						<button type="button" class="btn-close" data-bs-dismiss="modal"
+							aria-label="Close"></button>
+
 					</div>
+
 					<div class="modal-body">
+
 						<label><input type="radio" name="pacienteEDIT"
 							value="nuevoasg" onclick="mostrarCampos2()">Paciente
 							nuevo</label> <label><input type="radio" name="pacienteEDIT"
 							value="existenteasg" checked onclick="mostrarCampos2()">Paciente
 							existente</label> <input type="hidden" class="form-control" id="idCita">
+
 						<!-- Select para el modal -->
+
 						<div id="campos-fijos" style="display: block;">
+
 							<select class="form-control select2" name="miSelect"
 								id="idPaciente">
+
 								<option th:each="pacientes:${lista}" th:value=${pacientes.id}
 									th:text="${pacientes.nombre}+' '+${pacientes.apellidos}
-			+' '+${pacientes.telefono} ?: 'default value'"></option>
+
++' '+${pacientes.telefono} ?: 'default value'"></option>
+
 							</select>
+
 						</div>
+
+
+						<div id="campos-nuevos" style="display: none;">
+
+							<div class="form-group">
+
+								<label for="apellido">Nombre</label> <input type="text"
+									class="form-control" id="nomPaciente" placeholder="nombre">
+
+							</div>
+
+							<div class="form-group">
+
+								<label for="apellido">Teléfono</label> <input type="number"
+									class="form-control" id="telPaciente" placeholder="teléfono">
+
+							</div>
+
+						</div>
+
+						<div class="form-group">
+
+							<label for="direccion">Estado</label> <select name="opciones"
+								id="estadoE" class="form-control">
+
+								<option value="pendiente-Confirmar">Pendiente de
+
+									confirmar</option>
+
+								<option value="confirmada">Confirmada</option>
+
+							</select>
+
+						</div>
+
+
 					</div>
 
-					<div id="campos-nuevos" style="display: none;">
-						<div class="form-group">
-							<label for="apellido">Nombre</label> <input type="text"
-								class="form-control" id="nomPaciente" placeholder="nombre">
-						</div>
-						<div class="form-group">
-							<label for="apellido">Teléfono</label> <input type="number"
-								class="form-control" id="telPaciente" placeholder="teléfono">
-						</div>
-					</div>
+
 
 					<div class="modal-footer">
+
 						<button type="button" class="btn btn-secondary"
-							data-dismiss="modal" id="cerrarM">Cerrar</button>
+							data-bs-dismiss="modal">Cerrar</button>
+
 						<button type="button" class="btn btn-primary" id="asignar">Asignar
 							cita</button>
+
 					</div>
+
 				</div>
+
 			</div>
+
 		</div>
 
 	</main>
