@@ -422,6 +422,8 @@ sele.style.display = "block";
 
 borr.style.display = "none";
 
+botonAsignar.style.display = "block";
+
 $('#idCita').val(calEvent.id);
 
 select.value = 'pendiente-Confirmar';
@@ -441,6 +443,8 @@ dropdownParent: $('#modal1 .modal-body')
 });
 
 }else{
+
+botonAsignar.style.display = "block";
 
 body.style.display = "block";
 
@@ -537,10 +541,15 @@ estadoE: $('#estadoE').val(),
 });
 
 $("#terminarT").click(function() {
+		
+		if($('#tarifaE').val()===null){
+			alert("Antes de terminar escoge una tarifa ")
+		}else{
+			terminar($('#idCitaPago').val(), $('#formaPagoT').val(), $('#tarifaE').val(), $('#pacienteT').val());
+		}
+		
 
-terminar($('#idCitaPago').val(), $('#formaPagoT').val(), $('#tarifaE').val(), $('#pacienteT').val())
-
-});
+	});
 
 $("#confirmarC").click(function() {
 

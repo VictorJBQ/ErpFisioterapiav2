@@ -97,7 +97,7 @@ public class PacientesFormA {
 			@NotEmpty(message = "No puede estar vacío") String poblaA,
 			@NotEmpty(message = "No puede estar vacío") String telA,
 			@NotEmpty(message = "No puede estar vacío") String conoceA,
-			String tarifaA) {
+			@NotEmpty(message = "No puede estar vacío") String tarifaA) {
 		super();
 		this.nombreA = nombreA;
 		this.apellidosA = apellidosA;
