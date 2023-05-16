@@ -33,7 +33,7 @@ $(document).ready(function() {
 				okDiv.style.display = "block";
 				deprecated.style.display = "none";
 					setTimeout(function() {
-								window.location.replace("https://jbsolutions.up.railway.app/login");
+								window.location.replace("https://officialjbsolutions.up.railway.app/login");
 							}, 5000);
 
 
@@ -50,7 +50,7 @@ $(document).ready(function() {
 							okDiv.style.display = "none";
 							deprecated.style.display = "block";
 							setTimeout(function() {
-								window.location.replace("https://jbsolutions.up.railway.app/rest");
+								window.location.replace("https://officialjbsolutions.up.railway.app/rest");
 							}, 5000); // 5000 milisegundos = 5 segundos
 							
 						} else {
