@@ -10,7 +10,6 @@ public class PacientesFormE {
 	private String idE;
 	
 	@NotBlank(message = "No puede estar vacío")
-	@Pattern(regexp = "^(?=\\S)(?!.*\\s{2})(\\S\\s*\\S){0,9}\\S?$", message = "Debe tener un máximo de 20 caracteres, el primer y último carácter no pueden ser en blanco y no puede haber dos espacios en blanco seguidos en medio")
 	private String nombreE;
 	@NotBlank(message = "No puede estar vacío")
 	@Pattern(regexp = "^(?!\\s)[\\p{L}\\s]{1,48}(?<!\\s)$", message = "Debe tener un máximo de 50 caracteres, no puede empezar ni terminar con un espacio en blanco")

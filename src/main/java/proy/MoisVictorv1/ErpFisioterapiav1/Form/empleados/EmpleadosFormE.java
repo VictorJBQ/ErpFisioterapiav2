@@ -65,8 +65,6 @@ public class EmpleadosFormE {
 		this.emailE = emailE;
 	}
 
-	public EmpleadosFormE() {
-	}
 
 	public EmpleadosFormE(
 			@NotBlank(message = "No puede estar vacío") @Pattern(regexp = "^[^\\s]{1,10}$", message = "No puede contener espacios en blanco y debe tener una longitud máxima de 10 caracteres") String identificadorE,

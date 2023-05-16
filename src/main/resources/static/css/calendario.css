@@ -1,0 +1,30 @@
+#calendario-container {
+  position: relative;
+}
+
+#leyenda {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 30px;
+  line-height: 30px;
+  background-color: #f0f0f0;
+  text-align: center;
+}
+
+#calendario2 {
+  margin-top: 30px; /* Ajusta el valor según sea necesario para dejar espacio para la leyenda */
+}
+
+.leyenda-item {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.leyenda-color {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  margin-right: 5px;
+}

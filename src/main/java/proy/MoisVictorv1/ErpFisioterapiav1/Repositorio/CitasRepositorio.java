@@ -27,7 +27,8 @@ public interface CitasRepositorio extends CrudRepository<Citas,Integer>{
 	  List<Citas> findByEstadoContaining(String estado);
 	  
 	  Citas  findById(String id);
-	  
+	  @Query("SELECT c FROM Citas c")
+	    List<Citas> findByEstadoNotLibreOrCancelado();
 	  /*Consulta que nos traemos las citas que esten en pendientes o canceladas, que no sean inferior a la fecha actual y hora actual +1*/
 	   List<Citas> findByEstadoIn(List<String> estados);
 	   
