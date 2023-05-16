@@ -54,9 +54,10 @@ public class ErpFisioterapiav1Application {
 		repositorio.save(rol);
 		var encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 //		
-	Empleados empleado= new Empleados("T01","Carlos",encoder.encode("123"),"moisesjimenezgarcia4@gmail.com",rol);
+	Empleados empleado= new Empleados("T02","Moises",encoder.encode("123"),"moisesjimenezgarcia4@gmail.com",rol);
 		empleadosRepositorio.save(empleado);
-//		
+		Empleados empleado1= new Empleados("T01","Luis",encoder.encode("123"),"luiscarherranz@gmail.com",rol);
+		empleadosRepositorio.save(empleado1);
 
 	
 	Tarifas tarifa= new Tarifas("amigos",25.0);
